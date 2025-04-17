@@ -1,0 +1,3698 @@
+{
+    "template": [
+        {
+            "label": "Form Info",
+            "id": "TITLE"
+        },
+        {
+            "label": "SOS Control ID#",
+            "id": "RECORD_NUM"
+        },
+        {
+            "label": "Status",
+            "id": "STATUS"
+        },
+        {
+            "label": "Standing",
+            "id": "STANDING"
+        },
+        {
+            "label": "Filing Date",
+            "id": "FILING_DATE"
+        }
+    ],
+    "rows": {
+        "83": {
+            "SORT_INDEX": 58,
+            "TITLE": [
+                "XCEL ENERGY INC.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 83,
+            "FILING_DATE": "08/18/1910",
+            "RECORD_NUM": "0000000120",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "1940": {
+            "SORT_INDEX": 60,
+            "TITLE": [
+                "XCEL ERECTORS, INC.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 1940,
+            "FILING_DATE": "11/14/1985",
+            "RECORD_NUM": "0000002063",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "9739": {
+            "SORT_INDEX": 207,
+            "TITLE": [
+                "XXI CENTURY LTD.",
+                "Corporation - Business - Domestic"
+            ],
+            "ID": 9739,
+            "FILING_DATE": "08/21/1987",
+            "RECORD_NUM": "0000009887",
+            "STATUS": "Active",
+            "STANDING": "Not Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "13614": {
+            "SORT_INDEX": 176,
+            "TITLE": [
+                "XTO OFFSHORE INC.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 13614,
+            "FILING_DATE": "12/18/1980",
+            "RECORD_NUM": "0000013762",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "14868": {
+            "SORT_INDEX": 99,
+            "TITLE": [
+                "XH, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 14868,
+            "FILING_DATE": "05/04/1983",
+            "RECORD_NUM": "0000015018",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "17447": {
+            "SORT_INDEX": 91,
+            "TITLE": [
+                "XEROX CORPORATION",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 17447,
+            "FILING_DATE": "05/05/1964",
+            "RECORD_NUM": "0000017597",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "31989": {
+            "SORT_INDEX": 15,
+            "TITLE": [
+                "MCKESSON MEDICAL-SURGICAL MEDIMART INC.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 31989,
+            "FILING_DATE": "04/22/1991",
+            "RECORD_NUM": "0000032178",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "38823": {
+            "SORT_INDEX": 11,
+            "TITLE": [
+                "CONDUENT STATE & LOCAL SOLUTIONS, INC.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 38823,
+            "FILING_DATE": "03/21/1995",
+            "RECORD_NUM": "0000039021",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "41359": {
+            "SORT_INDEX": 40,
+            "TITLE": [
+                "XANADU PRODUCTS, L.L.C.",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 41359,
+            "FILING_DATE": "12/19/2003",
+            "RECORD_NUM": "0000041563",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "45656": {
+            "SORT_INDEX": 144,
+            "TITLE": [
+                "XPO Logistics Freight, Inc.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 45656,
+            "FILING_DATE": "07/21/1995",
+            "RECORD_NUM": "0000045863",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "47640": {
+            "SORT_INDEX": 106,
+            "TITLE": [
+                "XL HOMES, CORP.",
+                "Corporation - Business - Domestic"
+            ],
+            "ID": 47640,
+            "FILING_DATE": "05/24/1996",
+            "RECORD_NUM": "0000047848",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "48426": {
+            "SORT_INDEX": 8,
+            "TITLE": [
+                "CONDUENT GOVERNMENT SYSTEMS, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 48426,
+            "FILING_DATE": "08/06/1996",
+            "RECORD_NUM": "0000048634",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "49020": {
+            "SORT_INDEX": 128,
+            "TITLE": [
+                "XP SYSTEMS CORPORATION",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 49020,
+            "FILING_DATE": "01/20/1999",
+            "RECORD_NUM": "0000049228",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "50106": {
+            "SORT_INDEX": 14,
+            "TITLE": [
+                "GXO Logistics Worldwide, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 50106,
+            "FILING_DATE": "04/19/2004",
+            "RECORD_NUM": "0000050314",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "62403": {
+            "SORT_INDEX": 93,
+            "TITLE": [
+                "XETA TECHNOLOGIES, INC.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 62403,
+            "FILING_DATE": "04/06/2000",
+            "RECORD_NUM": "0000062616",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "64528": {
+            "SORT_INDEX": 59,
+            "TITLE": [
+                "XCEL ENERGY SERVICES INC.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 64528,
+            "FILING_DATE": "04/18/2001",
+            "RECORD_NUM": "0000064741",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "66466": {
+            "SORT_INDEX": 121,
+            "TITLE": [
+                "XO COMMUNICATIONS SERVICES, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 66466,
+            "FILING_DATE": "08/13/2004",
+            "RECORD_NUM": "0000066683",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "73374": {
+            "SORT_INDEX": 92,
+            "TITLE": [
+                "XEROX FINANCIAL SERVICES LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 73374,
+            "FILING_DATE": "02/04/2003",
+            "RECORD_NUM": "0000073595",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "74042": {
+            "SORT_INDEX": 100,
+            "TITLE": [
+                "XIE XIE, LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 74042,
+            "FILING_DATE": "03/28/2003",
+            "RECORD_NUM": "0000074263",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "74479": {
+            "SORT_INDEX": 12,
+            "TITLE": [
+                "CONDUENT STATE HEALTHCARE, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 74479,
+            "FILING_DATE": "05/01/2003",
+            "RECORD_NUM": "0000074703",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "76644": {
+            "SORT_INDEX": 174,
+            "TITLE": [
+                "XTO ENERGY INC.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 76644,
+            "FILING_DATE": "05/29/2008",
+            "RECORD_NUM": "0000076872",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "77127": {
+            "SORT_INDEX": 180,
+            "TITLE": [
+                "XTRA PROPERTIES, LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 77127,
+            "FILING_DATE": "10/11/2004",
+            "RECORD_NUM": "0000077355",
+            "STATUS": "Active",
+            "STANDING": "Not Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "79268": {
+            "SORT_INDEX": 190,
+            "TITLE": [
+                "XTREME ELECTRIC INC",
+                "Corporation - Business - Domestic"
+            ],
+            "ID": 79268,
+            "FILING_DATE": "01/14/2008",
+            "RECORD_NUM": "0000079498",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "83121": {
+            "SORT_INDEX": 184,
+            "TITLE": [
+                "XTREME AUTO, INC.",
+                "Corporation - Business - Domestic"
+            ],
+            "ID": 83121,
+            "FILING_DATE": "06/28/2006",
+            "RECORD_NUM": "0000083485",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "84218": {
+            "SORT_INDEX": 41,
+            "TITLE": [
+                "XANADU, LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 84218,
+            "FILING_DATE": "10/16/2006",
+            "RECORD_NUM": "0000084583",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "85802": {
+            "SORT_INDEX": 119,
+            "TITLE": [
+                "XN FINANCIAL SERVICES INC.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 85802,
+            "FILING_DATE": "02/06/2007",
+            "RECORD_NUM": "0000086167",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "86448": {
+            "SORT_INDEX": 134,
+            "TITLE": [
+                "XPERIENCE HEALTH & FITNESS LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 86448,
+            "FILING_DATE": "04/17/2007",
+            "RECORD_NUM": "0000086814",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "88279": {
+            "SORT_INDEX": 10,
+            "TITLE": [
+                "CONDUENT HUMAN RESOURCE SERVICES, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 88279,
+            "FILING_DATE": "08/14/2007",
+            "RECORD_NUM": "0000088647",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "90563": {
+            "SORT_INDEX": 19,
+            "TITLE": [
+                "RXO Last Mile, Inc.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 90563,
+            "FILING_DATE": "01/31/2008",
+            "RECORD_NUM": "0000090931",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "91770": {
+            "SORT_INDEX": 163,
+            "TITLE": [
+                "XSIDING XTERIORS LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 91770,
+            "FILING_DATE": "04/24/2008",
+            "RECORD_NUM": "0000092139",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "92327": {
+            "SORT_INDEX": 189,
+            "TITLE": [
+                "XTREME DRILLING, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 92327,
+            "FILING_DATE": "06/17/2008",
+            "RECORD_NUM": "0000092696",
+            "STATUS": "Active",
+            "STANDING": "Not Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "97654": {
+            "SORT_INDEX": 7,
+            "TITLE": [
+                "CONDUENT BUSINESS SERVICES, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 97654,
+            "FILING_DATE": "01/20/2010",
+            "RECORD_NUM": "0000098023",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "100168": {
+            "SORT_INDEX": 96,
+            "TITLE": [
+                "X-GEN PHARMACEUTICALS, INC.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 100168,
+            "FILING_DATE": "06/19/2010",
+            "RECORD_NUM": "0000100537",
+            "STATUS": "Active",
+            "STANDING": "Not Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "100169": {
+            "SORT_INDEX": 204,
+            "TITLE": [
+                "XTTRIUM LABORATORIES, INC.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 100169,
+            "FILING_DATE": "06/19/2010",
+            "RECORD_NUM": "0000100538",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "103327": {
+            "SORT_INDEX": 1,
+            "TITLE": [
+                "AKITA DRILLING USA CORP.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 103327,
+            "FILING_DATE": "11/30/2010",
+            "RECORD_NUM": "0000103696",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "103679": {
+            "SORT_INDEX": 2,
+            "TITLE": [
+                "AKITA EQUIPMENT CORP.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 103679,
+            "FILING_DATE": "12/17/2010",
+            "RECORD_NUM": "0000104048",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "105993": {
+            "SORT_INDEX": 9,
+            "TITLE": [
+                "CONDUENT HR SERVICES, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 105993,
+            "FILING_DATE": "04/21/2011",
+            "RECORD_NUM": "0000106362",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "106570": {
+            "SORT_INDEX": 191,
+            "TITLE": [
+                "XTREME ELECTRICAL SERVICES, INC. (dba X ELECTRIC)",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 106570,
+            "FILING_DATE": "05/19/2011",
+            "RECORD_NUM": "0000106939",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "108148": {
+            "SORT_INDEX": 192,
+            "TITLE": [
+                "XTREME FIRE PROTECTION, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 108148,
+            "FILING_DATE": "07/13/2011",
+            "RECORD_NUM": "0000108517",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "108164": {
+            "SORT_INDEX": 68,
+            "TITLE": [
+                "XCHANGE BENEFITS, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 108164,
+            "FILING_DATE": "07/18/2011",
+            "RECORD_NUM": "0000108533",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "111130": {
+            "SORT_INDEX": 211,
+            "TITLE": [
+                "XYLEM WATER SOLUTIONS U.S.A., INC.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 111130,
+            "FILING_DATE": "10/24/2011",
+            "RECORD_NUM": "0000111500",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "111653": {
+            "SORT_INDEX": 64,
+            "TITLE": [
+                "XCEL TRUCKING LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 111653,
+            "FILING_DATE": "11/09/2011",
+            "RECORD_NUM": "0000112023",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "116177": {
+            "SORT_INDEX": 123,
+            "TITLE": [
+                "XOME FIELD SERVICES LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 116177,
+            "FILING_DATE": "06/25/2014",
+            "RECORD_NUM": "0000116547",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "117057": {
+            "SORT_INDEX": 97,
+            "TITLE": [
+                "XGP PROPERTIES, LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 117057,
+            "FILING_DATE": "05/21/2012",
+            "RECORD_NUM": "0000117427",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "123072": {
+            "SORT_INDEX": 109,
+            "TITLE": [
+                "XL TRANSPORT, LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 123072,
+            "FILING_DATE": "12/04/2012",
+            "RECORD_NUM": "0000123442",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "123678": {
+            "SORT_INDEX": 125,
+            "TITLE": [
+                "XOME REALTY SERVICES LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 123678,
+            "FILING_DATE": "01/11/2013",
+            "RECORD_NUM": "0000124048",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "125299": {
+            "SORT_INDEX": 124,
+            "TITLE": [
+                "XOME INC.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 125299,
+            "FILING_DATE": "03/05/2013",
+            "RECORD_NUM": "0000125669",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "132687": {
+            "SORT_INDEX": 199,
+            "TITLE": [
+                "XTREME PRODUCTS LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 132687,
+            "FILING_DATE": "12/09/2013",
+            "RECORD_NUM": "0000133058",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "135134": {
+            "SORT_INDEX": 82,
+            "TITLE": [
+                "Xenex Disinfection Services Inc.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 135134,
+            "FILING_DATE": "03/20/2014",
+            "RECORD_NUM": "0000135506",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "136264": {
+            "SORT_INDEX": 107,
+            "TITLE": [
+                "XL INDUSTRIAL SERVICES, INC.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 136264,
+            "FILING_DATE": "05/06/2014",
+            "RECORD_NUM": "0000136636",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "136423": {
+            "SORT_INDEX": 103,
+            "TITLE": [
+                "XIPHOS TECHNICAL SERVICES, LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 136423,
+            "FILING_DATE": "05/12/2014",
+            "RECORD_NUM": "0000136795",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "138231": {
+            "SORT_INDEX": 209,
+            "TITLE": [
+                "XYLEM DEWATERING SOLUTIONS, INC.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 138231,
+            "FILING_DATE": "08/01/2014",
+            "RECORD_NUM": "0000138604",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "141236": {
+            "SORT_INDEX": 73,
+            "TITLE": [
+                "XConnect, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 141236,
+            "FILING_DATE": "10/27/2014",
+            "RECORD_NUM": "0000141609",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "144320": {
+            "SORT_INDEX": 4,
+            "TITLE": [
+                "ATOS IT OUTSOURCING SERVICES, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 144320,
+            "FILING_DATE": "03/10/2015",
+            "RECORD_NUM": "0000144693",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "144321": {
+            "SORT_INDEX": 3,
+            "TITLE": [
+                "ATOS HEALTHCARE SERVICES, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 144321,
+            "FILING_DATE": "03/10/2015",
+            "RECORD_NUM": "0000144694",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "146367": {
+            "SORT_INDEX": 17,
+            "TITLE": [
+                "RingSquared Telecom LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 146367,
+            "FILING_DATE": "06/10/2015",
+            "RECORD_NUM": "0000146740",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "148120": {
+            "SORT_INDEX": 86,
+            "TITLE": [
+                "XERCOR INSURANCE SERVICES LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 148120,
+            "FILING_DATE": "08/17/2015",
+            "RECORD_NUM": "0000148493",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "151536": {
+            "SORT_INDEX": 47,
+            "TITLE": [
+                "XCALIBER INTERNATIONAL LTD., L.L.C.",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 151536,
+            "FILING_DATE": "02/01/2016",
+            "RECORD_NUM": "0000151910",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "153110": {
+            "SORT_INDEX": 16,
+            "TITLE": [
+                "Miller Underground, LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 153110,
+            "FILING_DATE": "04/25/2016",
+            "RECORD_NUM": "0000153484",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "154348": {
+            "SORT_INDEX": 193,
+            "TITLE": [
+                "X-TREME FITNESS, LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 154348,
+            "FILING_DATE": "06/17/2016",
+            "RECORD_NUM": "0000154722",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "154726": {
+            "SORT_INDEX": 84,
+            "TITLE": [
+                "XENITH, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 154726,
+            "FILING_DATE": "06/27/2016",
+            "RECORD_NUM": "0000155100",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "154896": {
+            "SORT_INDEX": 139,
+            "TITLE": [
+                "XPERT ENTERPRISES LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 154896,
+            "FILING_DATE": "07/01/2016",
+            "RECORD_NUM": "0000155270",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "157057": {
+            "SORT_INDEX": 171,
+            "TITLE": [
+                "X-TECH LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 157057,
+            "FILING_DATE": "10/19/2016",
+            "RECORD_NUM": "0000157433",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "157286": {
+            "SORT_INDEX": 30,
+            "TITLE": [
+                "X S BROKERS INSURANCE AGENCY, INC.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 157286,
+            "FILING_DATE": "11/02/2016",
+            "RECORD_NUM": "0000157662",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "159971": {
+            "SORT_INDEX": 146,
+            "TITLE": [
+                "XPONET (dba XPONET CORPORATION)",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 159971,
+            "FILING_DATE": "03/22/2017",
+            "RECORD_NUM": "0000160347",
+            "STATUS": "Active",
+            "STANDING": "Not Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "160766": {
+            "SORT_INDEX": 157,
+            "TITLE": [
+                "X-RAY LIMA TANGO, LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 160766,
+            "FILING_DATE": "04/28/2017",
+            "RECORD_NUM": "0000161142",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "162412": {
+            "SORT_INDEX": 215,
+            "TITLE": [
+                "XZILON, INC.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 162412,
+            "FILING_DATE": "06/30/2017",
+            "RECORD_NUM": "0000162789",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "165394": {
+            "SORT_INDEX": 6,
+            "TITLE": [
+                "COMCAST BROADBAND SECURITY, LLC (dba XFINITY HOME)",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 165394,
+            "FILING_DATE": "11/28/2017",
+            "RECORD_NUM": "0000165771",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "165755": {
+            "SORT_INDEX": 53,
+            "TITLE": [
+                "XCEL AGRONOMY LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 165755,
+            "FILING_DATE": "12/18/2017",
+            "RECORD_NUM": "0000166132",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "169193": {
+            "SORT_INDEX": 13,
+            "TITLE": [
+                "GXO LOGISTICS SUPPLY CHAIN, INC.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 169193,
+            "FILING_DATE": "05/30/2018",
+            "RECORD_NUM": "0000169571",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "169542": {
+            "SORT_INDEX": 177,
+            "TITLE": [
+                "XTRA APPAREL CO LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 169542,
+            "FILING_DATE": "06/14/2018",
+            "RECORD_NUM": "0000169920",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "169931": {
+            "SORT_INDEX": 145,
+            "TITLE": [
+                "XPON INTERNATIONAL LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 169931,
+            "FILING_DATE": "07/02/2018",
+            "RECORD_NUM": "0000170309",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "170568": {
+            "SORT_INDEX": 51,
+            "TITLE": [
+                "XCED AVIATION SERVICES, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 170568,
+            "FILING_DATE": "07/31/2018",
+            "RECORD_NUM": "0000170946",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "171445": {
+            "SORT_INDEX": 63,
+            "TITLE": [
+                "XCEL NDT LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 171445,
+            "FILING_DATE": "09/04/2018",
+            "RECORD_NUM": "0000171823",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "171478": {
+            "SORT_INDEX": 0,
+            "TITLE": [
+                "Accurate INSPEX, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 171478,
+            "FILING_DATE": "09/24/2018",
+            "RECORD_NUM": "0000171856",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "171651": {
+            "SORT_INDEX": 52,
+            "TITLE": [
+                "XCEL AG SOLUTIONS LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 171651,
+            "FILING_DATE": "10/04/2018",
+            "RECORD_NUM": "0000172029",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "171952": {
+            "SORT_INDEX": 175,
+            "TITLE": [
+                "XTO HOLDINGS, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 171952,
+            "FILING_DATE": "10/02/2018",
+            "RECORD_NUM": "0000172330",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "173609": {
+            "SORT_INDEX": 151,
+            "TITLE": [
+                "XPRESSDOCS GP, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 173609,
+            "FILING_DATE": "12/06/2018",
+            "RECORD_NUM": "0000173989",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "180186": {
+            "SORT_INDEX": 168,
+            "TITLE": [
+                "XSTREAM PROPERTIES, LLP",
+                "Limited Liability Partnership - Domestic"
+            ],
+            "ID": 180186,
+            "FILING_DATE": "12/30/2002",
+            "RECORD_NUM": "0000180566",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "180654": {
+            "SORT_INDEX": 67,
+            "TITLE": [
+                "XCELL DRIVING SCHOOL LLP",
+                "Limited Liability Partnership - Domestic"
+            ],
+            "ID": 180654,
+            "FILING_DATE": "08/27/2003",
+            "RECORD_NUM": "0000181034",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "188181": {
+            "SORT_INDEX": 152,
+            "TITLE": [
+                "XPRESSDOCS PARTNERS, LTD. (dba XPRESSDOCS PARTNERS, LTD., A TEXAS LP)",
+                "Limited Partnership - Foreign"
+            ],
+            "ID": 188181,
+            "FILING_DATE": "12/06/2018",
+            "RECORD_NUM": "0000188561",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "228979": {
+            "SORT_INDEX": 198,
+            "TITLE": [
+                "X-TREME OUTFITTERS",
+                "Trade Name"
+            ],
+            "ID": 228979,
+            "FILING_DATE": "03/02/2005",
+            "RECORD_NUM": "0000229359",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "231461": {
+            "SORT_INDEX": 200,
+            "TITLE": [
+                "XTREME SIGNS & GRAPHIX",
+                "Trade Name"
+            ],
+            "ID": 231461,
+            "FILING_DATE": "06/13/2006",
+            "RECORD_NUM": "0000231841",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "231746": {
+            "SORT_INDEX": 133,
+            "TITLE": [
+                "XPERIENCE HEALTH & FITNESS",
+                "Trade Name"
+            ],
+            "ID": 231746,
+            "FILING_DATE": "07/24/2006",
+            "RECORD_NUM": "0000232126",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "236957": {
+            "SORT_INDEX": 57,
+            "TITLE": [
+                "XCEL ENERGY",
+                "Trade Name"
+            ],
+            "ID": 236957,
+            "FILING_DATE": "01/30/2009",
+            "RECORD_NUM": "0000237337",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "236958": {
+            "SORT_INDEX": 185,
+            "TITLE": [
+                "XTREME BUILDERS",
+                "Trade Name"
+            ],
+            "ID": 236958,
+            "FILING_DATE": "01/27/2009",
+            "RECORD_NUM": "0000237338",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "240582": {
+            "SORT_INDEX": 201,
+            "TITLE": [
+                "XTREME TROPHY PROPERTIES",
+                "Trade Name"
+            ],
+            "ID": 240582,
+            "FILING_DATE": "05/20/2010",
+            "RECORD_NUM": "0000240962",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "244002": {
+            "SORT_INDEX": 23,
+            "TITLE": [
+                "X ELECTRIC",
+                "Trade Name"
+            ],
+            "ID": 244002,
+            "FILING_DATE": "05/19/2011",
+            "RECORD_NUM": "0000244382",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "254941": {
+            "SORT_INDEX": 160,
+            "TITLE": [
+                "XS AUTOMATION",
+                "Trade Name"
+            ],
+            "ID": 254941,
+            "FILING_DATE": "01/27/2014",
+            "RECORD_NUM": "0000255321",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "265494": {
+            "SORT_INDEX": 148,
+            "TITLE": [
+                "XPRESS MONEY",
+                "Trade Name"
+            ],
+            "ID": 265494,
+            "FILING_DATE": "09/27/2016",
+            "RECORD_NUM": "0000265874",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "265626": {
+            "SORT_INDEX": 43,
+            "TITLE": [
+                "XAPIC STUDIOS",
+                "Trade Name"
+            ],
+            "ID": 265626,
+            "FILING_DATE": "10/14/2016",
+            "RECORD_NUM": "0000266006",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "270408": {
+            "SORT_INDEX": 120,
+            "TITLE": [
+                "XO BEAUTY",
+                "Trade Name"
+            ],
+            "ID": 270408,
+            "FILING_DATE": "02/06/2018",
+            "RECORD_NUM": "0000270788",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "273964": {
+            "SORT_INDEX": 181,
+            "TITLE": [
+                "Xtra-Office, Inc.",
+                "Corporation - Business - Domestic"
+            ],
+            "ID": 273964,
+            "FILING_DATE": "01/22/2019",
+            "RECORD_NUM": "0002694720",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "274036": {
+            "SORT_INDEX": 78,
+            "TITLE": [
+                "Xe USA",
+                "Trade Name"
+            ],
+            "ID": 274036,
+            "FILING_DATE": "01/24/2019",
+            "RECORD_NUM": "0002695525",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "275237": {
+            "SORT_INDEX": 88,
+            "TITLE": [
+                "Xeris Pharmaceuticals, Inc.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 275237,
+            "FILING_DATE": "02/14/2019",
+            "RECORD_NUM": "0002705646",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "278153": {
+            "SORT_INDEX": 54,
+            "TITLE": [
+                "Xcel Automation & Electric LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 278153,
+            "FILING_DATE": "04/16/2019",
+            "RECORD_NUM": "0002767465",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "278474": {
+            "SORT_INDEX": 202,
+            "TITLE": [
+                "Xtreme Xteriors LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 278474,
+            "FILING_DATE": "05/02/2019",
+            "RECORD_NUM": "0002772735",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "279692": {
+            "SORT_INDEX": 118,
+            "TITLE": [
+                "xmodn security LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 279692,
+            "FILING_DATE": "05/15/2019",
+            "RECORD_NUM": "0002794925",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "280171": {
+            "SORT_INDEX": 113,
+            "TITLE": [
+                "XLT Management Services, Inc.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 280171,
+            "FILING_DATE": "05/29/2019",
+            "RECORD_NUM": "0002813336",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "282230": {
+            "SORT_INDEX": 155,
+            "TITLE": [
+                "Xquisite Construction LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 282230,
+            "FILING_DATE": "07/17/2019",
+            "RECORD_NUM": "0002853122",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "282517": {
+            "SORT_INDEX": 138,
+            "TITLE": [
+                "Xpert Drywall llc",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 282517,
+            "FILING_DATE": "08/08/2019",
+            "RECORD_NUM": "0002857167",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "282675": {
+            "SORT_INDEX": 81,
+            "TITLE": [
+                "Xencom Energy Management, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 282675,
+            "FILING_DATE": "07/31/2019",
+            "RECORD_NUM": "0002859472",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "286920": {
+            "SORT_INDEX": 143,
+            "TITLE": [
+                "XPLR Infrastructure Constructors, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 286920,
+            "FILING_DATE": "10/04/2019",
+            "RECORD_NUM": "0002942261",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "289003": {
+            "SORT_INDEX": 5,
+            "TITLE": [
+                "Cirrata Partners Insurance Agency LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 289003,
+            "FILING_DATE": "11/26/2019",
+            "RECORD_NUM": "0002983026",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "290974": {
+            "SORT_INDEX": 108,
+            "TITLE": [
+                "XL LOGISTICS LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 290974,
+            "FILING_DATE": "01/13/2020",
+            "RECORD_NUM": "0003016450",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "291576": {
+            "SORT_INDEX": 141,
+            "TITLE": [
+                "Xpert Xteriors, LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 291576,
+            "FILING_DATE": "01/28/2020",
+            "RECORD_NUM": "0003036205",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "293283": {
+            "SORT_INDEX": 105,
+            "TITLE": [
+                "XL Farms",
+                "Trade Name"
+            ],
+            "ID": 293283,
+            "FILING_DATE": "03/04/2020",
+            "RECORD_NUM": "0003069778",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "294747": {
+            "SORT_INDEX": 112,
+            "TITLE": [
+                "XLHome, P.C. (dba Home Health Assessments of North Dakota, P.C.)",
+                "Corporation - Professional - Foreign"
+            ],
+            "ID": 294747,
+            "FILING_DATE": "04/07/2020",
+            "RECORD_NUM": "0003118500",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "299621": {
+            "SORT_INDEX": 153,
+            "TITLE": [
+                "XPT Partners, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 299621,
+            "FILING_DATE": "07/28/2020",
+            "RECORD_NUM": "0005216693",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "303782": {
+            "SORT_INDEX": 206,
+            "TITLE": [
+                "XWind Services Ltd.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 303782,
+            "FILING_DATE": "10/19/2020",
+            "RECORD_NUM": "0005309492",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "304915": {
+            "SORT_INDEX": 136,
+            "TITLE": [
+                "Xperience Title, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 304915,
+            "FILING_DATE": "11/06/2020",
+            "RECORD_NUM": "0005328786",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "305451": {
+            "SORT_INDEX": 70,
+            "TITLE": [
+                "XCLOUD, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 305451,
+            "FILING_DATE": "11/20/2020",
+            "RECORD_NUM": "0005338314",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "308363": {
+            "SORT_INDEX": 172,
+            "TITLE": [
+                "X-terior Solutions",
+                "Trade Name"
+            ],
+            "ID": 308363,
+            "FILING_DATE": "02/22/2021",
+            "RECORD_NUM": "0005407945",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "309089": {
+            "SORT_INDEX": 188,
+            "TITLE": [
+                "X-treme Detailing",
+                "Trade Name"
+            ],
+            "ID": 309089,
+            "FILING_DATE": "02/01/2021",
+            "RECORD_NUM": "0005426033",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "309214": {
+            "SORT_INDEX": 186,
+            "TITLE": [
+                "Xtreme Carpet Cleaning LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 309214,
+            "FILING_DATE": "02/02/2021",
+            "RECORD_NUM": "0005427601",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "309601": {
+            "SORT_INDEX": 131,
+            "TITLE": [
+                "Xperience Barbers",
+                "Trade Name"
+            ],
+            "ID": 309601,
+            "FILING_DATE": "02/09/2021",
+            "RECORD_NUM": "0005432375",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "312780": {
+            "SORT_INDEX": 212,
+            "TITLE": [
+                "XYMTEC Industries LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 312780,
+            "FILING_DATE": "03/31/2021",
+            "RECORD_NUM": "0005486763",
+            "STATUS": "Active",
+            "STANDING": "Not Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "313973": {
+            "SORT_INDEX": 80,
+            "TITLE": [
+                "XeCare LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 313973,
+            "FILING_DATE": "04/22/2021",
+            "RECORD_NUM": "0005499136",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "314011": {
+            "SORT_INDEX": 77,
+            "TITLE": [
+                "XDP Digital LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 314011,
+            "FILING_DATE": "04/22/2021",
+            "RECORD_NUM": "0005499495",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "315018": {
+            "SORT_INDEX": 38,
+            "TITLE": [
+                "XactlyOne Foundation",
+                "Corporation - Nonprofit - Foreign"
+            ],
+            "ID": 315018,
+            "FILING_DATE": "05/07/2021",
+            "RECORD_NUM": "0005510743",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "316181": {
+            "SORT_INDEX": 116,
+            "TITLE": [
+                "XM ACRES, LLP",
+                "Limited Liability Partnership - Domestic"
+            ],
+            "ID": 316181,
+            "FILING_DATE": "05/28/2021",
+            "RECORD_NUM": "0005525442",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "318390": {
+            "SORT_INDEX": 196,
+            "TITLE": [
+                "Xtreme installations",
+                "Trade Name"
+            ],
+            "ID": 318390,
+            "FILING_DATE": "07/07/2021",
+            "RECORD_NUM": "0005565360",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "319429": {
+            "SORT_INDEX": 22,
+            "TITLE": [
+                "X Diamond Partners, LLP",
+                "Limited Liability Partnership - Domestic"
+            ],
+            "ID": 319429,
+            "FILING_DATE": "07/30/2021",
+            "RECORD_NUM": "0005577759",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "321246": {
+            "SORT_INDEX": 159,
+            "TITLE": [
+                "XRQ CORP.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 321246,
+            "FILING_DATE": "09/27/2021",
+            "RECORD_NUM": "0005595152",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "322123": {
+            "SORT_INDEX": 26,
+            "TITLE": [
+                "X Golf Minot",
+                "Trade Name"
+            ],
+            "ID": 322123,
+            "FILING_DATE": "09/23/2021",
+            "RECORD_NUM": "0005643099",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "323422": {
+            "SORT_INDEX": 127,
+            "TITLE": [
+                "XOXO, PHOENIIX LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 323422,
+            "FILING_DATE": "10/13/2021",
+            "RECORD_NUM": "0005664534",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "323712": {
+            "SORT_INDEX": 203,
+            "TITLE": [
+                "XTS Holdings, LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 323712,
+            "FILING_DATE": "10/18/2021",
+            "RECORD_NUM": "0005668778",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "324145": {
+            "SORT_INDEX": 55,
+            "TITLE": [
+                "Xcel Aviation",
+                "Trade Name"
+            ],
+            "ID": 324145,
+            "FILING_DATE": "10/26/2021",
+            "RECORD_NUM": "0005675460",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "328417": {
+            "SORT_INDEX": 167,
+            "TITLE": [
+                "XSTREAM CLEAN CAR WASH",
+                "Trade Name"
+            ],
+            "ID": 328417,
+            "FILING_DATE": "01/20/2022",
+            "RECORD_NUM": "0005767677",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "329549": {
+            "SORT_INDEX": 29,
+            "TITLE": [
+                "X Realty LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 329549,
+            "FILING_DATE": "02/02/2022",
+            "RECORD_NUM": "0005781604",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "330579": {
+            "SORT_INDEX": 39,
+            "TITLE": [
+                "Xactus, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 330579,
+            "FILING_DATE": "02/16/2022",
+            "RECORD_NUM": "0005806191",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "330716": {
+            "SORT_INDEX": 61,
+            "TITLE": [
+                "Xcel Holdings",
+                "Trade Name"
+            ],
+            "ID": 330716,
+            "FILING_DATE": "02/28/2022",
+            "RECORD_NUM": "0005807728",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "332361": {
+            "SORT_INDEX": 42,
+            "TITLE": [
+                "XAP LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 332361,
+            "FILING_DATE": "03/22/2022",
+            "RECORD_NUM": "0005827829",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "333311": {
+            "SORT_INDEX": 62,
+            "TITLE": [
+                "Xcel Holdings LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 333311,
+            "FILING_DATE": "04/05/2022",
+            "RECORD_NUM": "0005852383",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "333362": {
+            "SORT_INDEX": 182,
+            "TITLE": [
+                "Xtravagant Elegance",
+                "Trade Name"
+            ],
+            "ID": 333362,
+            "FILING_DATE": "04/05/2022",
+            "RECORD_NUM": "0005852807",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "333623": {
+            "SORT_INDEX": 132,
+            "TITLE": [
+                "Xperience Barbers LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 333623,
+            "FILING_DATE": "04/19/2022",
+            "RECORD_NUM": "0005856034",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "335425": {
+            "SORT_INDEX": 76,
+            "TITLE": [
+                "xDatak LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 335425,
+            "FILING_DATE": "05/12/2022",
+            "RECORD_NUM": "0005876954",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "336584": {
+            "SORT_INDEX": 25,
+            "TITLE": [
+                "X Golf Bismarck",
+                "Trade Name"
+            ],
+            "ID": 336584,
+            "FILING_DATE": "06/01/2022",
+            "RECORD_NUM": "0005891299",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "337322": {
+            "SORT_INDEX": 102,
+            "TITLE": [
+                "XILAJU, LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 337322,
+            "FILING_DATE": "06/09/2022",
+            "RECORD_NUM": "0005914329",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "337397": {
+            "SORT_INDEX": 18,
+            "TITLE": [
+                "RXO Corporate Solutions, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 337397,
+            "FILING_DATE": "06/10/2022",
+            "RECORD_NUM": "0005914988",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "337553": {
+            "SORT_INDEX": 195,
+            "TITLE": [
+                "Xtreme installation LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 337553,
+            "FILING_DATE": "06/23/2022",
+            "RECORD_NUM": "0005916425",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "337680": {
+            "SORT_INDEX": 183,
+            "TITLE": [
+                "Xtreme Auto Detailz",
+                "Trade Name"
+            ],
+            "ID": 337680,
+            "FILING_DATE": "06/15/2022",
+            "RECORD_NUM": "0005917675",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "338193": {
+            "SORT_INDEX": 71,
+            "TITLE": [
+                "XCMG America Financial LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 338193,
+            "FILING_DATE": "06/23/2022",
+            "RECORD_NUM": "0005922092",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "339752": {
+            "SORT_INDEX": 69,
+            "TITLE": [
+                "XCHANGE TELECOM LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 339752,
+            "FILING_DATE": "07/01/2022",
+            "RECORD_NUM": "0005927138",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "341094": {
+            "SORT_INDEX": 156,
+            "TITLE": [
+                "XR Solutions, LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 341094,
+            "FILING_DATE": "07/26/2022",
+            "RECORD_NUM": "0005945632",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "343629": {
+            "SORT_INDEX": 117,
+            "TITLE": [
+                "XM42",
+                "Trade Name"
+            ],
+            "ID": 343629,
+            "FILING_DATE": "09/08/2022",
+            "RECORD_NUM": "0006023021",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "344027": {
+            "SORT_INDEX": 75,
+            "TITLE": [
+                "XCS Pros, LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 344027,
+            "FILING_DATE": "09/16/2022",
+            "RECORD_NUM": "0006028866",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "344030": {
+            "SORT_INDEX": 74,
+            "TITLE": [
+                "XCS Pros",
+                "Trade Name"
+            ],
+            "ID": 344030,
+            "FILING_DATE": "09/16/2022",
+            "RECORD_NUM": "0006028885",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "345737": {
+            "SORT_INDEX": 154,
+            "TITLE": [
+                "XPT Specialty",
+                "Trade Name"
+            ],
+            "ID": 345737,
+            "FILING_DATE": "09/28/2022",
+            "RECORD_NUM": "0006042100",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "347215": {
+            "SORT_INDEX": 114,
+            "TITLE": [
+                "XLT Pack and Ship",
+                "Trade Name"
+            ],
+            "ID": 347215,
+            "FILING_DATE": "10/25/2022",
+            "RECORD_NUM": "0006063334",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "347328": {
+            "SORT_INDEX": 194,
+            "TITLE": [
+                "Xtreme Gun Works",
+                "Trade Name"
+            ],
+            "ID": 347328,
+            "FILING_DATE": "10/26/2022",
+            "RECORD_NUM": "0006065149",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "348851": {
+            "SORT_INDEX": 101,
+            "TITLE": [
+                "Xigent Solutions, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 348851,
+            "FILING_DATE": "11/29/2022",
+            "RECORD_NUM": "0006091585",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "348941": {
+            "SORT_INDEX": 94,
+            "TITLE": [
+                "Xfinity Home",
+                "Trade Name"
+            ],
+            "ID": 348941,
+            "FILING_DATE": "11/30/2022",
+            "RECORD_NUM": "0006092932",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "349089": {
+            "SORT_INDEX": 214,
+            "TITLE": [
+                "XYZ Services LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 349089,
+            "FILING_DATE": "12/02/2022",
+            "RECORD_NUM": "0006118943",
+            "STATUS": "Active",
+            "STANDING": "Not Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "352364": {
+            "SORT_INDEX": 24,
+            "TITLE": [
+                "X FOODS",
+                "Trade Name"
+            ],
+            "ID": 352364,
+            "FILING_DATE": "02/02/2023",
+            "RECORD_NUM": "0006173383",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "352546": {
+            "SORT_INDEX": 135,
+            "TITLE": [
+                "Xperience Investments LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 352546,
+            "FILING_DATE": "02/06/2023",
+            "RECORD_NUM": "0006184608",
+            "STATUS": "Active",
+            "STANDING": "Not Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "352753": {
+            "SORT_INDEX": 35,
+            "TITLE": [
+                "X4I LIMITED, LLC",
+                "Trade Name"
+            ],
+            "ID": 352753,
+            "FILING_DATE": "02/08/2023",
+            "RECORD_NUM": "0006187455",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "352995": {
+            "SORT_INDEX": 34,
+            "TITLE": [
+                "X4I LIMITED (dba X4I LIMITED, LLC)",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 352995,
+            "FILING_DATE": "02/08/2023",
+            "RECORD_NUM": "0006190492",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "353992": {
+            "SORT_INDEX": 95,
+            "TITLE": [
+                "XFIT Holdings, Inc.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 353992,
+            "FILING_DATE": "03/02/2023",
+            "RECORD_NUM": "0006204817",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "354792": {
+            "SORT_INDEX": 72,
+            "TITLE": [
+                "XConnect Texas, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 354792,
+            "FILING_DATE": "03/21/2023",
+            "RECORD_NUM": "0006215915",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "356424": {
+            "SORT_INDEX": 115,
+            "TITLE": [
+                "xlt taxi",
+                "Trade Name"
+            ],
+            "ID": 356424,
+            "FILING_DATE": "04/14/2023",
+            "RECORD_NUM": "0006249515",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "356798": {
+            "SORT_INDEX": 21,
+            "TITLE": [
+                "X Corp.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 356798,
+            "FILING_DATE": "04/06/2023",
+            "RECORD_NUM": "0006253561",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "356840": {
+            "SORT_INDEX": 122,
+            "TITLE": [
+                "Xolaria LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 356840,
+            "FILING_DATE": "04/12/2023",
+            "RECORD_NUM": "0006253787",
+            "STATUS": "Active",
+            "STANDING": "Not Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "357555": {
+            "SORT_INDEX": 28,
+            "TITLE": [
+                "X Payments LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 357555,
+            "FILING_DATE": "04/24/2023",
+            "RECORD_NUM": "0006261917",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "357877": {
+            "SORT_INDEX": 208,
+            "TITLE": [
+                "XXXXX Holdings LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 357877,
+            "FILING_DATE": "04/27/2023",
+            "RECORD_NUM": "0006264782",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "358352": {
+            "SORT_INDEX": 36,
+            "TITLE": [
+                "XaBeat, LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 358352,
+            "FILING_DATE": "05/04/2023",
+            "RECORD_NUM": "0006269430",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "358512": {
+            "SORT_INDEX": 66,
+            "TITLE": [
+                "Xcelerate Indoor Adventures LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 358512,
+            "FILING_DATE": "05/04/2023",
+            "RECORD_NUM": "0006271478",
+            "STATUS": "Active",
+            "STANDING": "Not Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "358513": {
+            "SORT_INDEX": 65,
+            "TITLE": [
+                "Xcelerate Indoor Adventures",
+                "Trade Name"
+            ],
+            "ID": 358513,
+            "FILING_DATE": "05/04/2023",
+            "RECORD_NUM": "0006271482",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "359212": {
+            "SORT_INDEX": 164,
+            "TITLE": [
+                "XSM ATM Services LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 359212,
+            "FILING_DATE": "05/18/2023",
+            "RECORD_NUM": "0006280606",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "359470": {
+            "SORT_INDEX": 147,
+            "TITLE": [
+                "Xpress Bookkeepers",
+                "Trade Name"
+            ],
+            "ID": 359470,
+            "FILING_DATE": "05/23/2023",
+            "RECORD_NUM": "0006283339",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "360667": {
+            "SORT_INDEX": 85,
+            "TITLE": [
+                "Xeratex Group, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 360667,
+            "FILING_DATE": "06/09/2023",
+            "RECORD_NUM": "0006311361",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "361615": {
+            "SORT_INDEX": 46,
+            "TITLE": [
+                "Xavier Taylor Construction",
+                "Trade Name"
+            ],
+            "ID": 361615,
+            "FILING_DATE": "06/27/2023",
+            "RECORD_NUM": "0006320673",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "362695": {
+            "SORT_INDEX": 79,
+            "TITLE": [
+                "XEC, Inc.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 362695,
+            "FILING_DATE": "07/14/2023",
+            "RECORD_NUM": "0006336472",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "362750": {
+            "SORT_INDEX": 158,
+            "TITLE": [
+                "XRPL Mining Company, LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 362750,
+            "FILING_DATE": "07/19/2023",
+            "RECORD_NUM": "0006337035",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "363051": {
+            "SORT_INDEX": 33,
+            "TITLE": [
+                "X4 Pharmaceuticals, Inc.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 363051,
+            "FILING_DATE": "07/25/2023",
+            "RECORD_NUM": "0006339864",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "364524": {
+            "SORT_INDEX": 37,
+            "TITLE": [
+                "XABOW EXPRESS LOGISTICS INC.",
+                "Corporation - Business - Domestic"
+            ],
+            "ID": 364524,
+            "FILING_DATE": "08/17/2023",
+            "RECORD_NUM": "0006355495",
+            "STATUS": "Active",
+            "STANDING": "Not Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "365401": {
+            "SORT_INDEX": 49,
+            "TITLE": [
+                "Xcalibur Entertainment",
+                "Trade Name"
+            ],
+            "ID": 365401,
+            "FILING_DATE": "09/01/2023",
+            "RECORD_NUM": "0006363711",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "366510": {
+            "SORT_INDEX": 45,
+            "TITLE": [
+                "Xavier Gold Consulting Group Inc",
+                "Corporation - Business - Domestic"
+            ],
+            "ID": 366510,
+            "FILING_DATE": "09/22/2023",
+            "RECORD_NUM": "0006420317",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "367060": {
+            "SORT_INDEX": 149,
+            "TITLE": [
+                "Xpressbet, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 367060,
+            "FILING_DATE": "10/04/2023",
+            "RECORD_NUM": "0006429887",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "367138": {
+            "SORT_INDEX": 56,
+            "TITLE": [
+                "Xcel Detailing",
+                "Trade Name"
+            ],
+            "ID": 367138,
+            "FILING_DATE": "10/04/2023",
+            "RECORD_NUM": "0006431195",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "369976": {
+            "SORT_INDEX": 187,
+            "TITLE": [
+                "Xtreme Cleaning Services LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 369976,
+            "FILING_DATE": "11/24/2023",
+            "RECORD_NUM": "0006482080",
+            "STATUS": "Active",
+            "STANDING": "Not Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "369998": {
+            "SORT_INDEX": 170,
+            "TITLE": [
+                "XTC U.S. XPRESS INC. U.S. INC.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 369998,
+            "FILING_DATE": "12/04/2023",
+            "RECORD_NUM": "0006482466",
+            "STATUS": "Active",
+            "STANDING": "Not Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "372441": {
+            "SORT_INDEX": 50,
+            "TITLE": [
+                "Xcalibur Leasing Company",
+                "Corporation - Business - Domestic"
+            ],
+            "ID": 372441,
+            "FILING_DATE": "01/11/2024",
+            "RECORD_NUM": "0006557504",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "373175": {
+            "SORT_INDEX": 140,
+            "TITLE": [
+                "Xpert Home Lending Inc.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 373175,
+            "FILING_DATE": "01/25/2024",
+            "RECORD_NUM": "0006569153",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "374198": {
+            "SORT_INDEX": 166,
+            "TITLE": [
+                "Xspray Pharma Inc.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 374198,
+            "FILING_DATE": "02/13/2024",
+            "RECORD_NUM": "0006591189",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "375671": {
+            "SORT_INDEX": 44,
+            "TITLE": [
+                "Xavier Collections LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 375671,
+            "FILING_DATE": "03/06/2024",
+            "RECORD_NUM": "0006611230",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "375793": {
+            "SORT_INDEX": 169,
+            "TITLE": [
+                "Xstreme MD",
+                "Trade Name"
+            ],
+            "ID": 375793,
+            "FILING_DATE": "03/07/2024",
+            "RECORD_NUM": "0006612579",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "376114": {
+            "SORT_INDEX": 130,
+            "TITLE": [
+                "XPEL, INC.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 376114,
+            "FILING_DATE": "03/12/2024",
+            "RECORD_NUM": "0006615596",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "376440": {
+            "SORT_INDEX": 179,
+            "TITLE": [
+                "Xtra Mile Property Services LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 376440,
+            "FILING_DATE": "03/18/2024",
+            "RECORD_NUM": "0006618532",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "376551": {
+            "SORT_INDEX": 197,
+            "TITLE": [
+                "Xtreme Lawn Care LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 376551,
+            "FILING_DATE": "03/19/2024",
+            "RECORD_NUM": "0006637287",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "379519": {
+            "SORT_INDEX": 32,
+            "TITLE": [
+                "X11 LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 379519,
+            "FILING_DATE": "05/07/2024",
+            "RECORD_NUM": "0006672219",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "380781": {
+            "SORT_INDEX": 83,
+            "TITLE": [
+                "Xenith Development Group",
+                "Trade Name"
+            ],
+            "ID": 380781,
+            "FILING_DATE": "05/29/2024",
+            "RECORD_NUM": "0006685910",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "381522": {
+            "SORT_INDEX": 162,
+            "TITLE": [
+                "Xsellr8r, Inc.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 381522,
+            "FILING_DATE": "06/12/2024",
+            "RECORD_NUM": "0006709030",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "382036": {
+            "SORT_INDEX": 89,
+            "TITLE": [
+                "Xero LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 382036,
+            "FILING_DATE": "06/20/2024",
+            "RECORD_NUM": "0006714143",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "383772": {
+            "SORT_INDEX": 150,
+            "TITLE": [
+                "XpressConnect Supply, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 383772,
+            "FILING_DATE": "07/30/2024",
+            "RECORD_NUM": "0006737933",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "386152": {
+            "SORT_INDEX": 165,
+            "TITLE": [
+                "Xsolla Payment Network USA, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 386152,
+            "FILING_DATE": "09/11/2024",
+            "RECORD_NUM": "0006761557",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "386669": {
+            "SORT_INDEX": 137,
+            "TITLE": [
+                "Xpert Concrete Coatings LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 386669,
+            "FILING_DATE": "09/20/2024",
+            "RECORD_NUM": "0006817200",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "387248": {
+            "SORT_INDEX": 87,
+            "TITLE": [
+                "Xeric Holdings LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 387248,
+            "FILING_DATE": "10/02/2024",
+            "RECORD_NUM": "0006828480",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "387490": {
+            "SORT_INDEX": 129,
+            "TITLE": [
+                "Xpedition Well Service LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 387490,
+            "FILING_DATE": "10/08/2024",
+            "RECORD_NUM": "0006832697",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "387774": {
+            "SORT_INDEX": 20,
+            "TITLE": [
+                "X Block Inc",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 387774,
+            "FILING_DATE": "10/29/2024",
+            "RECORD_NUM": "0006838115",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": true,
+            "CAN_ALWAYS_FILE_AR": true,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "388292": {
+            "SORT_INDEX": 27,
+            "TITLE": [
+                "X Mark Properties LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 388292,
+            "FILING_DATE": "10/23/2024",
+            "RECORD_NUM": "0006848693",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "389761": {
+            "SORT_INDEX": 205,
+            "TITLE": [
+                "XWA 2024, LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 389761,
+            "FILING_DATE": "10/30/2024",
+            "RECORD_NUM": "0006856720",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "390807": {
+            "SORT_INDEX": 126,
+            "TITLE": [
+                "Xoom",
+                "Trade Name"
+            ],
+            "ID": 390807,
+            "FILING_DATE": "11/21/2024",
+            "RECORD_NUM": "0006878133",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "391100": {
+            "SORT_INDEX": 210,
+            "TITLE": [
+                "Xylem I LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 391100,
+            "FILING_DATE": "11/26/2024",
+            "RECORD_NUM": "0006885195",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "393161": {
+            "SORT_INDEX": 104,
+            "TITLE": [
+                "XJOY LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 393161,
+            "FILING_DATE": "01/13/2025",
+            "RECORD_NUM": "0006948055",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "393921": {
+            "SORT_INDEX": 173,
+            "TITLE": [
+                "XTERNALSOURCE LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 393921,
+            "FILING_DATE": "01/24/2025",
+            "RECORD_NUM": "0006960714",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "396369": {
+            "SORT_INDEX": 31,
+            "TITLE": [
+                "X.L. Global Services, Inc.",
+                "Corporation - Business - Foreign"
+            ],
+            "ID": 396369,
+            "FILING_DATE": "02/18/2025",
+            "RECORD_NUM": "0006988332",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "396789": {
+            "SORT_INDEX": 161,
+            "TITLE": [
+                "XSeed Consultants",
+                "Trade Name"
+            ],
+            "ID": 396789,
+            "FILING_DATE": "02/18/2025",
+            "RECORD_NUM": "0006996425",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "397196": {
+            "SORT_INDEX": 90,
+            "TITLE": [
+                "Xerox Business Solutions, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 397196,
+            "FILING_DATE": "03/03/2025",
+            "RECORD_NUM": "0007001379",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "397474": {
+            "SORT_INDEX": 48,
+            "TITLE": [
+                "X-Caliber Rural Capital, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 397474,
+            "FILING_DATE": "03/06/2025",
+            "RECORD_NUM": "0007004608",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "398144": {
+            "SORT_INDEX": 98,
+            "TITLE": [
+                "XGSC Inc.",
+                "Corporation - Business - Domestic"
+            ],
+            "ID": 398144,
+            "FILING_DATE": "03/14/2025",
+            "RECORD_NUM": "0007011900",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "399442": {
+            "SORT_INDEX": 110,
+            "TITLE": [
+                "XLHNE, P.C.",
+                "Trade Name"
+            ],
+            "ID": 399442,
+            "FILING_DATE": "04/03/2025",
+            "RECORD_NUM": "0007046060",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "399444": {
+            "SORT_INDEX": 111,
+            "TITLE": [
+                "XLHome Northeast, P.C. (dba XLHNE, P.C.)",
+                "Corporation - Professional - Foreign"
+            ],
+            "ID": 399444,
+            "FILING_DATE": "04/04/2025",
+            "RECORD_NUM": "0007046064",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "399806": {
+            "SORT_INDEX": 213,
+            "TITLE": [
+                "XYZ ROOFCO, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 399806,
+            "FILING_DATE": "04/09/2025",
+            "RECORD_NUM": "0007050351",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "399935": {
+            "SORT_INDEX": 178,
+            "TITLE": [
+                "Xtra Hand LLC",
+                "Limited Liability Company - Business - Domestic"
+            ],
+            "ID": 399935,
+            "FILING_DATE": "04/09/2025",
+            "RECORD_NUM": "0007051667",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        },
+        "400182": {
+            "SORT_INDEX": 142,
+            "TITLE": [
+                "xPL Offsite, LLC",
+                "Limited Liability Company - Business - Foreign"
+            ],
+            "ID": 400182,
+            "FILING_DATE": "04/14/2025",
+            "RECORD_NUM": "0007054068",
+            "STATUS": "Active",
+            "STANDING": "Good Standing",
+            "ALERT": false,
+            "CAN_REINSTATE": false,
+            "CAN_FILE_AR": false,
+            "CAN_ALWAYS_FILE_AR": false,
+            "CAN_FILE_REINSTATEMENT": false
+        }
+    }
+}

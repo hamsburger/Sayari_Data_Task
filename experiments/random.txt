@@ -1,0 +1,14 @@
+accept: */*
+accept-encoding: gzip, deflate, br, zstd
+accept-language: en-CA,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,en-GB;q=0.6,en-US;q=0.5
+authorization: undefined
+cookie: ASP.NET_SessionId=c5yp0ml0vvjlgdy2nsii3ijl; _dd_s=logs=1&id=238106aa-fd0d-4e23-88d1-52d14d51af04&created=1744837199135&expire=1744838399266
+priority: u=1, i
+referer: https://firststop.sos.nd.gov/search/business
+sec-ch-ua: "Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+sec-fetch-dest: empty
+sec-fetch-mode: cors
+sec-fetch-site: same-origin
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36

@@ -1,0 +1,8 @@
+matplotlib==3.10.1
+networkx==3.4.2
+numpy==2.2.4
+pip==25.0
+jmespath==1.0.1
+PyYAML==6.0.2
+Scrapy==2.12.0
+itemadapter==0.11.0

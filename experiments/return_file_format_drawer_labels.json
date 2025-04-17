@@ -1,0 +1,97 @@
+{
+    "DRAWER_DETAIL_LIST": [
+        {
+            "LABEL": "Filing Type",
+            "VALUE": "Limited Liability Company - Business - Foreign",
+            "TYPE": null,
+            "LINKLABEL": null,
+            "ALERT_YN": false
+        },
+        {
+            "LABEL": "Status",
+            "VALUE": "Active",
+            "TYPE": null,
+            "LINKLABEL": null,
+            "ALERT_YN": false
+        },
+        {
+            "LABEL": "Standing - AR",
+            "VALUE": "Good",
+            "TYPE": null,
+            "LINKLABEL": null,
+            "ALERT_YN": false
+        },
+        {
+            "LABEL": "Standing - RA",
+            "VALUE": "Good",
+            "TYPE": null,
+            "LINKLABEL": null,
+            "ALERT_YN": false
+        },
+        {
+            "LABEL": "Standing - Other",
+            "VALUE": "Good",
+            "TYPE": null,
+            "LINKLABEL": null,
+            "ALERT_YN": false
+        },
+        {
+            "LABEL": "Formed In",
+            "VALUE": "INDIANA",
+            "TYPE": null,
+            "LINKLABEL": null,
+            "ALERT_YN": false
+        },
+        {
+            "LABEL": "Term of Duration",
+            "VALUE": "Perpetual",
+            "TYPE": null,
+            "LINKLABEL": null,
+            "ALERT_YN": false
+        },
+        {
+            "LABEL": "Initial Filing Date",
+            "VALUE": "09/24/2018",
+            "TYPE": null,
+            "LINKLABEL": null,
+            "ALERT_YN": false
+        },
+        {
+            "LABEL": "Principal Address",
+            "VALUE": "6000 FREEDOM SQUARE DRIVE\nSUITE 300\nINDEPENDENCE, OH 44131",
+            "TYPE": null,
+            "LINKLABEL": null,
+            "ALERT_YN": false
+        },
+        {
+            "LABEL": "Mailing Address",
+            "VALUE": "6000 FREEDOM SQUARE DR\nSTE 300\nINDEPENDENCE, OH 44131-2547",
+            "TYPE": null,
+            "LINKLABEL": null,
+            "ALERT_YN": false
+        },
+        {
+            "LABEL": "AR Due Date",
+            "VALUE": "11/17/2025",
+            "TYPE": null,
+            "LINKLABEL": null,
+            "ALERT_YN": false
+        },
+        {
+            "LABEL": "Commercial Registered Agent",
+            "VALUE": "COGENCY GLOBAL INC.\n120 W SWEET AVE STE 9\nBISMARCK, ND  58504",
+            "TYPE": null,
+            "LINKLABEL": null,
+            "ALERT_YN": false
+        },
+        {
+            "VALUE" : "hey"
+        }
+    ],
+    "UNAVAILABLE_AR_MESSAGE": null,
+    "UNAVAILABLE_REINSTATEMENT_MESSAGE": null,
+    "UNAVAILABLE_RENEWAL_MESSAGE": null,
+    "AR_BUTTON_LABEL": "File Annual Report",
+    "HIDE_CERT_BUTTON": false,
+    "CERT_BUTTON_LABEL": null
+}

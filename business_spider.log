@@ -1,5 +1,5 @@
-2025-04-17 15:25:55 [sayari_graph_scraping.pipelines] WARNING: Expected graph label names not found for business id: 231461
-2025-04-17 15:26:46 [sayari_graph_scraping.pipelines] WARNING: Expected graph label names not found for business id: 293283
+2025-04-17 15:25:55 [sayari_graph_scraping.pipelines] WARNING: Expected graph label names not found for business id: 231461 and SOS Control ID#: 0000231841
+2025-04-17 15:26:46 [sayari_graph_scraping.pipelines] WARNING: Expected graph label names not found for business id: 293283 and SOS Control ID#: 0003069778
 2025-04-17 18:40:20 [scrapy.core.engine] ERROR: Scraper close failure2025-04-18 19:48:45 [scrapy.core.engine] ERROR: Scraper close failure
 Traceback (most recent call last):
   File "/usr/local/lib/python3.10/site-packages/twisted/internet/defer.py", line 1088, in _runCallbacks

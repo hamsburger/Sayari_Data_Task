@@ -65,7 +65,7 @@ Some additional tasks were done to ensure data quality, code reproducibility and
 I will break down key features of my design responsible for scalable, fault-tolerant data engineering pipeline.
 
 ### Web Crawling
-1. **Requests and Link Follows.** Used the IDs extracted from initial API call to get web app tables to query drawer information. This allows all relevant business information to be retrieved. For requests **Accept** and **Content-Type** flags were configured to respectively communicate desired response data types and request payload data, as well as other headers such as **Authorization**. A minimally acceptable header size was decided using JavaScript knowledge and testing API requests in Postman. See Postman workspace [here](https://www.postman.com/cryosat-astronaut-55406376/my-workspace/collection/26y6zr0/sayari?action=share&creator=29483381) where I tested the requests. 
+1. **Requests and Link Follows.** Used the IDs extracted from initial API call to get web app tables to query drawer information. This allows all relevant business information to be retrieved. For requests, **Accept** and **Content-Type** flags were configured to respectively communicate desired response data types and request payload data, as well as other headers such as **Authorization**. A minimally acceptable header size was decided using JavaScript knowledge and testing API requests in Postman. See Postman workspace [here](https://www.postman.com/cryosat-astronaut-55406376/my-workspace/collection/26y6zr0/sayari?action=share&creator=29483381) where I tested the requests. 
 2. **Log warnings [(logged at business_spider.log)](business_spider.log) + Code Resilience** These were crucial for debugging unexpected data structures and improving adaptability of web crawling code. For example, an additional field **OWNERS** was discovered to be required for graph analysis, with the help of logs capturing moments when drawer information did not hold expected graph labels: OWNER_NAME, COMMERCIAL_REGISTERED_AGENT, OR REGISTERED_AGENT. It was also important for these warnings to act as warnings and not errors, to encourage fault tolerance and prevent failing entire crawling processes due to single point of failure. [Click for my data quality exploration notebook](experiments/explore_company_records.ipynb).
 
 3. **Rate_limiting**
@@ -73,6 +73,7 @@ Autothrottling was configured in [sayari_graph_scraping/settings.py](sayari_grap
 
 ### Data Model
 1. **Data Lake Format.** The data crawled by our spider is initially stored in .jsonl format [\(Link to data\)](output/company_records.jsonl). From eye test, it looked like drawer details has unpredictable schema, so .jsonl was opted to store web crawled results and hold unstructured data. Drawer details are stored in an array under the key "DRAWER_DETAILS". Also note that for each business, a new data field originally not returned from API request was derived, **KEY_ID**, to cater data format for .jsonl storage.
+> The Data Lake contains 216 rows.
 ```javascript
     ## Initial
     {
@@ -91,6 +92,7 @@ Autothrottling was configured in [sayari_graph_scraping/settings.py](sayari_grap
 
 2. **Graph Data Format** The graph dataset is stored in .csv format [\(Link here\)](output/graph.csv).
 It contains network graph data format derived from in the following schema, expressed using Postgres DDL. The table can be interpreted as such: **entity** has a **relationship** with **company**. For example, **A (entity)** is the registered commercial agent (relationship) of **B (company)**. 
+> The Graph Dataset contains 198 rows, smaller than data lake due to processing of Owners field and filtering company titles that do not actually being with X.
 ```sql
     CREATE TABLE graph (
         entity TEXT,
@@ -103,11 +105,10 @@ Each of the text columns go through simple preprocessing. Here's how it's done f
 
 - **company** Upper Case, Stripped, Contiguous Spaces Replaced with One Space.
 
-- **relationship** Upper Case, Replace Contiguous Spaces with One Underscore.
+- **relationship** Upper Case, Contiguous Spaces Replaces with One Underscore.
 
 
-More complex processing could be done in the future, such as Levenshtein distance to
-normalize strings. 
+More complex processing could be done in the future, such as Levenshtein distance/Vector Database to normalize suspect duplicate strings. 
 
 
 ### Data Quality
@@ -116,7 +117,7 @@ As mentionned, [Click for my data quality exploration notebook](experiments/expl
 Data quality problems won't be explored in detail in README, but here are the general issues that were found and resolved:
 - Additional **OWNERS** field needs to be processed from initially expected graph fields: **OWNER_NAME, COMMERCIAL_REGISTERED_AGENT, OR REGISTERED_AGENT.** Recall this issue was only discovered with the help of web crawling logging. *Solution*: rewrite code to add OWNERS field **AND** subsequent dictionaries in drawer that has "" empty string label to the resulting network graph. 
 - POST request for companies whose titles start with X return some companies whose title do not start with X. *Solution:* filter for company titles using string operations (startswith).
-- Multiple owner names delimited by commas under OWNER_NAME field in drawer. Only happens for company Xtravagant Elegance with SOS CONTROL ID# of 5852807. *Solution:* No solution to fix this yet, maybe the owner could have multiple names. Better contact stakeholders for this.
+- Multiple owner names delimited by commas under OWNER_NAME field in drawer. Only one data record when this happens: Company Xtravagant Elegance with SOS CONTROL ID# of 5852807. *Solution:* No solution how to resolve owner name with seeming multiple names yet. I need to understand the data better.
 
 Even though these issues are considered resolved for now, it's important to have good code design and stay alert of future problems.
 
@@ -131,18 +132,18 @@ Installing graphviz on windows was painstakingly hard, which was one of my motiv
 
 There are a few options for reproducing results
 ### Makefile + Docker (Recommended)
-Simply running ```make``` in the terminal in root directory will build the docker container and run the entire crawling process as shown in [methodology](#methodology)
+Simply running ```make``` in the terminal in root directory will build the docker container and run all crawling steps as shown in [methodology](#methodology)
 
 You can specify ```make run``` or ```make crawl``` to skip the build.
 
-Or if you already web crawled, you can just run ```make postprocess``` to build graph dataset and generate visualization.
+Or if you already web crawled and want to skip it, you can just run ```make postprocess``` to build graph dataset and generate visualization.
 
 ### Virtual Environment
 You can also set up a virtual environment yourself. Google how to set one up, there arem any ways, and once you've activated the environment, run the following code to install packages.
 ```bash
     pip install -r requirements.txt
 ```
-To run entire crawling process:
+To run all crawling steps:
 ```bash
     scrapy crawl business_spider
 ```
@@ -150,15 +151,15 @@ And last but not least, if you already have web crawled data stored, just run th
 ```bash
     python sayari_graph_scraping/postprocess.py
 ```
+All the above commands should be executed in the **root** directory.
 
 ## Future Work
 - [ ] Test data lake modeling and graph data modeling in postgres with docker-compose, to prepare for cloud deployments (ex. Kubernetes, RDS, S3). We are already going in the right direction with Dockerfiles.
 
 - [ ] Consult stakeholders on desired data lake format. The field labels returned from API aren't exactly the same as what's shown on UI, (ex. SOS Control ID on UI is shown as RECORD_NUM in the API), so we need to understand the desired data schema and make necessary changes.
 
-- [ ] Consult stakeholders to improve network visualization. For example, they might want colour for each type of node (ex. is it a registered agent? company? owner?) instead of just a colour for each connected component.
+- [ ] Consult stakeholders to improve network visualization. For example, they might want colour each type of node (ex. is it a registered agent? company? owner?) instead of just a colour for each connected component.
 
-- [ ] Improve string preprocessing for entity resolution, since simple preprocessing may not be enough to normalize all names. 
+- [ ] Understand data and data quality better. Improve string preprocessing for entity resolution, since simple preprocessing may not be enough to normalize all names. 
 
-- [ ] Create custom commands in Makefile to run Jupyter Notebook data quality exploration in Docker. That way developers can play around and check my analysis. 
-
+- [ ] Create custom commands in Makefile to run Jupyter Notebook data quality exploration in Docker. That way developers can play around and check my analysis.

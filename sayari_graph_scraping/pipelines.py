@@ -81,11 +81,12 @@ class SayariGraphScrapingPipeline:
                         # indicated by label_name == ""
                         while i < len(details):
                             detail = details[i]
+                            label_name = detail.get("LABEL", None)
                             if label_name == "":
-                                self.reformat_and_check_data_for_knowledge_graph(
+                                edge_to_write = self.reformat_and_check_data_for_knowledge_graph(
                                     detail.get("VALUE", None),
                                     company_title,
-                                    label_name,
+                                    "OWNERS",
                                     item,
                                 )
                                 self.knowledge_graph.append(edge_to_write)
@@ -93,12 +94,10 @@ class SayariGraphScrapingPipeline:
                             else:
                                 # No more owners to extract, break
                                 break
-                    
                     else:
-                        value = detail.get("VALUE", None)
                         edge_to_write = (
                             self.reformat_and_check_data_for_knowledge_graph(
-                                value, company_title, label_name, item
+                                detail.get("VALUE", None), company_title, label_name, item
                             )
                         )
                         self.knowledge_graph.append(edge_to_write)
@@ -106,6 +105,7 @@ class SayariGraphScrapingPipeline:
                     is_relation_found = True
                 else:
                     i += 1
+            ## After going through all drawer details
             if is_relation_found is False:
                 self.log_warn_msg(f"Expected graph label names not found", item)
         else:

@@ -1,0 +1,9 @@
+2025-04-17 15:25:55 [sayari_graph_scraping.pipelines] WARNING: Expected graph label names not found for business id: 231461
+2025-04-17 15:26:46 [sayari_graph_scraping.pipelines] WARNING: Expected graph label names not found for business id: 293283
+2025-04-17 18:40:20 [scrapy.core.engine] ERROR: Scraper close failure2025-04-18 19:48:45 [scrapy.core.engine] ERROR: Scraper close failure
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/twisted/internet/defer.py", line 1088, in _runCallbacks
+    current.result = callback(  # type: ignore[misc]
+  File "/app/sayari_graph_scraping/pipelines.py", line 202, in close_spider
+    print("Number of Companies Plotted:", len(self.nodes))
+AttributeError: 'SayariGraphScrapingPipeline' object has no attribute 'nodes'

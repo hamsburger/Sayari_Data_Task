@@ -46,7 +46,7 @@ class SayariGraphScrapingPipeline:
         company_title = jmespath.search("TITLE[0]", item)
         if company_title is None:
             self.log_warn_msg("Company title not found", item)
-        company_title = company_title.strip().upper()
+        company_title = company_title.upper().strip()
 
         # If company title does not start with x, don't incorporate into knowledge graph
         if company_title and not company_title.startswith("X"):
@@ -114,7 +114,7 @@ class SayariGraphScrapingPipeline:
     def reformat_and_check_data_for_knowledge_graph(
         self, value, company_title, label_name, item
     ):  
-        company_title = re.sub(r"\s+", " " , company_title)
+        company_title = re.sub(r"\s+", " ", company_title)
         if not self.check_string_warning(
             value, f"Value for {label_name} not string", item
         ):
@@ -200,7 +200,7 @@ class SayariGraphScrapingPipeline:
             to_node = jmespath.search("[*][1]", self.knowledge_graph)
             relationship_type = jmespath.search("[*][2].label", self.knowledge_graph)
             df = pl.DataFrame(
-                {"from": from_node, "to": to_node, "relationship": relationship_type}
+                {"entity": from_node, "company": to_node, "relationship": relationship_type}
             )
             df.write_csv(self.graph_path)
 

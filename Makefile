@@ -5,6 +5,7 @@ DATA_FILE=$(PROJECT_NAME)/output/company_records.jsonl
 
 ALL: build crawl
 
+# Build docker image
 build:
 	docker build -t $(IMAGE_NAME) .
 
@@ -16,13 +17,18 @@ crawl:
 
 postprocess:
 	docker run --rm -v $$PWD:/app $(IMAGE_NAME) python $(PROJECT_NAME)/postprocess.py
- 
-# if data file exists, only postprocess. Otherwise crawl
-autoproc:
-	@if docker exec $(IMAGE_NAME) test -f $(DATA_FILE); then \
-		echo "✔ Found $$(DATA_FILE). Skipping crawl. Running postprocess only."; \
-		make postprocess; \
+
+# Stop container and remove docker image
+clean-image:
+	CONTAINER_IDS=$$(docker ps -a -q --filter ancestor=$(IMAGE_NAME)); \
+	if [ -z "$$CONTAINER_IDS" ]; then \
+		echo "No containers found for image: $(IMAGE_NAME)"; \
 	else \
-		echo "⚙ Data file not found. Crawling now..."; \
-		make crawl \
-	fi
+		echo "Stopping containers..."; \
+		docker stop $$CONTAINER_IDS; \
+		echo "Removing containers..."; \
+		docker rm $$CONTAINER_IDS; \
+	fi; \
+	echo "Removing image: $(IMAGE_NAME)"; \
+	docker rmi -f $(IMAGE_NAME) || true; \
+	echo "Done cleaning up image and containers."

@@ -1,6 +1,7 @@
 from pipelines import SayariGraphScrapingPipeline
 import json
 import os
+
 root_path = os.path.dirname(os.path.dirname(__file__))
 output_dir = os.path.join(root_path, "output")
 

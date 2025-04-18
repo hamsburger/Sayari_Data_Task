@@ -3,8 +3,10 @@ FROM python:3.10-slim
 # Install system packages required for graphviz
 RUN apt-get update && apt-get install -y \
     graphviz \
-    libgraphviz-dev \
+    graphviz-dev \
     pkg-config \
+    python3-dev \
+    build-essential \
     && rm -rf /var/lib/apt/lists/*
 
 # Optional: Install Graphviz Python packages

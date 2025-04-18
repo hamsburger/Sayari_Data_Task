@@ -2,3 +2,4 @@
 **/__pycache__/
 .dockerignore
 **/*.log
+sayari_graph_scraping/sql

@@ -22,8 +22,10 @@ class SayariGraphScrapingPipeline:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
         self.root_dir = os.path.dirname(os.path.dirname(__file__))
+        self.docs_dir = os.path.join(self.root_dir, "docs")
         self.output_dir = os.path.join(self.root_dir, "output")
         os.makedirs(self.output_dir, exist_ok=True)
+        os.makedirs(self.docs_dir, exist_ok=True)
         self.graph_path = os.path.join(self.output_dir, "graph.csv")
         self.knowledge_graph = []  # Store edges
         self.nodes = []  # Store nodes
@@ -220,7 +222,7 @@ class SayariGraphScrapingPipeline:
 
         # Write out HTML
         # First write is for github.io rendering, second write it to output folder
-        nt.write_html(os.path.join(self.root_dir, "index.html"))
+        nt.write_html(os.path.join(self.docs_dir, "knowledge_graph.html"))
         nt.write_html(os.path.join(self.output_dir, "knowledge_graph.html"))
 
     @staticmethod

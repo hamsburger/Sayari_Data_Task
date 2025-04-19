@@ -74,7 +74,7 @@ Some additional tasks were done to ensure data quality, code reproducibility and
         F["""Logs
         (business_spider.log)"""]
         G["""Pyvis Visualization
-        (output/knowledge_graph.html)"""]  
+        (docs/index.html)"""]  
 ```
 I will break down key features of my design responsible for scalable, fault-tolerant data engineering pipeline.
 

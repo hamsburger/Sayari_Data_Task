@@ -124,11 +124,12 @@ Even though these issues are considered resolved for now, it's important to have
 ### Data Visualization
 > [Link to Vis](output/knowledge_graph.png)
 
-Based on the graph data model, a networkx graph visualization was generated. The graph is divided into connected components and each set of connected components is assigned a colour. With the help of neato graphviz positioning, registered agents and owner hubs and authorities were revealed through the networkx graph. 
+Based on the graph data model, a networkx graph visualization was generated. The graph is divided into connected components and each set of connected components is assigned a colour. With the help of neato graphviz positioning, registered agents and owner hubs assigned to many companies were revealed through the networkx graph. 
 
-Installing graphviz on windows was painstakingly hard, which was one of my motivations for building a docker container for reproducing code, so future developers wouldn't have to deal with the installation process.
 
 ## Running/Reproducing the Results
+
+**Note:** From testing, it seems like Windows machines have trouble running the provided docker container due to graphviz dependency, but this container should still be reproducible on other machines (ex. Debian) 
 
 There are a few options for reproducing results
 ### Makefile + Docker (Recommended)

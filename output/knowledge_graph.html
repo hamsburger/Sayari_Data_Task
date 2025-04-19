@@ -1,0 +1,1281 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/css/tom-select.min.css" integrity="sha512-43fHB3GLgZfz8QXl1RPQ8O66oIgv3po9cJ5erMt1c4QISq9dYb195T3vr5ImnJPXuVroKcGBPXBFKETW8jrPNQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/js/tom-select.complete.js" integrity="sha512-jeF9CfnvzDiw9G9xiksVjxR2lib44Gnovvkv+3CgCG6NXCD4gqlA5nDAVW5WjpA+i+/zKsUWV5xNEbW1X/HH0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100% ;
+                 height: 100vh;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+             #loadingBar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width: 100% ;
+                 height: 100vh;
+                 background-color:rgba(200,200,200,0.8);
+                 -webkit-transition: all 0.5s ease;
+                 -moz-transition: all 0.5s ease;
+                 -ms-transition: all 0.5s ease;
+                 -o-transition: all 0.5s ease;
+                 transition: all 0.5s ease;
+                 opacity:1;
+             }
+
+             #bar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width:20px;
+                 height:20px;
+                 margin:auto auto auto auto;
+                 border-radius:11px;
+                 border:2px solid rgba(30,30,30,0.05);
+                 background: rgb(0, 173, 246); /* Old browsers */
+                 box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+             }
+
+             #border {
+                 position:absolute;
+                 top:10px;
+                 left:10px;
+                 width:500px;
+                 height:23px;
+                 margin:auto auto auto auto;
+                 box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+                 border-radius:10px;
+             }
+
+             #text {
+                 position:absolute;
+                 top:8px;
+                 left:530px;
+                 width:30px;
+                 height:50px;
+                 margin:auto auto auto auto;
+                 font-size:22px;
+                 color: #000000;
+             }
+
+             div.outerBorder {
+                 position:relative;
+                 top:400px;
+                 width:600px;
+                 height:44px;
+                 margin:auto auto auto auto;
+                 border:8px solid rgba(0,0,0,0.1);
+                 background: rgb(252,252,252); /* Old browsers */
+                 background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+                 background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+                 background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+                 background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+                 background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+                 border-radius:72px;
+                 box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+             }
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+                <div id="select-menu" class="card-header">
+                    <div class="row no-gutters">
+                        <div class="col-10 pb-2">
+                            <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="selectNode([value]);"
+                            id="select-node"
+                            placeholder="Select node..."
+                            >
+                                <option selected>Select a Node by ID</option>
+                                
+                                    <option value="X ELECTRIC">X ELECTRIC</option>
+                                
+                                    <option value="XTREME ELECTRICAL SERVICES, INC.">XTREME ELECTRICAL SERVICES, INC.</option>
+                                
+                                    <option value="X BLOCK INC">X BLOCK INC</option>
+                                
+                                    <option value="REGISTERED AGENTS INC">REGISTERED AGENTS INC</option>
+                                
+                                    <option value="X FOODS">X FOODS</option>
+                                
+                                    <option value="OECH FOODS LLC">OECH FOODS LLC</option>
+                                
+                                    <option value="XZILON, INC.">XZILON, INC.</option>
+                                
+                                    <option value="C T CORPORATION SYSTEM">C T CORPORATION SYSTEM</option>
+                                
+                                    <option value="XYZ ROOFCO, LLC">XYZ ROOFCO, LLC</option>
+                                
+                                    <option value="X DIAMOND PARTNERS, LLP">X DIAMOND PARTNERS, LLP</option>
+                                
+                                    <option value="KENDALL VETTER">KENDALL VETTER</option>
+                                
+                                    <option value="X CORP.">X CORP.</option>
+                                
+                                    <option value="XYZ SERVICES LLC">XYZ SERVICES LLC</option>
+                                
+                                    <option value="ZANE SCHOBINGER">ZANE SCHOBINGER</option>
+                                
+                                    <option value="XYMTEC INDUSTRIES LLC">XYMTEC INDUSTRIES LLC</option>
+                                
+                                    <option value="ANDREW SANDVIK">ANDREW SANDVIK</option>
+                                
+                                    <option value="XYLEM WATER SOLUTIONS U.S.A., INC.">XYLEM WATER SOLUTIONS U.S.A., INC.</option>
+                                
+                                    <option value="XYLEM I LLC">XYLEM I LLC</option>
+                                
+                                    <option value="CORPORATION SERVICE COMPANY">CORPORATION SERVICE COMPANY</option>
+                                
+                                    <option value="XYLEM DEWATERING SOLUTIONS, INC.">XYLEM DEWATERING SOLUTIONS, INC.</option>
+                                
+                                    <option value="XXXXX HOLDINGS LLC">XXXXX HOLDINGS LLC</option>
+                                
+                                    <option value="LIGHT CONSULTING LLC">LIGHT CONSULTING LLC</option>
+                                
+                                    <option value="XXI CENTURY LTD.">XXI CENTURY LTD.</option>
+                                
+                                    <option value="TODD J SCHULZ">TODD J SCHULZ</option>
+                                
+                                    <option value="XWA 2024, LLC">XWA 2024, LLC</option>
+                                
+                                    <option value="KYLE BLACK">KYLE BLACK</option>
+                                
+                                    <option value="XTS HOLDINGS, LLC">XTS HOLDINGS, LLC</option>
+                                
+                                    <option value="DARIN POWELL">DARIN POWELL</option>
+                                
+                                    <option value="XTREME PRODUCTS LLC">XTREME PRODUCTS LLC</option>
+                                
+                                    <option value="GREG PFAFF">GREG PFAFF</option>
+                                
+                                    <option value="XTTRIUM LABORATORIES, INC.">XTTRIUM LABORATORIES, INC.</option>
+                                
+                                    <option value="INCORP SERVICES, INC.">INCORP SERVICES, INC.</option>
+                                
+                                    <option value="XTREME LAWN CARE LLC">XTREME LAWN CARE LLC</option>
+                                
+                                    <option value="WOODROW SHORT">WOODROW SHORT</option>
+                                
+                                    <option value="XTREME SIGNS & GRAPHIX">XTREME SIGNS & GRAPHIX</option>
+                                
+                                    <option value="CRAIG NICHOLAS THOMAS">CRAIG NICHOLAS THOMAS</option>
+                                
+                                    <option value="AMANDA KAY THOMAS">AMANDA KAY THOMAS</option>
+                                
+                                    <option value="XTREME XTERIORS LLC">XTREME XTERIORS LLC</option>
+                                
+                                    <option value="AAA NORTH DAKOTA REGISTERED AGENT LLC">AAA NORTH DAKOTA REGISTERED AGENT LLC</option>
+                                
+                                    <option value="X-TREME FITNESS, LLC">X-TREME FITNESS, LLC</option>
+                                
+                                    <option value="SCOTT SCHMIDT">SCOTT SCHMIDT</option>
+                                
+                                    <option value="XTREME INSTALLATION LLC">XTREME INSTALLATION LLC</option>
+                                
+                                    <option value="DAVID RODRIGUEZ">DAVID RODRIGUEZ</option>
+                                
+                                    <option value="X-TREME OUTFITTERS">X-TREME OUTFITTERS</option>
+                                
+                                    <option value="COREY GULKE">COREY GULKE</option>
+                                
+                                    <option value="XTREME INSTALLATIONS">XTREME INSTALLATIONS</option>
+                                
+                                    <option value="XTREME FIRE PROTECTION, LLC">XTREME FIRE PROTECTION, LLC</option>
+                                
+                                    <option value="XWIND SERVICES LTD.">XWIND SERVICES LTD.</option>
+                                
+                                    <option value="XTREME ELECTRICAL SERVICES, INC. (DBA X ELECTRIC)">XTREME ELECTRICAL SERVICES, INC. (DBA X ELECTRIC)</option>
+                                
+                                    <option value="PARACORP INCORPORATED">PARACORP INCORPORATED</option>
+                                
+                                    <option value="XTREME DRILLING, LLC">XTREME DRILLING, LLC</option>
+                                
+                                    <option value="XTREME ELECTRIC INC">XTREME ELECTRIC INC</option>
+                                
+                                    <option value="DEREK WANZEK">DEREK WANZEK</option>
+                                
+                                    <option value="XTREME GUN WORKS">XTREME GUN WORKS</option>
+                                
+                                    <option value="WET WORK HYDROGRAPHICS LLC">WET WORK HYDROGRAPHICS LLC</option>
+                                
+                                    <option value="XTREME TROPHY PROPERTIES">XTREME TROPHY PROPERTIES</option>
+                                
+                                    <option value="HAWLEY REALTY, INC.">HAWLEY REALTY, INC.</option>
+                                
+                                    <option value="XTREME CLEANING SERVICES LLC">XTREME CLEANING SERVICES LLC</option>
+                                
+                                    <option value="GABRIEL FRANCO">GABRIEL FRANCO</option>
+                                
+                                    <option value="XTREME CARPET CLEANING LLC">XTREME CARPET CLEANING LLC</option>
+                                
+                                    <option value="ALDIN MEHUKIC">ALDIN MEHUKIC</option>
+                                
+                                    <option value="X-TREME DETAILING">X-TREME DETAILING</option>
+                                
+                                    <option value="WILL A SIRY">WILL A SIRY</option>
+                                
+                                    <option value="XTREME BUILDERS">XTREME BUILDERS</option>
+                                
+                                    <option value="JOSH JELINEK">JOSH JELINEK</option>
+                                
+                                    <option value="XTREME AUTO, INC.">XTREME AUTO, INC.</option>
+                                
+                                    <option value="MARK L SCHUMACHER">MARK L SCHUMACHER</option>
+                                
+                                    <option value="XTREME AUTO DETAILZ">XTREME AUTO DETAILZ</option>
+                                
+                                    <option value="SCOTT A KRAFT">SCOTT A KRAFT</option>
+                                
+                                    <option value="XTRAVAGANT ELEGANCE">XTRAVAGANT ELEGANCE</option>
+                                
+                                    <option value="XIOMARA A. URIBE, ECATERINA M. QUINTANA">XIOMARA A. URIBE, ECATERINA M. QUINTANA</option>
+                                
+                                    <option value="XTRA-OFFICE, INC.">XTRA-OFFICE, INC.</option>
+                                
+                                    <option value="TRACIE DAY">TRACIE DAY</option>
+                                
+                                    <option value="XTRA MILE PROPERTY SERVICES LLC">XTRA MILE PROPERTY SERVICES LLC</option>
+                                
+                                    <option value="REMINGTON KOSTENKO">REMINGTON KOSTENKO</option>
+                                
+                                    <option value="XTRA APPAREL CO LLC">XTRA APPAREL CO LLC</option>
+                                
+                                    <option value="NORTH DAKOTA REGISTERED AGENT SERVICES LLC">NORTH DAKOTA REGISTERED AGENT SERVICES LLC</option>
+                                
+                                    <option value="XTRA HAND LLC">XTRA HAND LLC</option>
+                                
+                                    <option value="GREGORY P BUCKTA">GREGORY P BUCKTA</option>
+                                
+                                    <option value="XTO OFFSHORE INC.">XTO OFFSHORE INC.</option>
+                                
+                                    <option value="XTC U.S. XPRESS INC. U.S. INC.">XTC U.S. XPRESS INC. U.S. INC.</option>
+                                
+                                    <option value="WILLIAM LUCAS">WILLIAM LUCAS</option>
+                                
+                                    <option value="XTO ENERGY INC.">XTO ENERGY INC.</option>
+                                
+                                    <option value="XTO HOLDINGS, LLC">XTO HOLDINGS, LLC</option>
+                                
+                                    <option value="XSTREAM PROPERTIES, LLP">XSTREAM PROPERTIES, LLP</option>
+                                
+                                    <option value="LYNN JOHNSTON">LYNN JOHNSTON</option>
+                                
+                                    <option value="XTERNALSOURCE LLC">XTERNALSOURCE LLC</option>
+                                
+                                    <option value="COGENCY GLOBAL INC.">COGENCY GLOBAL INC.</option>
+                                
+                                    <option value="X-TECH LLC">X-TECH LLC</option>
+                                
+                                    <option value="VOGEL LAW FIRM, LTD.">VOGEL LAW FIRM, LTD.</option>
+                                
+                                    <option value="XSOLLA PAYMENT NETWORK USA, LLC">XSOLLA PAYMENT NETWORK USA, LLC</option>
+                                
+                                    <option value="XSM ATM SERVICES LLC">XSM ATM SERVICES LLC</option>
+                                
+                                    <option value="SPENSER J MILLER">SPENSER J MILLER</option>
+                                
+                                    <option value="XSPRAY PHARMA INC.">XSPRAY PHARMA INC.</option>
+                                
+                                    <option value="XSELLR8R, INC.">XSELLR8R, INC.</option>
+                                
+                                    <option value="RANDY KENT MILLER">RANDY KENT MILLER</option>
+                                
+                                    <option value="XSIDING XTERIORS LLC">XSIDING XTERIORS LLC</option>
+                                
+                                    <option value="DALE PIETRUSZEWSKI">DALE PIETRUSZEWSKI</option>
+                                
+                                    <option value="XSTREME MD">XSTREME MD</option>
+                                
+                                    <option value="LIFE LINE TECHNOLOGIES, LLC">LIFE LINE TECHNOLOGIES, LLC</option>
+                                
+                                    <option value="XSTREAM CLEAN CAR WASH">XSTREAM CLEAN CAR WASH</option>
+                                
+                                    <option value="KARLGAARD ENTERPRISES, LLC">KARLGAARD ENTERPRISES, LLC</option>
+                                
+                                    <option value="XS AUTOMATION">XS AUTOMATION</option>
+                                
+                                    <option value="JEROME M HINDS">JEROME M HINDS</option>
+                                
+                                    <option value="XTRA PROPERTIES, LLC">XTRA PROPERTIES, LLC</option>
+                                
+                                    <option value="SHERLEEN LARSON">SHERLEEN LARSON</option>
+                                
+                                    <option value="XSEED CONSULTANTS">XSEED CONSULTANTS</option>
+                                
+                                    <option value="DUSTIN R SMITH">DUSTIN R SMITH</option>
+                                
+                                    <option value="XRQ CORP.">XRQ CORP.</option>
+                                
+                                    <option value="NORTHWEST REGISTERED AGENT SERVICE, INC.">NORTHWEST REGISTERED AGENT SERVICE, INC.</option>
+                                
+                                    <option value="X-TERIOR SOLUTIONS">X-TERIOR SOLUTIONS</option>
+                                
+                                    <option value="TRAVIS C TOEPKE">TRAVIS C TOEPKE</option>
+                                
+                                    <option value="XRPL MINING COMPANY, LLC">XRPL MINING COMPANY, LLC</option>
+                                
+                                    <option value="DANIEL B BRUNSON">DANIEL B BRUNSON</option>
+                                
+                                    <option value="X-RAY LIMA TANGO, LLC">X-RAY LIMA TANGO, LLC</option>
+                                
+                                    <option value="CORY KUNERTH">CORY KUNERTH</option>
+                                
+                                    <option value="XR SOLUTIONS, LLC">XR SOLUTIONS, LLC</option>
+                                
+                                    <option value="MONTGOMERY & PENDER, P.C.">MONTGOMERY & PENDER, P.C.</option>
+                                
+                                    <option value="XQUISITE CONSTRUCTION LLC">XQUISITE CONSTRUCTION LLC</option>
+                                
+                                    <option value="BRYCE ANDERSON & ASSOCIATES, PLLC">BRYCE ANDERSON & ASSOCIATES, PLLC</option>
+                                
+                                    <option value="XPT SPECIALTY">XPT SPECIALTY</option>
+                                
+                                    <option value="XPT PARTNERS, LLC">XPT PARTNERS, LLC</option>
+                                
+                                    <option value="XPRESSDOCS PARTNERS, LTD. (DBA XPRESSDOCS PARTNERS, LTD., A TEXAS LP)">XPRESSDOCS PARTNERS, LTD. (DBA XPRESSDOCS PARTNERS, LTD., A TEXAS LP)</option>
+                                
+                                    <option value="XPRESSCONNECT SUPPLY, LLC">XPRESSCONNECT SUPPLY, LLC</option>
+                                
+                                    <option value="XPRESSDOCS GP, LLC">XPRESSDOCS GP, LLC</option>
+                                
+                                    <option value="XPRESS MONEY">XPRESS MONEY</option>
+                                
+                                    <option value="MONEYDART GLOBAL SERVICES INC.">MONEYDART GLOBAL SERVICES INC.</option>
+                                
+                                    <option value="XPRESSBET, LLC">XPRESSBET, LLC</option>
+                                
+                                    <option value="XPRESS BOOKKEEPERS">XPRESS BOOKKEEPERS</option>
+                                
+                                    <option value="CHRISTOPHER TEGWE">CHRISTOPHER TEGWE</option>
+                                
+                                    <option value="XPON INTERNATIONAL LLC">XPON INTERNATIONAL LLC</option>
+                                
+                                    <option value="LEGALINC CORPORATE SERVICES INC.">LEGALINC CORPORATE SERVICES INC.</option>
+                                
+                                    <option value="3H AGENT SERVICES, INC.">3H AGENT SERVICES, INC.</option>
+                                
+                                    <option value="XPERT HOME LENDING INC.">XPERT HOME LENDING INC.</option>
+                                
+                                    <option value="XPONET (DBA XPONET CORPORATION)">XPONET (DBA XPONET CORPORATION)</option>
+                                
+                                    <option value="XPO LOGISTICS FREIGHT, INC.">XPO LOGISTICS FREIGHT, INC.</option>
+                                
+                                    <option value="REGISTERED AGENT SOLUTIONS, INC.">REGISTERED AGENT SOLUTIONS, INC.</option>
+                                
+                                    <option value="XPERT XTERIORS, LLC">XPERT XTERIORS, LLC</option>
+                                
+                                    <option value="PHILIP L MAENZA">PHILIP L MAENZA</option>
+                                
+                                    <option value="XPERT ENTERPRISES LLC">XPERT ENTERPRISES LLC</option>
+                                
+                                    <option value="RACHAEL NADEAU">RACHAEL NADEAU</option>
+                                
+                                    <option value="XPERT DRYWALL LLC">XPERT DRYWALL LLC</option>
+                                
+                                    <option value="XPLR INFRASTRUCTURE CONSTRUCTORS, LLC">XPLR INFRASTRUCTURE CONSTRUCTORS, LLC</option>
+                                
+                                    <option value="XPERT CONCRETE COATINGS LLC">XPERT CONCRETE COATINGS LLC</option>
+                                
+                                    <option value="ROBERT C JAMIESON">ROBERT C JAMIESON</option>
+                                
+                                    <option value="XPL OFFSITE, LLC">XPL OFFSITE, LLC</option>
+                                
+                                    <option value="XPERIENCE TITLE, LLC">XPERIENCE TITLE, LLC</option>
+                                
+                                    <option value="XPERIENCE INVESTMENTS LLC">XPERIENCE INVESTMENTS LLC</option>
+                                
+                                    <option value="DELSON SAINTAL">DELSON SAINTAL</option>
+                                
+                                    <option value="XPERIENCE HEALTH & FITNESS LLC">XPERIENCE HEALTH & FITNESS LLC</option>
+                                
+                                    <option value="DARCY D REIS">DARCY D REIS</option>
+                                
+                                    <option value="XPERIENCE BARBERS LLC">XPERIENCE BARBERS LLC</option>
+                                
+                                    <option value="XPERIENCE HEALTH & FITNESS">XPERIENCE HEALTH & FITNESS</option>
+                                
+                                    <option value="XP SYSTEMS CORPORATION">XP SYSTEMS CORPORATION</option>
+                                
+                                    <option value="XPEDITION WELL SERVICE LLC">XPEDITION WELL SERVICE LLC</option>
+                                
+                                    <option value="BROOKS HONDL">BROOKS HONDL</option>
+                                
+                                    <option value="XOME REALTY SERVICES LLC">XOME REALTY SERVICES LLC</option>
+                                
+                                    <option value="XPERIENCE BARBERS">XPERIENCE BARBERS</option>
+                                
+                                    <option value="XOXO, PHOENIIX LLC">XOXO, PHOENIIX LLC</option>
+                                
+                                    <option value="STACY THOMAS">STACY THOMAS</option>
+                                
+                                    <option value="XOME FIELD SERVICES LLC">XOME FIELD SERVICES LLC</option>
+                                
+                                    <option value="XOME INC.">XOME INC.</option>
+                                
+                                    <option value="XOOM">XOOM</option>
+                                
+                                    <option value="PAYPAL, INC.">PAYPAL, INC.</option>
+                                
+                                    <option value="XN FINANCIAL SERVICES INC.">XN FINANCIAL SERVICES INC.</option>
+                                
+                                    <option value="XMODN SECURITY LLC">XMODN SECURITY LLC</option>
+                                
+                                    <option value="XO COMMUNICATIONS SERVICES, LLC">XO COMMUNICATIONS SERVICES, LLC</option>
+                                
+                                    <option value="XO BEAUTY">XO BEAUTY</option>
+                                
+                                    <option value="ASHLEY MACK">ASHLEY MACK</option>
+                                
+                                    <option value="XM42">XM42</option>
+                                
+                                    <option value="ROUGHRIDER ARMS LLC">ROUGHRIDER ARMS LLC</option>
+                                
+                                    <option value="XM ACRES, LLP">XM ACRES, LLP</option>
+                                
+                                    <option value="MICHAEL BERG">MICHAEL BERG</option>
+                                
+                                    <option value="XLT TAXI">XLT TAXI</option>
+                                
+                                    <option value="XOLARIA LLC">XOLARIA LLC</option>
+                                
+                                    <option value="SHILO J SHUMWAY">SHILO J SHUMWAY</option>
+                                
+                                    <option value="XLT PACK AND SHIP">XLT PACK AND SHIP</option>
+                                
+                                    <option value="XPEL, INC.">XPEL, INC.</option>
+                                
+                                    <option value="FIRST CORPORATE SOLUTIONS, INC.">FIRST CORPORATE SOLUTIONS, INC.</option>
+                                
+                                    <option value="XLT MANAGEMENT SERVICES, INC.">XLT MANAGEMENT SERVICES, INC.</option>
+                                
+                                    <option value="XLHOME, P.C. (DBA HOME HEALTH ASSESSMENTS OF NORTH DAKOTA, P.C.)">XLHOME, P.C. (DBA HOME HEALTH ASSESSMENTS OF NORTH DAKOTA, P.C.)</option>
+                                
+                                    <option value="XLHOME NORTHEAST, P.C. (DBA XLHNE, P.C.)">XLHOME NORTHEAST, P.C. (DBA XLHNE, P.C.)</option>
+                                
+                                    <option value="XLHNE, P.C.">XLHNE, P.C.</option>
+                                
+                                    <option value="XLHOME NORTHEAST, P.C.">XLHOME NORTHEAST, P.C.</option>
+                                
+                                    <option value="XL TRANSPORT, LLC">XL TRANSPORT, LLC</option>
+                                
+                                    <option value="COREY GETZLAFF">COREY GETZLAFF</option>
+                                
+                                    <option value="XL LOGISTICS LLC">XL LOGISTICS LLC</option>
+                                
+                                    <option value="MOHAMED GARAAR">MOHAMED GARAAR</option>
+                                
+                                    <option value="XL HOMES, CORP.">XL HOMES, CORP.</option>
+                                
+                                    <option value="DAN MASSETH">DAN MASSETH</option>
+                                
+                                    <option value="XJOY LLC">XJOY LLC</option>
+                                
+                                    <option value="LIYING ZHANG">LIYING ZHANG</option>
+                                
+                                    <option value="XILAJU, LLC">XILAJU, LLC</option>
+                                
+                                    <option value="JUAN ULLOA">JUAN ULLOA</option>
+                                
+                                    <option value="XL INDUSTRIAL SERVICES, INC.">XL INDUSTRIAL SERVICES, INC.</option>
+                                
+                                    <option value="XIE XIE, LLC">XIE XIE, LLC</option>
+                                
+                                    <option value="CINDY O'DAY">CINDY O'DAY</option>
+                                
+                                    <option value="XL FARMS">XL FARMS</option>
+                                
+                                    <option value="COREY K GETZLAFF">COREY K GETZLAFF</option>
+                                
+                                    <option value="CINDY J GETZLAFF">CINDY J GETZLAFF</option>
+                                
+                                    <option value="XH, LLC">XH, LLC</option>
+                                
+                                    <option value="X-GEN PHARMACEUTICALS, INC.">X-GEN PHARMACEUTICALS, INC.</option>
+                                
+                                    <option value="XGP PROPERTIES, LLC">XGP PROPERTIES, LLC</option>
+                                
+                                    <option value="GEORGE POITRA">GEORGE POITRA</option>
+                                
+                                    <option value="XGSC INC.">XGSC INC.</option>
+                                
+                                    <option value="XIPHOS TECHNICAL SERVICES, LLC">XIPHOS TECHNICAL SERVICES, LLC</option>
+                                
+                                    <option value="DARIN K POWELL">DARIN K POWELL</option>
+                                
+                                    <option value="XETA TECHNOLOGIES, INC.">XETA TECHNOLOGIES, INC.</option>
+                                
+                                    <option value="XFINITY HOME">XFINITY HOME</option>
+                                
+                                    <option value="COMCAST BROADBAND SECURITY, LLC">COMCAST BROADBAND SECURITY, LLC</option>
+                                
+                                    <option value="XEROX FINANCIAL SERVICES LLC">XEROX FINANCIAL SERVICES LLC</option>
+                                
+                                    <option value="XEROX BUSINESS SOLUTIONS, LLC">XEROX BUSINESS SOLUTIONS, LLC</option>
+                                
+                                    <option value="XERO LLC">XERO LLC</option>
+                                
+                                    <option value="KAYLEN STANLEY">KAYLEN STANLEY</option>
+                                
+                                    <option value="XEROX CORPORATION">XEROX CORPORATION</option>
+                                
+                                    <option value="THE PRENTICE-HALL CORPORATION SYSTEM, INC.">THE PRENTICE-HALL CORPORATION SYSTEM, INC.</option>
+                                
+                                    <option value="XFIT HOLDINGS, INC.">XFIT HOLDINGS, INC.</option>
+                                
+                                    <option value="XERIS PHARMACEUTICALS, INC.">XERIS PHARMACEUTICALS, INC.</option>
+                                
+                                    <option value="XIGENT SOLUTIONS, LLC">XIGENT SOLUTIONS, LLC</option>
+                                
+                                    <option value="XERIC HOLDINGS LLC">XERIC HOLDINGS LLC</option>
+                                
+                                    <option value="CHRISTOPHER SHERMAN">CHRISTOPHER SHERMAN</option>
+                                
+                                    <option value="XERCOR INSURANCE SERVICES LLC">XERCOR INSURANCE SERVICES LLC</option>
+                                
+                                    <option value="XERATEX GROUP, LLC">XERATEX GROUP, LLC</option>
+                                
+                                    <option value="XENITH, LLC">XENITH, LLC</option>
+                                
+                                    <option value="UNITED AGENT GROUP INC.">UNITED AGENT GROUP INC.</option>
+                                
+                                    <option value="XENITH DEVELOPMENT GROUP">XENITH DEVELOPMENT GROUP</option>
+                                
+                                    <option value="TREVOR HARTMAN">TREVOR HARTMAN</option>
+                                
+                                    <option value="XENEX DISINFECTION SERVICES INC.">XENEX DISINFECTION SERVICES INC.</option>
+                                
+                                    <option value="XECARE LLC">XECARE LLC</option>
+                                
+                                    <option value="CAPITOL CORPORATE SERVICES, INC.">CAPITOL CORPORATE SERVICES, INC.</option>
+                                
+                                    <option value="XENCOM ENERGY MANAGEMENT, LLC">XENCOM ENERGY MANAGEMENT, LLC</option>
+                                
+                                    <option value="XCS PROS">XCS PROS</option>
+                                
+                                    <option value="XCS PROS, LLC">XCS PROS, LLC</option>
+                                
+                                    <option value="XDP DIGITAL LLC">XDP DIGITAL LLC</option>
+                                
+                                    <option value="KIMBERLY BRAUN">KIMBERLY BRAUN</option>
+                                
+                                    <option value="XCONNECT TEXAS, LLC">XCONNECT TEXAS, LLC</option>
+                                
+                                    <option value="XCMG AMERICA FINANCIAL LLC">XCMG AMERICA FINANCIAL LLC</option>
+                                
+                                    <option value="VCORP SERVICES, LLC">VCORP SERVICES, LLC</option>
+                                
+                                    <option value="XCHANGE TELECOM LLC">XCHANGE TELECOM LLC</option>
+                                
+                                    <option value="XEC, INC.">XEC, INC.</option>
+                                
+                                    <option value="XCONNECT, LLC">XCONNECT, LLC</option>
+                                
+                                    <option value="XDATAK LLC">XDATAK LLC</option>
+                                
+                                    <option value="XCELL DRIVING SCHOOL LLP">XCELL DRIVING SCHOOL LLP</option>
+                                
+                                    <option value="DAVID J KLINKHAMMER">DAVID J KLINKHAMMER</option>
+                                
+                                    <option value="XCLOUD, LLC">XCLOUD, LLC</option>
+                                
+                                    <option value="XCELERATE INDOOR ADVENTURES">XCELERATE INDOOR ADVENTURES</option>
+                                
+                                    <option value="XCELERATE INDOOR ADVENTURES LLC">XCELERATE INDOOR ADVENTURES LLC</option>
+                                
+                                    <option value="XCEL TRUCKING LLC">XCEL TRUCKING LLC</option>
+                                
+                                    <option value="KENNETH MILLER">KENNETH MILLER</option>
+                                
+                                    <option value="XCEL NDT LLC">XCEL NDT LLC</option>
+                                
+                                    <option value="SEARCH COMPANY OF NORTH DAKOTA LLC">SEARCH COMPANY OF NORTH DAKOTA LLC</option>
+                                
+                                    <option value="XCEL HOLDINGS LLC">XCEL HOLDINGS LLC</option>
+                                
+                                    <option value="TAIT SILTALA">TAIT SILTALA</option>
+                                
+                                    <option value="XE USA">XE USA</option>
+                                
+                                    <option value="DANDELION PAYMENTS, INC.">DANDELION PAYMENTS, INC.</option>
+                                
+                                    <option value="ANNIE CREECH">ANNIE CREECH</option>
+                                
+                                    <option value="XCEL ENERGY INC.">XCEL ENERGY INC.</option>
+                                
+                                    <option value="XCEL HOLDINGS">XCEL HOLDINGS</option>
+                                
+                                    <option value="TANNER COLLETTE">TANNER COLLETTE</option>
+                                
+                                    <option value="XCEL ENERGY">XCEL ENERGY</option>
+                                
+                                    <option value="NORTHERN STATES POWER COMPANY">NORTHERN STATES POWER COMPANY</option>
+                                
+                                    <option value="XCEL ENERGY SERVICES INC.">XCEL ENERGY SERVICES INC.</option>
+                                
+                                    <option value="XCEL AVIATION">XCEL AVIATION</option>
+                                
+                                    <option value="TANNER S COLLETTE">TANNER S COLLETTE</option>
+                                
+                                    <option value="XCEL DETAILING">XCEL DETAILING</option>
+                                
+                                    <option value="DIAMONTE STUGELMEYER">DIAMONTE STUGELMEYER</option>
+                                
+                                    <option value="XCEL AUTOMATION & ELECTRIC LLC">XCEL AUTOMATION & ELECTRIC LLC</option>
+                                
+                                    <option value="XCHANGE BENEFITS, LLC">XCHANGE BENEFITS, LLC</option>
+                                
+                                    <option value="XCEL ERECTORS, INC.">XCEL ERECTORS, INC.</option>
+                                
+                                    <option value="MICHAEL S BROOKS">MICHAEL S BROOKS</option>
+                                
+                                    <option value="XCEL AGRONOMY LLC">XCEL AGRONOMY LLC</option>
+                                
+                                    <option value="CHRISTOPHER PERLEBERG">CHRISTOPHER PERLEBERG</option>
+                                
+                                    <option value="XCEL AG SOLUTIONS LLC">XCEL AG SOLUTIONS LLC</option>
+                                
+                                    <option value="ANTHONY BAUMGARTNER">ANTHONY BAUMGARTNER</option>
+                                
+                                    <option value="XCED AVIATION SERVICES, LLC">XCED AVIATION SERVICES, LLC</option>
+                                
+                                    <option value="XCALIBUR LEASING COMPANY">XCALIBUR LEASING COMPANY</option>
+                                
+                                    <option value="GREGORY C KRUTSINGER">GREGORY C KRUTSINGER</option>
+                                
+                                    <option value="XCALIBUR ENTERTAINMENT">XCALIBUR ENTERTAINMENT</option>
+                                
+                                    <option value="JONES ENTERPRISES, INC.">JONES ENTERPRISES, INC.</option>
+                                
+                                    <option value="XCALIBER INTERNATIONAL LTD., L.L.C.">XCALIBER INTERNATIONAL LTD., L.L.C.</option>
+                                
+                                    <option value="X-CALIBER RURAL CAPITAL, LLC">X-CALIBER RURAL CAPITAL, LLC</option>
+                                
+                                    <option value="XAP LLC">XAP LLC</option>
+                                
+                                    <option value="INCORPORATING SERVICES, LTD.">INCORPORATING SERVICES, LTD.</option>
+                                
+                                    <option value="XANADU, LLC">XANADU, LLC</option>
+                                
+                                    <option value="MICHELLE BAKKE">MICHELLE BAKKE</option>
+                                
+                                    <option value="XANADU PRODUCTS, L.L.C.">XANADU PRODUCTS, L.L.C.</option>
+                                
+                                    <option value="RICK PAULSON">RICK PAULSON</option>
+                                
+                                    <option value="XAPIC STUDIOS">XAPIC STUDIOS</option>
+                                
+                                    <option value="PATRICIA A ROGALLA">PATRICIA A ROGALLA</option>
+                                
+                                    <option value="XAVIER GOLD CONSULTING GROUP INC">XAVIER GOLD CONSULTING GROUP INC</option>
+                                
+                                    <option value="LEGALCORP SOLUTIONS, LLC">LEGALCORP SOLUTIONS, LLC</option>
+                                
+                                    <option value="XABOW EXPRESS LOGISTICS INC.">XABOW EXPRESS LOGISTICS INC.</option>
+                                
+                                    <option value="ABDIKARIM A JAMA">ABDIKARIM A JAMA</option>
+                                
+                                    <option value="XACTUS, LLC">XACTUS, LLC</option>
+                                
+                                    <option value="XABEAT, LLC">XABEAT, LLC</option>
+                                
+                                    <option value="ROXANNE WANZEK">ROXANNE WANZEK</option>
+                                
+                                    <option value="XACTLYONE FOUNDATION">XACTLYONE FOUNDATION</option>
+                                
+                                    <option value="X4 PHARMACEUTICALS, INC.">X4 PHARMACEUTICALS, INC.</option>
+                                
+                                    <option value="XAVIER TAYLOR CONSTRUCTION">XAVIER TAYLOR CONSTRUCTION</option>
+                                
+                                    <option value="XAVIER G TAYLOR">XAVIER G TAYLOR</option>
+                                
+                                    <option value="XAVIER COLLECTIONS LLC">XAVIER COLLECTIONS LLC</option>
+                                
+                                    <option value="KORTO C KOLLIE">KORTO C KOLLIE</option>
+                                
+                                    <option value="X4I LIMITED (DBA X4I LIMITED, LLC)">X4I LIMITED (DBA X4I LIMITED, LLC)</option>
+                                
+                                    <option value="X.L. GLOBAL SERVICES, INC.">X.L. GLOBAL SERVICES, INC.</option>
+                                
+                                    <option value="X4I LIMITED, LLC">X4I LIMITED, LLC</option>
+                                
+                                    <option value="X4I LIMITED">X4I LIMITED</option>
+                                
+                                    <option value="X S BROKERS INSURANCE AGENCY, INC.">X S BROKERS INSURANCE AGENCY, INC.</option>
+                                
+                                    <option value="X11 LLC">X11 LLC</option>
+                                
+                                    <option value="MIAN HUSSAIN">MIAN HUSSAIN</option>
+                                
+                                    <option value="X REALTY LLC">X REALTY LLC</option>
+                                
+                                    <option value="ERIC CHRISTIANS">ERIC CHRISTIANS</option>
+                                
+                                    <option value="X PAYMENTS LLC">X PAYMENTS LLC</option>
+                                
+                                    <option value="X MARK PROPERTIES LLC">X MARK PROPERTIES LLC</option>
+                                
+                                    <option value="DANNY KRAFT">DANNY KRAFT</option>
+                                
+                                    <option value="X GOLF MINOT">X GOLF MINOT</option>
+                                
+                                    <option value="ELITE GOLF, LLC">ELITE GOLF, LLC</option>
+                                
+                                    <option value="X GOLF BISMARCK">X GOLF BISMARCK</option>
+                                
+                                    <option value="ELITE GOLF 2, LLC">ELITE GOLF 2, LLC</option>
+                                
+                            </select>
+                        </div>
+                        <div class="col-2 pb-2">
+                            <button type="button" class="btn btn-primary btn-block" onclick="neighbourhoodHighlight({nodes: []});">Reset Selection</button>
+                        </div>
+                    </div>
+                </div>
+            
+            
+              <div id="filter-menu" class="card-header">
+                <div class="row no-gutters">
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="updateFilter(value, 'item')"
+                            id="select-item"
+                        >
+                        <option value="">Select a network item</option>
+                        <option value="edge">edge</option>
+                        <option value="node">node</option>
+                    </select>
+                  </div>
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="updateFilter(value, 'property')"
+                            id="select-property"
+                        >
+                        <option value="">Select a property...</option>
+                    </select>
+                  </div>
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            id="select-value"
+                        >
+                        <option value="">Select value(s)...</option>
+                    </select>
+                  </div>
+                  <div class="col-1 pb-2">
+                    <button type="button" class="btn btn-primary btn-block" onclick="highlightFilter(filter);">Filter</button>
+                  </div>
+                  <div class="col-2 pb-2">
+                    <button type="button" class="btn btn-primary btn-block" onclick="clearFilter(true)">Reset Selection</button>
+                  </div>
+                </div>
+              </div>
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+            <div id="loadingBar">
+              <div class="outerBorder">
+                <div id="text">0%</div>
+                <div id="border">
+                  <div id="bar"></div>
+                </div>
+              </div>
+            </div>
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+                  new TomSelect("#select-node",{
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      }
+                  });
+              
+
+              
+                  // explicitly using onItemAdd and this function as we need to save multiple values
+                  let updateValueFilter = function() {
+                      return function () {
+                      filter['value'].push(arguments[0])
+                      }
+                  }
+
+                  let valueControl = new TomSelect("#select-value",{
+                      maxItems: null,
+                      valueField: 'id',
+                      labelField: 'title',
+                      searchField: 'title',
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: updateValueFilter()
+                  });
+
+                  let addValues = function() {
+                      return function () {
+                          // clear the current value options and add the selected attribute values
+                          // tom-select handles duplicates
+                          let selectedProperty = arguments[0];
+                          valueControl.clear();
+                          valueControl.clearOptions();
+                          filter['value'] = []
+                          if (filter['item'] === 'node') {
+                              for (let each in allNodes) {
+                                  valueControl.addOption({
+                                      id:allNodes[each][selectedProperty],
+                                      title:allNodes[each][selectedProperty]
+                                  })
+                              }
+                          }
+                          else if (filter['item'] === 'edge') {
+                              for (let each in allEdges) {
+                                  valueControl.addOption({
+                                      id:allEdges[each][selectedProperty],
+                                      title:allEdges[each][selectedProperty]
+                                  })
+                              }
+                          }
+                      }
+                  };
+
+                  let propControl = new TomSelect("#select-property",{
+                      valueField: 'id',
+                      labelField: 'title',
+                      searchField: 'title',
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: addValues()
+                  });
+
+                  let addProperties = function() {
+                      return function () {
+                          // loops through the selected network item and adds the attributes to dropdown
+                          // tom-select handles duplicates
+                          clearFilter(false)
+                          if (arguments[0] === 'edge') {
+                              for (let each in allEdges) {
+                                  if (allEdges.hasOwnProperty(each)) {
+                                      for (let eachProp in allEdges[each]) {
+                                          if (allEdges[each].hasOwnProperty(eachProp)) {
+                                              propControl.addOption({id: eachProp, title: eachProp})
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                          else if (arguments[0] === 'node') {
+                              for (let each in allNodes) {
+                                  if (allNodes.hasOwnProperty(each)) {
+                                      for (let eachProp in allNodes[each]) {
+                                          if (allNodes[each].hasOwnProperty(eachProp)
+                                              && (eachProp !== 'hidden' && eachProp !== 'savedLabel'
+                                                  && eachProp !== 'hiddenLabel')) {
+                                              propControl.addOption({id: eachProp, title: eachProp})
+
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  };
+
+                  let itemControl = new TomSelect("#select-item",{
+                      create: false,
+                      sortField:{
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: addProperties()
+                  });
+
+                  function clearFilter(reset) {
+                      // utility function to clear all the selected filter options
+                      // if reset is set to true, the existing filter will be removed
+                      // else, only the dropdown options are cleared
+                      propControl.clear();
+                      propControl.clearOptions();
+                      valueControl.clear();
+                      valueControl.clearOptions();
+                      filter = {
+                          item : '',
+                          property : '',
+                          value : []
+                      }
+                      if (reset) {
+                          itemControl.clear();
+                          filterHighlight({nodes: []})
+                      }
+                  }
+
+                  function updateFilter(value, key) {
+                      // key could be 'item' or 'property' and value is as selected in dropdown
+                      filter[key] = value
+                  }
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "id": "X ELECTRIC", "label": "X ELECTRIC", "shape": "dot", "size": 10, "title": "Company Title: X ELECTRIC\n                            Company Type: Trade Name\n                            SOS Control ID# 0000244382\n                        "}, {"color": "#97c2fc", "id": "XTREME ELECTRICAL SERVICES, INC.", "label": "XTREME ELECTRICAL SERVICES, INC.", "shape": "dot", "size": 10, "title": "OWNER_NAME : XTREME ELECTRICAL SERVICES, INC."}, {"color": "#97c2fc", "id": "X BLOCK INC", "label": "X BLOCK INC", "shape": "dot", "size": 10, "title": "Company Title: X BLOCK INC\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0006838115\n                        "}, {"color": "#97c2fc", "id": "REGISTERED AGENTS INC", "label": "REGISTERED AGENTS INC", "shape": "dot", "size": 10, "title": "COMMERCIAL_REGISTERED_AGENT : REGISTERED AGENTS INC"}, {"color": "#97c2fc", "id": "X FOODS", "label": "X FOODS", "shape": "dot", "size": 10, "title": "Company Title: X FOODS\n                            Company Type: Trade Name\n                            SOS Control ID# 0006173383\n                        "}, {"color": "#97c2fc", "id": "OECH FOODS LLC", "label": "OECH FOODS LLC", "shape": "dot", "size": 10, "title": "OWNER_NAME : OECH FOODS LLC"}, {"color": "#97c2fc", "id": "XZILON, INC.", "label": "XZILON, INC.", "shape": "dot", "size": 10, "title": "Company Title: XZILON, INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000162789\n                        "}, {"color": "#97c2fc", "id": "C T CORPORATION SYSTEM", "label": "C T CORPORATION SYSTEM", "shape": "dot", "size": 10, "title": "COMMERCIAL_REGISTERED_AGENT : C T CORPORATION SYSTEM"}, {"color": "#97c2fc", "id": "XYZ ROOFCO, LLC", "label": "XYZ ROOFCO, LLC", "shape": "dot", "size": 10, "title": "Company Title: XYZ ROOFCO, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0007050351\n                        "}, {"color": "#97c2fc", "id": "X DIAMOND PARTNERS, LLP", "label": "X DIAMOND PARTNERS, LLP", "shape": "dot", "size": 10, "title": "Company Title: X DIAMOND PARTNERS, LLP\n                            Company Type: Limited Liability Partnership - Domestic\n                            SOS Control ID# 0005577759\n                        "}, {"color": "#97c2fc", "id": "KENDALL VETTER", "label": "KENDALL VETTER", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : KENDALL VETTER"}, {"color": "#97c2fc", "id": "X CORP.", "label": "X CORP.", "shape": "dot", "size": 10, "title": "Company Title: X CORP.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0006253561\n                        "}, {"color": "#97c2fc", "id": "XYZ SERVICES LLC", "label": "XYZ SERVICES LLC", "shape": "dot", "size": 10, "title": "Company Title: XYZ SERVICES LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006118943\n                        "}, {"color": "#97c2fc", "id": "ZANE SCHOBINGER", "label": "ZANE SCHOBINGER", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : ZANE SCHOBINGER"}, {"color": "#97c2fc", "id": "XYMTEC INDUSTRIES LLC", "label": "XYMTEC INDUSTRIES LLC", "shape": "dot", "size": 10, "title": "Company Title: XYMTEC INDUSTRIES LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0005486763\n                        "}, {"color": "#97c2fc", "id": "ANDREW SANDVIK", "label": "ANDREW SANDVIK", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : ANDREW SANDVIK"}, {"color": "#97c2fc", "id": "XYLEM WATER SOLUTIONS U.S.A., INC.", "label": "XYLEM WATER SOLUTIONS U.S.A., INC.", "shape": "dot", "size": 10, "title": "Company Title: XYLEM WATER SOLUTIONS U.S.A., INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000111500\n                        "}, {"color": "#97c2fc", "id": "XYLEM I LLC", "label": "XYLEM I LLC", "shape": "dot", "size": 10, "title": "Company Title: XYLEM I LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0006885195\n                        "}, {"color": "#97c2fc", "id": "CORPORATION SERVICE COMPANY", "label": "CORPORATION SERVICE COMPANY", "shape": "dot", "size": 10, "title": "COMMERCIAL_REGISTERED_AGENT : CORPORATION SERVICE COMPANY"}, {"color": "#97c2fc", "id": "XYLEM DEWATERING SOLUTIONS, INC.", "label": "XYLEM DEWATERING SOLUTIONS, INC.", "shape": "dot", "size": 10, "title": "Company Title: XYLEM DEWATERING SOLUTIONS, INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000138604\n                        "}, {"color": "#97c2fc", "id": "XXXXX HOLDINGS LLC", "label": "XXXXX HOLDINGS LLC", "shape": "dot", "size": 10, "title": "Company Title: XXXXX HOLDINGS LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006264782\n                        "}, {"color": "#97c2fc", "id": "LIGHT CONSULTING LLC", "label": "LIGHT CONSULTING LLC", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : LIGHT CONSULTING LLC"}, {"color": "#97c2fc", "id": "XXI CENTURY LTD.", "label": "XXI CENTURY LTD.", "shape": "dot", "size": 10, "title": "Company Title: XXI CENTURY LTD.\n                            Company Type: Corporation - Business - Domestic\n                            SOS Control ID# 0000009887\n                        "}, {"color": "#97c2fc", "id": "TODD J SCHULZ", "label": "TODD J SCHULZ", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : TODD J SCHULZ"}, {"color": "#97c2fc", "id": "XWA 2024, LLC", "label": "XWA 2024, LLC", "shape": "dot", "size": 10, "title": "Company Title: XWA 2024, LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006856720\n                        "}, {"color": "#97c2fc", "id": "KYLE BLACK", "label": "KYLE BLACK", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : KYLE BLACK"}, {"color": "#97c2fc", "id": "XTS HOLDINGS, LLC", "label": "XTS HOLDINGS, LLC", "shape": "dot", "size": 10, "title": "Company Title: XTS HOLDINGS, LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0005668778\n                        "}, {"color": "#97c2fc", "id": "DARIN POWELL", "label": "DARIN POWELL", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : DARIN POWELL"}, {"color": "#97c2fc", "id": "XTREME PRODUCTS LLC", "label": "XTREME PRODUCTS LLC", "shape": "dot", "size": 10, "title": "Company Title: XTREME PRODUCTS LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0000133058\n                        "}, {"color": "#97c2fc", "id": "GREG PFAFF", "label": "GREG PFAFF", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : GREG PFAFF"}, {"color": "#97c2fc", "id": "XTTRIUM LABORATORIES, INC.", "label": "XTTRIUM LABORATORIES, INC.", "shape": "dot", "size": 10, "title": "Company Title: XTTRIUM LABORATORIES, INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000100538\n                        "}, {"color": "#97c2fc", "id": "INCORP SERVICES, INC.", "label": "INCORP SERVICES, INC.", "shape": "dot", "size": 10, "title": "COMMERCIAL_REGISTERED_AGENT : INCORP SERVICES, INC."}, {"color": "#97c2fc", "id": "XTREME LAWN CARE LLC", "label": "XTREME LAWN CARE LLC", "shape": "dot", "size": 10, "title": "Company Title: XTREME LAWN CARE LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006637287\n                        "}, {"color": "#97c2fc", "id": "WOODROW SHORT", "label": "WOODROW SHORT", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : WOODROW SHORT"}, {"color": "#97c2fc", "id": "XTREME SIGNS \u0026 GRAPHIX", "label": "XTREME SIGNS \u0026 GRAPHIX", "shape": "dot", "size": 10, "title": "Company Title: XTREME SIGNS \u0026 GRAPHIX\n                            Company Type: Trade Name\n                            SOS Control ID# 0000231841\n                        "}, {"color": "#97c2fc", "id": "CRAIG NICHOLAS THOMAS", "label": "CRAIG NICHOLAS THOMAS", "shape": "dot", "size": 10, "title": "OWNER_NAME : CRAIG NICHOLAS THOMAS"}, {"color": "#97c2fc", "id": "AMANDA KAY THOMAS", "label": "AMANDA KAY THOMAS", "shape": "dot", "size": 10, "title": "OWNER_NAME : AMANDA KAY THOMAS"}, {"color": "#97c2fc", "id": "XTREME XTERIORS LLC", "label": "XTREME XTERIORS LLC", "shape": "dot", "size": 10, "title": "Company Title: XTREME XTERIORS LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0002772735\n                        "}, {"color": "#97c2fc", "id": "AAA NORTH DAKOTA REGISTERED AGENT LLC", "label": "AAA NORTH DAKOTA REGISTERED AGENT LLC", "shape": "dot", "size": 10, "title": "COMMERCIAL_REGISTERED_AGENT : AAA NORTH DAKOTA REGISTERED AGENT LLC"}, {"color": "#97c2fc", "id": "X-TREME FITNESS, LLC", "label": "X-TREME FITNESS, LLC", "shape": "dot", "size": 10, "title": "Company Title: X-TREME FITNESS, LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0000154722\n                        "}, {"color": "#97c2fc", "id": "SCOTT SCHMIDT", "label": "SCOTT SCHMIDT", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : SCOTT SCHMIDT"}, {"color": "#97c2fc", "id": "XTREME INSTALLATION LLC", "label": "XTREME INSTALLATION LLC", "shape": "dot", "size": 10, "title": "Company Title: XTREME INSTALLATION LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0005916425\n                        "}, {"color": "#97c2fc", "id": "DAVID RODRIGUEZ", "label": "DAVID RODRIGUEZ", "shape": "dot", "size": 10, "title": "OWNER_NAME : DAVID RODRIGUEZ"}, {"color": "#97c2fc", "id": "X-TREME OUTFITTERS", "label": "X-TREME OUTFITTERS", "shape": "dot", "size": 10, "title": "Company Title: X-TREME OUTFITTERS\n                            Company Type: Trade Name\n                            SOS Control ID# 0000229359\n                        "}, {"color": "#97c2fc", "id": "COREY GULKE", "label": "COREY GULKE", "shape": "dot", "size": 10, "title": "OWNER_NAME : COREY GULKE"}, {"color": "#97c2fc", "id": "XTREME INSTALLATIONS", "label": "XTREME INSTALLATIONS", "shape": "dot", "size": 10, "title": "Company Title: XTREME INSTALLATIONS\n                            Company Type: Trade Name\n                            SOS Control ID# 0005565360\n                        "}, {"color": "#97c2fc", "id": "XTREME FIRE PROTECTION, LLC", "label": "XTREME FIRE PROTECTION, LLC", "shape": "dot", "size": 10, "title": "Company Title: XTREME FIRE PROTECTION, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0000108517\n                        "}, {"color": "#97c2fc", "id": "XWIND SERVICES LTD.", "label": "XWIND SERVICES LTD.", "shape": "dot", "size": 10, "title": "Company Title: XWIND SERVICES LTD.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0005309492\n                        "}, {"color": "#97c2fc", "id": "XTREME ELECTRICAL SERVICES, INC. (DBA X ELECTRIC)", "label": "XTREME ELECTRICAL SERVICES, INC. (DBA X ELECTRIC)", "shape": "dot", "size": 10, "title": "Company Title: XTREME ELECTRICAL SERVICES, INC. (DBA X ELECTRIC)\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000106939\n                        "}, {"color": "#97c2fc", "id": "PARACORP INCORPORATED", "label": "PARACORP INCORPORATED", "shape": "dot", "size": 10, "title": "COMMERCIAL_REGISTERED_AGENT : PARACORP INCORPORATED"}, {"color": "#97c2fc", "id": "XTREME DRILLING, LLC", "label": "XTREME DRILLING, LLC", "shape": "dot", "size": 10, "title": "Company Title: XTREME DRILLING, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0000092696\n                        "}, {"color": "#97c2fc", "id": "XTREME ELECTRIC INC", "label": "XTREME ELECTRIC INC", "shape": "dot", "size": 10, "title": "Company Title: XTREME ELECTRIC INC\n                            Company Type: Corporation - Business - Domestic\n                            SOS Control ID# 0000079498\n                        "}, {"color": "#97c2fc", "id": "DEREK WANZEK", "label": "DEREK WANZEK", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : DEREK WANZEK"}, {"color": "#97c2fc", "id": "XTREME GUN WORKS", "label": "XTREME GUN WORKS", "shape": "dot", "size": 10, "title": "Company Title: XTREME GUN WORKS\n                            Company Type: Trade Name\n                            SOS Control ID# 0006065149\n                        "}, {"color": "#97c2fc", "id": "WET WORK HYDROGRAPHICS LLC", "label": "WET WORK HYDROGRAPHICS LLC", "shape": "dot", "size": 10, "title": "OWNER_NAME : WET WORK HYDROGRAPHICS LLC"}, {"color": "#97c2fc", "id": "XTREME TROPHY PROPERTIES", "label": "XTREME TROPHY PROPERTIES", "shape": "dot", "size": 10, "title": "Company Title: XTREME TROPHY PROPERTIES\n                            Company Type: Trade Name\n                            SOS Control ID# 0000240962\n                        "}, {"color": "#97c2fc", "id": "HAWLEY REALTY, INC.", "label": "HAWLEY REALTY, INC.", "shape": "dot", "size": 10, "title": "OWNER_NAME : HAWLEY REALTY, INC."}, {"color": "#97c2fc", "id": "XTREME CLEANING SERVICES LLC", "label": "XTREME CLEANING SERVICES LLC", "shape": "dot", "size": 10, "title": "Company Title: XTREME CLEANING SERVICES LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006482080\n                        "}, {"color": "#97c2fc", "id": "GABRIEL FRANCO", "label": "GABRIEL FRANCO", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : GABRIEL FRANCO"}, {"color": "#97c2fc", "id": "XTREME CARPET CLEANING LLC", "label": "XTREME CARPET CLEANING LLC", "shape": "dot", "size": 10, "title": "Company Title: XTREME CARPET CLEANING LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0005427601\n                        "}, {"color": "#97c2fc", "id": "ALDIN MEHUKIC", "label": "ALDIN MEHUKIC", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : ALDIN MEHUKIC"}, {"color": "#97c2fc", "id": "X-TREME DETAILING", "label": "X-TREME DETAILING", "shape": "dot", "size": 10, "title": "Company Title: X-TREME DETAILING\n                            Company Type: Trade Name\n                            SOS Control ID# 0005426033\n                        "}, {"color": "#97c2fc", "id": "WILL A SIRY", "label": "WILL A SIRY", "shape": "dot", "size": 10, "title": "OWNER_NAME : WILL A SIRY"}, {"color": "#97c2fc", "id": "XTREME BUILDERS", "label": "XTREME BUILDERS", "shape": "dot", "size": 10, "title": "Company Title: XTREME BUILDERS\n                            Company Type: Trade Name\n                            SOS Control ID# 0000237338\n                        "}, {"color": "#97c2fc", "id": "JOSH JELINEK", "label": "JOSH JELINEK", "shape": "dot", "size": 10, "title": "OWNER_NAME : JOSH JELINEK"}, {"color": "#97c2fc", "id": "XTREME AUTO, INC.", "label": "XTREME AUTO, INC.", "shape": "dot", "size": 10, "title": "Company Title: XTREME AUTO, INC.\n                            Company Type: Corporation - Business - Domestic\n                            SOS Control ID# 0000083485\n                        "}, {"color": "#97c2fc", "id": "MARK L SCHUMACHER", "label": "MARK L SCHUMACHER", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : MARK L SCHUMACHER"}, {"color": "#97c2fc", "id": "XTREME AUTO DETAILZ", "label": "XTREME AUTO DETAILZ", "shape": "dot", "size": 10, "title": "Company Title: XTREME AUTO DETAILZ\n                            Company Type: Trade Name\n                            SOS Control ID# 0005917675\n                        "}, {"color": "#97c2fc", "id": "SCOTT A KRAFT", "label": "SCOTT A KRAFT", "shape": "dot", "size": 10, "title": "OWNER_NAME : SCOTT A KRAFT"}, {"color": "#97c2fc", "id": "XTRAVAGANT ELEGANCE", "label": "XTRAVAGANT ELEGANCE", "shape": "dot", "size": 10, "title": "Company Title: XTRAVAGANT ELEGANCE\n                            Company Type: Trade Name\n                            SOS Control ID# 0005852807\n                        "}, {"color": "#97c2fc", "id": "XIOMARA A. URIBE, ECATERINA M. QUINTANA", "label": "XIOMARA A. URIBE, ECATERINA M. QUINTANA", "shape": "dot", "size": 10, "title": "OWNER_NAME : XIOMARA A. URIBE, ECATERINA M. QUINTANA"}, {"color": "#97c2fc", "id": "XTRA-OFFICE, INC.", "label": "XTRA-OFFICE, INC.", "shape": "dot", "size": 10, "title": "Company Title: XTRA-OFFICE, INC.\n                            Company Type: Corporation - Business - Domestic\n                            SOS Control ID# 0002694720\n                        "}, {"color": "#97c2fc", "id": "TRACIE DAY", "label": "TRACIE DAY", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : TRACIE DAY"}, {"color": "#97c2fc", "id": "XTRA MILE PROPERTY SERVICES LLC", "label": "XTRA MILE PROPERTY SERVICES LLC", "shape": "dot", "size": 10, "title": "Company Title: XTRA MILE PROPERTY SERVICES LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006618532\n                        "}, {"color": "#97c2fc", "id": "REMINGTON KOSTENKO", "label": "REMINGTON KOSTENKO", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : REMINGTON KOSTENKO"}, {"color": "#97c2fc", "id": "XTRA APPAREL CO LLC", "label": "XTRA APPAREL CO LLC", "shape": "dot", "size": 10, "title": "Company Title: XTRA APPAREL CO LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0000169920\n                        "}, {"color": "#97c2fc", "id": "NORTH DAKOTA REGISTERED AGENT SERVICES LLC", "label": "NORTH DAKOTA REGISTERED AGENT SERVICES LLC", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : NORTH DAKOTA REGISTERED AGENT SERVICES LLC"}, {"color": "#97c2fc", "id": "XTRA HAND LLC", "label": "XTRA HAND LLC", "shape": "dot", "size": 10, "title": "Company Title: XTRA HAND LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0007051667\n                        "}, {"color": "#97c2fc", "id": "GREGORY P BUCKTA", "label": "GREGORY P BUCKTA", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : GREGORY P BUCKTA"}, {"color": "#97c2fc", "id": "XTO OFFSHORE INC.", "label": "XTO OFFSHORE INC.", "shape": "dot", "size": 10, "title": "Company Title: XTO OFFSHORE INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000013762\n                        "}, {"color": "#97c2fc", "id": "XTC U.S. XPRESS INC. U.S. INC.", "label": "XTC U.S. XPRESS INC. U.S. INC.", "shape": "dot", "size": 10, "title": "Company Title: XTC U.S. XPRESS INC. U.S. INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0006482466\n                        "}, {"color": "#97c2fc", "id": "WILLIAM LUCAS", "label": "WILLIAM LUCAS", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : WILLIAM LUCAS"}, {"color": "#97c2fc", "id": "XTO ENERGY INC.", "label": "XTO ENERGY INC.", "shape": "dot", "size": 10, "title": "Company Title: XTO ENERGY INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000076872\n                        "}, {"color": "#97c2fc", "id": "XTO HOLDINGS, LLC", "label": "XTO HOLDINGS, LLC", "shape": "dot", "size": 10, "title": "Company Title: XTO HOLDINGS, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0000172330\n                        "}, {"color": "#97c2fc", "id": "XSTREAM PROPERTIES, LLP", "label": "XSTREAM PROPERTIES, LLP", "shape": "dot", "size": 10, "title": "Company Title: XSTREAM PROPERTIES, LLP\n                            Company Type: Limited Liability Partnership - Domestic\n                            SOS Control ID# 0000180566\n                        "}, {"color": "#97c2fc", "id": "LYNN JOHNSTON", "label": "LYNN JOHNSTON", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : LYNN JOHNSTON"}, {"color": "#97c2fc", "id": "XTERNALSOURCE LLC", "label": "XTERNALSOURCE LLC", "shape": "dot", "size": 10, "title": "Company Title: XTERNALSOURCE LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0006960714\n                        "}, {"color": "#97c2fc", "id": "COGENCY GLOBAL INC.", "label": "COGENCY GLOBAL INC.", "shape": "dot", "size": 10, "title": "COMMERCIAL_REGISTERED_AGENT : COGENCY GLOBAL INC."}, {"color": "#97c2fc", "id": "X-TECH LLC", "label": "X-TECH LLC", "shape": "dot", "size": 10, "title": "Company Title: X-TECH LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0000157433\n                        "}, {"color": "#97c2fc", "id": "VOGEL LAW FIRM, LTD.", "label": "VOGEL LAW FIRM, LTD.", "shape": "dot", "size": 10, "title": "COMMERCIAL_REGISTERED_AGENT : VOGEL LAW FIRM, LTD."}, {"color": "#97c2fc", "id": "XSOLLA PAYMENT NETWORK USA, LLC", "label": "XSOLLA PAYMENT NETWORK USA, LLC", "shape": "dot", "size": 10, "title": "Company Title: XSOLLA PAYMENT NETWORK USA, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0006761557\n                        "}, {"color": "#97c2fc", "id": "XSM ATM SERVICES LLC", "label": "XSM ATM SERVICES LLC", "shape": "dot", "size": 10, "title": "Company Title: XSM ATM SERVICES LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006280606\n                        "}, {"color": "#97c2fc", "id": "SPENSER J MILLER", "label": "SPENSER J MILLER", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : SPENSER J MILLER"}, {"color": "#97c2fc", "id": "XSPRAY PHARMA INC.", "label": "XSPRAY PHARMA INC.", "shape": "dot", "size": 10, "title": "Company Title: XSPRAY PHARMA INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0006591189\n                        "}, {"color": "#97c2fc", "id": "XSELLR8R, INC.", "label": "XSELLR8R, INC.", "shape": "dot", "size": 10, "title": "Company Title: XSELLR8R, INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0006709030\n                        "}, {"color": "#97c2fc", "id": "RANDY KENT MILLER", "label": "RANDY KENT MILLER", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : RANDY KENT MILLER"}, {"color": "#97c2fc", "id": "XSIDING XTERIORS LLC", "label": "XSIDING XTERIORS LLC", "shape": "dot", "size": 10, "title": "Company Title: XSIDING XTERIORS LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0000092139\n                        "}, {"color": "#97c2fc", "id": "DALE PIETRUSZEWSKI", "label": "DALE PIETRUSZEWSKI", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : DALE PIETRUSZEWSKI"}, {"color": "#97c2fc", "id": "XSTREME MD", "label": "XSTREME MD", "shape": "dot", "size": 10, "title": "Company Title: XSTREME MD\n                            Company Type: Trade Name\n                            SOS Control ID# 0006612579\n                        "}, {"color": "#97c2fc", "id": "LIFE LINE TECHNOLOGIES, LLC", "label": "LIFE LINE TECHNOLOGIES, LLC", "shape": "dot", "size": 10, "title": "OWNER_NAME : LIFE LINE TECHNOLOGIES, LLC"}, {"color": "#97c2fc", "id": "XSTREAM CLEAN CAR WASH", "label": "XSTREAM CLEAN CAR WASH", "shape": "dot", "size": 10, "title": "Company Title: XSTREAM CLEAN CAR WASH\n                            Company Type: Trade Name\n                            SOS Control ID# 0005767677\n                        "}, {"color": "#97c2fc", "id": "KARLGAARD ENTERPRISES, LLC", "label": "KARLGAARD ENTERPRISES, LLC", "shape": "dot", "size": 10, "title": "OWNER_NAME : KARLGAARD ENTERPRISES, LLC"}, {"color": "#97c2fc", "id": "XS AUTOMATION", "label": "XS AUTOMATION", "shape": "dot", "size": 10, "title": "Company Title: XS AUTOMATION\n                            Company Type: Trade Name\n                            SOS Control ID# 0000255321\n                        "}, {"color": "#97c2fc", "id": "JEROME M HINDS", "label": "JEROME M HINDS", "shape": "dot", "size": 10, "title": "OWNER_NAME : JEROME M HINDS"}, {"color": "#97c2fc", "id": "XTRA PROPERTIES, LLC", "label": "XTRA PROPERTIES, LLC", "shape": "dot", "size": 10, "title": "Company Title: XTRA PROPERTIES, LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0000077355\n                        "}, {"color": "#97c2fc", "id": "SHERLEEN LARSON", "label": "SHERLEEN LARSON", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : SHERLEEN LARSON"}, {"color": "#97c2fc", "id": "XSEED CONSULTANTS", "label": "XSEED CONSULTANTS", "shape": "dot", "size": 10, "title": "Company Title: XSEED CONSULTANTS\n                            Company Type: Trade Name\n                            SOS Control ID# 0006996425\n                        "}, {"color": "#97c2fc", "id": "DUSTIN R SMITH", "label": "DUSTIN R SMITH", "shape": "dot", "size": 10, "title": "OWNER_NAME : DUSTIN R SMITH"}, {"color": "#97c2fc", "id": "XRQ CORP.", "label": "XRQ CORP.", "shape": "dot", "size": 10, "title": "Company Title: XRQ CORP.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0005595152\n                        "}, {"color": "#97c2fc", "id": "NORTHWEST REGISTERED AGENT SERVICE, INC.", "label": "NORTHWEST REGISTERED AGENT SERVICE, INC.", "shape": "dot", "size": 10, "title": "COMMERCIAL_REGISTERED_AGENT : NORTHWEST REGISTERED AGENT SERVICE, INC."}, {"color": "#97c2fc", "id": "X-TERIOR SOLUTIONS", "label": "X-TERIOR SOLUTIONS", "shape": "dot", "size": 10, "title": "Company Title: X-TERIOR SOLUTIONS\n                            Company Type: Trade Name\n                            SOS Control ID# 0005407945\n                        "}, {"color": "#97c2fc", "id": "TRAVIS C TOEPKE", "label": "TRAVIS C TOEPKE", "shape": "dot", "size": 10, "title": "OWNER_NAME : TRAVIS C TOEPKE"}, {"color": "#97c2fc", "id": "XRPL MINING COMPANY, LLC", "label": "XRPL MINING COMPANY, LLC", "shape": "dot", "size": 10, "title": "Company Title: XRPL MINING COMPANY, LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006337035\n                        "}, {"color": "#97c2fc", "id": "DANIEL B BRUNSON", "label": "DANIEL B BRUNSON", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : DANIEL B BRUNSON"}, {"color": "#97c2fc", "id": "X-RAY LIMA TANGO, LLC", "label": "X-RAY LIMA TANGO, LLC", "shape": "dot", "size": 10, "title": "Company Title: X-RAY LIMA TANGO, LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0000161142\n                        "}, {"color": "#97c2fc", "id": "CORY KUNERTH", "label": "CORY KUNERTH", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : CORY KUNERTH"}, {"color": "#97c2fc", "id": "XR SOLUTIONS, LLC", "label": "XR SOLUTIONS, LLC", "shape": "dot", "size": 10, "title": "Company Title: XR SOLUTIONS, LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0005945632\n                        "}, {"color": "#97c2fc", "id": "MONTGOMERY \u0026 PENDER, P.C.", "label": "MONTGOMERY \u0026 PENDER, P.C.", "shape": "dot", "size": 10, "title": "COMMERCIAL_REGISTERED_AGENT : MONTGOMERY \u0026 PENDER, P.C."}, {"color": "#97c2fc", "id": "XQUISITE CONSTRUCTION LLC", "label": "XQUISITE CONSTRUCTION LLC", "shape": "dot", "size": 10, "title": "Company Title: XQUISITE CONSTRUCTION LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0002853122\n                        "}, {"color": "#97c2fc", "id": "BRYCE ANDERSON \u0026 ASSOCIATES, PLLC", "label": "BRYCE ANDERSON \u0026 ASSOCIATES, PLLC", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : BRYCE ANDERSON \u0026 ASSOCIATES, PLLC"}, {"color": "#97c2fc", "id": "XPT SPECIALTY", "label": "XPT SPECIALTY", "shape": "dot", "size": 10, "title": "Company Title: XPT SPECIALTY\n                            Company Type: Trade Name\n                            SOS Control ID# 0006042100\n                        "}, {"color": "#97c2fc", "id": "XPT PARTNERS, LLC", "label": "XPT PARTNERS, LLC", "shape": "dot", "size": 10, "title": "Company Title: XPT PARTNERS, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0005216693\n                        "}, {"color": "#97c2fc", "id": "XPRESSDOCS PARTNERS, LTD. (DBA XPRESSDOCS PARTNERS, LTD., A TEXAS LP)", "label": "XPRESSDOCS PARTNERS, LTD. (DBA XPRESSDOCS PARTNERS, LTD., A TEXAS LP)", "shape": "dot", "size": 10, "title": "Company Title: XPRESSDOCS PARTNERS, LTD. (DBA XPRESSDOCS PARTNERS, LTD., A TEXAS LP)\n                            Company Type: Limited Partnership - Foreign\n                            SOS Control ID# 0000188561\n                        "}, {"color": "#97c2fc", "id": "XPRESSCONNECT SUPPLY, LLC", "label": "XPRESSCONNECT SUPPLY, LLC", "shape": "dot", "size": 10, "title": "Company Title: XPRESSCONNECT SUPPLY, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0006737933\n                        "}, {"color": "#97c2fc", "id": "XPRESSDOCS GP, LLC", "label": "XPRESSDOCS GP, LLC", "shape": "dot", "size": 10, "title": "Company Title: XPRESSDOCS GP, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0000173989\n                        "}, {"color": "#97c2fc", "id": "XPRESS MONEY", "label": "XPRESS MONEY", "shape": "dot", "size": 10, "title": "Company Title: XPRESS MONEY\n                            Company Type: Trade Name\n                            SOS Control ID# 0000265874\n                        "}, {"color": "#97c2fc", "id": "MONEYDART GLOBAL SERVICES INC.", "label": "MONEYDART GLOBAL SERVICES INC.", "shape": "dot", "size": 10, "title": "OWNER_NAME : MONEYDART GLOBAL SERVICES INC."}, {"color": "#97c2fc", "id": "XPRESSBET, LLC", "label": "XPRESSBET, LLC", "shape": "dot", "size": 10, "title": "Company Title: XPRESSBET, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0006429887\n                        "}, {"color": "#97c2fc", "id": "XPRESS BOOKKEEPERS", "label": "XPRESS BOOKKEEPERS", "shape": "dot", "size": 10, "title": "Company Title: XPRESS BOOKKEEPERS\n                            Company Type: Trade Name\n                            SOS Control ID# 0006283339\n                        "}, {"color": "#97c2fc", "id": "CHRISTOPHER TEGWE", "label": "CHRISTOPHER TEGWE", "shape": "dot", "size": 10, "title": "OWNER_NAME : CHRISTOPHER TEGWE"}, {"color": "#97c2fc", "id": "XPON INTERNATIONAL LLC", "label": "XPON INTERNATIONAL LLC", "shape": "dot", "size": 10, "title": "Company Title: XPON INTERNATIONAL LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0000170309\n                        "}, {"color": "#97c2fc", "id": "LEGALINC CORPORATE SERVICES INC.", "label": "LEGALINC CORPORATE SERVICES INC.", "shape": "dot", "size": 10, "title": "COMMERCIAL_REGISTERED_AGENT : LEGALINC CORPORATE SERVICES INC."}, {"color": "#97c2fc", "id": "3H AGENT SERVICES, INC.", "label": "3H AGENT SERVICES, INC.", "shape": "dot", "size": 10, "title": "COMMERCIAL_REGISTERED_AGENT : 3H AGENT SERVICES, INC."}, {"color": "#97c2fc", "id": "XPERT HOME LENDING INC.", "label": "XPERT HOME LENDING INC.", "shape": "dot", "size": 10, "title": "Company Title: XPERT HOME LENDING INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0006569153\n                        "}, {"color": "#97c2fc", "id": "XPONET (DBA XPONET CORPORATION)", "label": "XPONET (DBA XPONET CORPORATION)", "shape": "dot", "size": 10, "title": "Company Title: XPONET (DBA XPONET CORPORATION)\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000160347\n                        "}, {"color": "#97c2fc", "id": "XPO LOGISTICS FREIGHT, INC.", "label": "XPO LOGISTICS FREIGHT, INC.", "shape": "dot", "size": 10, "title": "Company Title: XPO LOGISTICS FREIGHT, INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000045863\n                        "}, {"color": "#97c2fc", "id": "REGISTERED AGENT SOLUTIONS, INC.", "label": "REGISTERED AGENT SOLUTIONS, INC.", "shape": "dot", "size": 10, "title": "COMMERCIAL_REGISTERED_AGENT : REGISTERED AGENT SOLUTIONS, INC."}, {"color": "#97c2fc", "id": "XPERT XTERIORS, LLC", "label": "XPERT XTERIORS, LLC", "shape": "dot", "size": 10, "title": "Company Title: XPERT XTERIORS, LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0003036205\n                        "}, {"color": "#97c2fc", "id": "PHILIP L MAENZA", "label": "PHILIP L MAENZA", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : PHILIP L MAENZA"}, {"color": "#97c2fc", "id": "XPERT ENTERPRISES LLC", "label": "XPERT ENTERPRISES LLC", "shape": "dot", "size": 10, "title": "Company Title: XPERT ENTERPRISES LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0000155270\n                        "}, {"color": "#97c2fc", "id": "RACHAEL NADEAU", "label": "RACHAEL NADEAU", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : RACHAEL NADEAU"}, {"color": "#97c2fc", "id": "XPERT DRYWALL LLC", "label": "XPERT DRYWALL LLC", "shape": "dot", "size": 10, "title": "Company Title: XPERT DRYWALL LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0002857167\n                        "}, {"color": "#97c2fc", "id": "XPLR INFRASTRUCTURE CONSTRUCTORS, LLC", "label": "XPLR INFRASTRUCTURE CONSTRUCTORS, LLC", "shape": "dot", "size": 10, "title": "Company Title: XPLR INFRASTRUCTURE CONSTRUCTORS, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0002942261\n                        "}, {"color": "#97c2fc", "id": "XPERT CONCRETE COATINGS LLC", "label": "XPERT CONCRETE COATINGS LLC", "shape": "dot", "size": 10, "title": "Company Title: XPERT CONCRETE COATINGS LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006817200\n                        "}, {"color": "#97c2fc", "id": "ROBERT C JAMIESON", "label": "ROBERT C JAMIESON", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : ROBERT C JAMIESON"}, {"color": "#97c2fc", "id": "XPL OFFSITE, LLC", "label": "XPL OFFSITE, LLC", "shape": "dot", "size": 10, "title": "Company Title: XPL OFFSITE, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0007054068\n                        "}, {"color": "#97c2fc", "id": "XPERIENCE TITLE, LLC", "label": "XPERIENCE TITLE, LLC", "shape": "dot", "size": 10, "title": "Company Title: XPERIENCE TITLE, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0005328786\n                        "}, {"color": "#97c2fc", "id": "XPERIENCE INVESTMENTS LLC", "label": "XPERIENCE INVESTMENTS LLC", "shape": "dot", "size": 10, "title": "Company Title: XPERIENCE INVESTMENTS LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006184608\n                        "}, {"color": "#97c2fc", "id": "DELSON SAINTAL", "label": "DELSON SAINTAL", "shape": "dot", "size": 10, "title": "OWNER_NAME : DELSON SAINTAL"}, {"color": "#97c2fc", "id": "XPERIENCE HEALTH \u0026 FITNESS LLC", "label": "XPERIENCE HEALTH \u0026 FITNESS LLC", "shape": "dot", "size": 10, "title": "Company Title: XPERIENCE HEALTH \u0026 FITNESS LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0000086814\n                        "}, {"color": "#97c2fc", "id": "DARCY D REIS", "label": "DARCY D REIS", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : DARCY D REIS"}, {"color": "#97c2fc", "id": "XPERIENCE BARBERS LLC", "label": "XPERIENCE BARBERS LLC", "shape": "dot", "size": 10, "title": "Company Title: XPERIENCE BARBERS LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0005856034\n                        "}, {"color": "#97c2fc", "id": "XPERIENCE HEALTH \u0026 FITNESS", "label": "XPERIENCE HEALTH \u0026 FITNESS", "shape": "dot", "size": 10, "title": "Company Title: XPERIENCE HEALTH \u0026 FITNESS\n                            Company Type: Trade Name\n                            SOS Control ID# 0000232126\n                        "}, {"color": "#97c2fc", "id": "XP SYSTEMS CORPORATION", "label": "XP SYSTEMS CORPORATION", "shape": "dot", "size": 10, "title": "Company Title: XP SYSTEMS CORPORATION\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000049228\n                        "}, {"color": "#97c2fc", "id": "XPEDITION WELL SERVICE LLC", "label": "XPEDITION WELL SERVICE LLC", "shape": "dot", "size": 10, "title": "Company Title: XPEDITION WELL SERVICE LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006832697\n                        "}, {"color": "#97c2fc", "id": "BROOKS HONDL", "label": "BROOKS HONDL", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : BROOKS HONDL"}, {"color": "#97c2fc", "id": "XOME REALTY SERVICES LLC", "label": "XOME REALTY SERVICES LLC", "shape": "dot", "size": 10, "title": "Company Title: XOME REALTY SERVICES LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0000124048\n                        "}, {"color": "#97c2fc", "id": "XPERIENCE BARBERS", "label": "XPERIENCE BARBERS", "shape": "dot", "size": 10, "title": "Company Title: XPERIENCE BARBERS\n                            Company Type: Trade Name\n                            SOS Control ID# 0005432375\n                        "}, {"color": "#97c2fc", "id": "XOXO, PHOENIIX LLC", "label": "XOXO, PHOENIIX LLC", "shape": "dot", "size": 10, "title": "Company Title: XOXO, PHOENIIX LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0005664534\n                        "}, {"color": "#97c2fc", "id": "STACY THOMAS", "label": "STACY THOMAS", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : STACY THOMAS"}, {"color": "#97c2fc", "id": "XOME FIELD SERVICES LLC", "label": "XOME FIELD SERVICES LLC", "shape": "dot", "size": 10, "title": "Company Title: XOME FIELD SERVICES LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0000116547\n                        "}, {"color": "#97c2fc", "id": "XOME INC.", "label": "XOME INC.", "shape": "dot", "size": 10, "title": "Company Title: XOME INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000125669\n                        "}, {"color": "#97c2fc", "id": "XOOM", "label": "XOOM", "shape": "dot", "size": 10, "title": "Company Title: XOOM\n                            Company Type: Trade Name\n                            SOS Control ID# 0006878133\n                        "}, {"color": "#97c2fc", "id": "PAYPAL, INC.", "label": "PAYPAL, INC.", "shape": "dot", "size": 10, "title": "OWNER_NAME : PAYPAL, INC."}, {"color": "#97c2fc", "id": "XN FINANCIAL SERVICES INC.", "label": "XN FINANCIAL SERVICES INC.", "shape": "dot", "size": 10, "title": "Company Title: XN FINANCIAL SERVICES INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000086167\n                        "}, {"color": "#97c2fc", "id": "XMODN SECURITY LLC", "label": "XMODN SECURITY LLC", "shape": "dot", "size": 10, "title": "Company Title: XMODN SECURITY LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0002794925\n                        "}, {"color": "#97c2fc", "id": "XO COMMUNICATIONS SERVICES, LLC", "label": "XO COMMUNICATIONS SERVICES, LLC", "shape": "dot", "size": 10, "title": "Company Title: XO COMMUNICATIONS SERVICES, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0000066683\n                        "}, {"color": "#97c2fc", "id": "XO BEAUTY", "label": "XO BEAUTY", "shape": "dot", "size": 10, "title": "Company Title: XO BEAUTY\n                            Company Type: Trade Name\n                            SOS Control ID# 0000270788\n                        "}, {"color": "#97c2fc", "id": "ASHLEY MACK", "label": "ASHLEY MACK", "shape": "dot", "size": 10, "title": "OWNER_NAME : ASHLEY MACK"}, {"color": "#97c2fc", "id": "XM42", "label": "XM42", "shape": "dot", "size": 10, "title": "Company Title: XM42\n                            Company Type: Trade Name\n                            SOS Control ID# 0006023021\n                        "}, {"color": "#97c2fc", "id": "ROUGHRIDER ARMS LLC", "label": "ROUGHRIDER ARMS LLC", "shape": "dot", "size": 10, "title": "OWNER_NAME : ROUGHRIDER ARMS LLC"}, {"color": "#97c2fc", "id": "XM ACRES, LLP", "label": "XM ACRES, LLP", "shape": "dot", "size": 10, "title": "Company Title: XM ACRES, LLP\n                            Company Type: Limited Liability Partnership - Domestic\n                            SOS Control ID# 0005525442\n                        "}, {"color": "#97c2fc", "id": "MICHAEL BERG", "label": "MICHAEL BERG", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : MICHAEL BERG"}, {"color": "#97c2fc", "id": "XLT TAXI", "label": "XLT TAXI", "shape": "dot", "size": 10, "title": "Company Title: XLT TAXI\n                            Company Type: Trade Name\n                            SOS Control ID# 0006249515\n                        "}, {"color": "#97c2fc", "id": "XOLARIA LLC", "label": "XOLARIA LLC", "shape": "dot", "size": 10, "title": "Company Title: XOLARIA LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006253787\n                        "}, {"color": "#97c2fc", "id": "SHILO J SHUMWAY", "label": "SHILO J SHUMWAY", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : SHILO J SHUMWAY"}, {"color": "#97c2fc", "id": "XLT PACK AND SHIP", "label": "XLT PACK AND SHIP", "shape": "dot", "size": 10, "title": "Company Title: XLT PACK AND SHIP\n                            Company Type: Trade Name\n                            SOS Control ID# 0006063334\n                        "}, {"color": "#97c2fc", "id": "XPEL, INC.", "label": "XPEL, INC.", "shape": "dot", "size": 10, "title": "Company Title: XPEL, INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0006615596\n                        "}, {"color": "#97c2fc", "id": "FIRST CORPORATE SOLUTIONS, INC.", "label": "FIRST CORPORATE SOLUTIONS, INC.", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : FIRST CORPORATE SOLUTIONS, INC."}, {"color": "#97c2fc", "id": "XLT MANAGEMENT SERVICES, INC.", "label": "XLT MANAGEMENT SERVICES, INC.", "shape": "dot", "size": 10, "title": "Company Title: XLT MANAGEMENT SERVICES, INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0002813336\n                        "}, {"color": "#97c2fc", "id": "XLHOME, P.C. (DBA HOME HEALTH ASSESSMENTS OF NORTH DAKOTA, P.C.)", "label": "XLHOME, P.C. (DBA HOME HEALTH ASSESSMENTS OF NORTH DAKOTA, P.C.)", "shape": "dot", "size": 10, "title": "Company Title: XLHOME, P.C. (DBA HOME HEALTH ASSESSMENTS OF NORTH DAKOTA, P.C.)\n                            Company Type: Corporation - Professional - Foreign\n                            SOS Control ID# 0003118500\n                        "}, {"color": "#97c2fc", "id": "XLHOME NORTHEAST, P.C. (DBA XLHNE, P.C.)", "label": "XLHOME NORTHEAST, P.C. (DBA XLHNE, P.C.)", "shape": "dot", "size": 10, "title": "Company Title: XLHOME NORTHEAST, P.C. (DBA XLHNE, P.C.)\n                            Company Type: Corporation - Professional - Foreign\n                            SOS Control ID# 0007046064\n                        "}, {"color": "#97c2fc", "id": "XLHNE, P.C.", "label": "XLHNE, P.C.", "shape": "dot", "size": 10, "title": "Company Title: XLHNE, P.C.\n                            Company Type: Trade Name\n                            SOS Control ID# 0007046060\n                        "}, {"color": "#97c2fc", "id": "XLHOME NORTHEAST, P.C.", "label": "XLHOME NORTHEAST, P.C.", "shape": "dot", "size": 10, "title": "OWNER_NAME : XLHOME NORTHEAST, P.C."}, {"color": "#97c2fc", "id": "XL TRANSPORT, LLC", "label": "XL TRANSPORT, LLC", "shape": "dot", "size": 10, "title": "Company Title: XL TRANSPORT, LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0000123442\n                        "}, {"color": "#97c2fc", "id": "COREY GETZLAFF", "label": "COREY GETZLAFF", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : COREY GETZLAFF"}, {"color": "#97c2fc", "id": "XL LOGISTICS LLC", "label": "XL LOGISTICS LLC", "shape": "dot", "size": 10, "title": "Company Title: XL LOGISTICS LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0003016450\n                        "}, {"color": "#97c2fc", "id": "MOHAMED GARAAR", "label": "MOHAMED GARAAR", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : MOHAMED GARAAR"}, {"color": "#97c2fc", "id": "XL HOMES, CORP.", "label": "XL HOMES, CORP.", "shape": "dot", "size": 10, "title": "Company Title: XL HOMES, CORP.\n                            Company Type: Corporation - Business - Domestic\n                            SOS Control ID# 0000047848\n                        "}, {"color": "#97c2fc", "id": "DAN MASSETH", "label": "DAN MASSETH", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : DAN MASSETH"}, {"color": "#97c2fc", "id": "XJOY LLC", "label": "XJOY LLC", "shape": "dot", "size": 10, "title": "Company Title: XJOY LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006948055\n                        "}, {"color": "#97c2fc", "id": "LIYING ZHANG", "label": "LIYING ZHANG", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : LIYING ZHANG"}, {"color": "#97c2fc", "id": "XILAJU, LLC", "label": "XILAJU, LLC", "shape": "dot", "size": 10, "title": "Company Title: XILAJU, LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0005914329\n                        "}, {"color": "#97c2fc", "id": "JUAN ULLOA", "label": "JUAN ULLOA", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : JUAN ULLOA"}, {"color": "#97c2fc", "id": "XL INDUSTRIAL SERVICES, INC.", "label": "XL INDUSTRIAL SERVICES, INC.", "shape": "dot", "size": 10, "title": "Company Title: XL INDUSTRIAL SERVICES, INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000136636\n                        "}, {"color": "#97c2fc", "id": "XIE XIE, LLC", "label": "XIE XIE, LLC", "shape": "dot", "size": 10, "title": "Company Title: XIE XIE, LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0000074263\n                        "}, {"color": "#97c2fc", "id": "CINDY O\u0027DAY", "label": "CINDY O\u0027DAY", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : CINDY O\u0027DAY"}, {"color": "#97c2fc", "id": "XL FARMS", "label": "XL FARMS", "shape": "dot", "size": 10, "title": "Company Title: XL FARMS\n                            Company Type: Trade Name\n                            SOS Control ID# 0003069778\n                        "}, {"color": "#97c2fc", "id": "COREY K GETZLAFF", "label": "COREY K GETZLAFF", "shape": "dot", "size": 10, "title": "OWNER_NAME : COREY K GETZLAFF"}, {"color": "#97c2fc", "id": "CINDY J GETZLAFF", "label": "CINDY J GETZLAFF", "shape": "dot", "size": 10, "title": "OWNER_NAME : CINDY J GETZLAFF"}, {"color": "#97c2fc", "id": "XH, LLC", "label": "XH, LLC", "shape": "dot", "size": 10, "title": "Company Title: XH, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0000015018\n                        "}, {"color": "#97c2fc", "id": "X-GEN PHARMACEUTICALS, INC.", "label": "X-GEN PHARMACEUTICALS, INC.", "shape": "dot", "size": 10, "title": "Company Title: X-GEN PHARMACEUTICALS, INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000100537\n                        "}, {"color": "#97c2fc", "id": "XGP PROPERTIES, LLC", "label": "XGP PROPERTIES, LLC", "shape": "dot", "size": 10, "title": "Company Title: XGP PROPERTIES, LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0000117427\n                        "}, {"color": "#97c2fc", "id": "GEORGE POITRA", "label": "GEORGE POITRA", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : GEORGE POITRA"}, {"color": "#97c2fc", "id": "XGSC INC.", "label": "XGSC INC.", "shape": "dot", "size": 10, "title": "Company Title: XGSC INC.\n                            Company Type: Corporation - Business - Domestic\n                            SOS Control ID# 0007011900\n                        "}, {"color": "#97c2fc", "id": "XIPHOS TECHNICAL SERVICES, LLC", "label": "XIPHOS TECHNICAL SERVICES, LLC", "shape": "dot", "size": 10, "title": "Company Title: XIPHOS TECHNICAL SERVICES, LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0000136795\n                        "}, {"color": "#97c2fc", "id": "DARIN K POWELL", "label": "DARIN K POWELL", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : DARIN K POWELL"}, {"color": "#97c2fc", "id": "XETA TECHNOLOGIES, INC.", "label": "XETA TECHNOLOGIES, INC.", "shape": "dot", "size": 10, "title": "Company Title: XETA TECHNOLOGIES, INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000062616\n                        "}, {"color": "#97c2fc", "id": "XFINITY HOME", "label": "XFINITY HOME", "shape": "dot", "size": 10, "title": "Company Title: XFINITY HOME\n                            Company Type: Trade Name\n                            SOS Control ID# 0006092932\n                        "}, {"color": "#97c2fc", "id": "COMCAST BROADBAND SECURITY, LLC", "label": "COMCAST BROADBAND SECURITY, LLC", "shape": "dot", "size": 10, "title": "OWNER_NAME : COMCAST BROADBAND SECURITY, LLC"}, {"color": "#97c2fc", "id": "XEROX FINANCIAL SERVICES LLC", "label": "XEROX FINANCIAL SERVICES LLC", "shape": "dot", "size": 10, "title": "Company Title: XEROX FINANCIAL SERVICES LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0000073595\n                        "}, {"color": "#97c2fc", "id": "XEROX BUSINESS SOLUTIONS, LLC", "label": "XEROX BUSINESS SOLUTIONS, LLC", "shape": "dot", "size": 10, "title": "Company Title: XEROX BUSINESS SOLUTIONS, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0007001379\n                        "}, {"color": "#97c2fc", "id": "XERO LLC", "label": "XERO LLC", "shape": "dot", "size": 10, "title": "Company Title: XERO LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006714143\n                        "}, {"color": "#97c2fc", "id": "KAYLEN STANLEY", "label": "KAYLEN STANLEY", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : KAYLEN STANLEY"}, {"color": "#97c2fc", "id": "XEROX CORPORATION", "label": "XEROX CORPORATION", "shape": "dot", "size": 10, "title": "Company Title: XEROX CORPORATION\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000017597\n                        "}, {"color": "#97c2fc", "id": "THE PRENTICE-HALL CORPORATION SYSTEM, INC.", "label": "THE PRENTICE-HALL CORPORATION SYSTEM, INC.", "shape": "dot", "size": 10, "title": "COMMERCIAL_REGISTERED_AGENT : THE PRENTICE-HALL CORPORATION SYSTEM, INC."}, {"color": "#97c2fc", "id": "XFIT HOLDINGS, INC.", "label": "XFIT HOLDINGS, INC.", "shape": "dot", "size": 10, "title": "Company Title: XFIT HOLDINGS, INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0006204817\n                        "}, {"color": "#97c2fc", "id": "XERIS PHARMACEUTICALS, INC.", "label": "XERIS PHARMACEUTICALS, INC.", "shape": "dot", "size": 10, "title": "Company Title: XERIS PHARMACEUTICALS, INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0002705646\n                        "}, {"color": "#97c2fc", "id": "XIGENT SOLUTIONS, LLC", "label": "XIGENT SOLUTIONS, LLC", "shape": "dot", "size": 10, "title": "Company Title: XIGENT SOLUTIONS, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0006091585\n                        "}, {"color": "#97c2fc", "id": "XERIC HOLDINGS LLC", "label": "XERIC HOLDINGS LLC", "shape": "dot", "size": 10, "title": "Company Title: XERIC HOLDINGS LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006828480\n                        "}, {"color": "#97c2fc", "id": "CHRISTOPHER SHERMAN", "label": "CHRISTOPHER SHERMAN", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : CHRISTOPHER SHERMAN"}, {"color": "#97c2fc", "id": "XERCOR INSURANCE SERVICES LLC", "label": "XERCOR INSURANCE SERVICES LLC", "shape": "dot", "size": 10, "title": "Company Title: XERCOR INSURANCE SERVICES LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0000148493\n                        "}, {"color": "#97c2fc", "id": "XERATEX GROUP, LLC", "label": "XERATEX GROUP, LLC", "shape": "dot", "size": 10, "title": "Company Title: XERATEX GROUP, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0006311361\n                        "}, {"color": "#97c2fc", "id": "XENITH, LLC", "label": "XENITH, LLC", "shape": "dot", "size": 10, "title": "Company Title: XENITH, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0000155100\n                        "}, {"color": "#97c2fc", "id": "UNITED AGENT GROUP INC.", "label": "UNITED AGENT GROUP INC.", "shape": "dot", "size": 10, "title": "COMMERCIAL_REGISTERED_AGENT : UNITED AGENT GROUP INC."}, {"color": "#97c2fc", "id": "XENITH DEVELOPMENT GROUP", "label": "XENITH DEVELOPMENT GROUP", "shape": "dot", "size": 10, "title": "Company Title: XENITH DEVELOPMENT GROUP\n                            Company Type: Trade Name\n                            SOS Control ID# 0006685910\n                        "}, {"color": "#97c2fc", "id": "TREVOR HARTMAN", "label": "TREVOR HARTMAN", "shape": "dot", "size": 10, "title": "OWNER_NAME : TREVOR HARTMAN"}, {"color": "#97c2fc", "id": "XENEX DISINFECTION SERVICES INC.", "label": "XENEX DISINFECTION SERVICES INC.", "shape": "dot", "size": 10, "title": "Company Title: XENEX DISINFECTION SERVICES INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000135506\n                        "}, {"color": "#97c2fc", "id": "XECARE LLC", "label": "XECARE LLC", "shape": "dot", "size": 10, "title": "Company Title: XECARE LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0005499136\n                        "}, {"color": "#97c2fc", "id": "CAPITOL CORPORATE SERVICES, INC.", "label": "CAPITOL CORPORATE SERVICES, INC.", "shape": "dot", "size": 10, "title": "COMMERCIAL_REGISTERED_AGENT : CAPITOL CORPORATE SERVICES, INC."}, {"color": "#97c2fc", "id": "XENCOM ENERGY MANAGEMENT, LLC", "label": "XENCOM ENERGY MANAGEMENT, LLC", "shape": "dot", "size": 10, "title": "Company Title: XENCOM ENERGY MANAGEMENT, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0002859472\n                        "}, {"color": "#97c2fc", "id": "XCS PROS", "label": "XCS PROS", "shape": "dot", "size": 10, "title": "Company Title: XCS PROS\n                            Company Type: Trade Name\n                            SOS Control ID# 0006028885\n                        "}, {"color": "#97c2fc", "id": "XCS PROS, LLC", "label": "XCS PROS, LLC", "shape": "dot", "size": 10, "title": "Company Title: XCS PROS, LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006028866\n                        "}, {"color": "#97c2fc", "id": "XDP DIGITAL LLC", "label": "XDP DIGITAL LLC", "shape": "dot", "size": 10, "title": "Company Title: XDP DIGITAL LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0005499495\n                        "}, {"color": "#97c2fc", "id": "KIMBERLY BRAUN", "label": "KIMBERLY BRAUN", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : KIMBERLY BRAUN"}, {"color": "#97c2fc", "id": "XCONNECT TEXAS, LLC", "label": "XCONNECT TEXAS, LLC", "shape": "dot", "size": 10, "title": "Company Title: XCONNECT TEXAS, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0006215915\n                        "}, {"color": "#97c2fc", "id": "XCMG AMERICA FINANCIAL LLC", "label": "XCMG AMERICA FINANCIAL LLC", "shape": "dot", "size": 10, "title": "Company Title: XCMG AMERICA FINANCIAL LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0005922092\n                        "}, {"color": "#97c2fc", "id": "VCORP SERVICES, LLC", "label": "VCORP SERVICES, LLC", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : VCORP SERVICES, LLC"}, {"color": "#97c2fc", "id": "XCHANGE TELECOM LLC", "label": "XCHANGE TELECOM LLC", "shape": "dot", "size": 10, "title": "Company Title: XCHANGE TELECOM LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0005927138\n                        "}, {"color": "#97c2fc", "id": "XEC, INC.", "label": "XEC, INC.", "shape": "dot", "size": 10, "title": "Company Title: XEC, INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0006336472\n                        "}, {"color": "#97c2fc", "id": "XCONNECT, LLC", "label": "XCONNECT, LLC", "shape": "dot", "size": 10, "title": "Company Title: XCONNECT, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0000141609\n                        "}, {"color": "#97c2fc", "id": "XDATAK LLC", "label": "XDATAK LLC", "shape": "dot", "size": 10, "title": "Company Title: XDATAK LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0005876954\n                        "}, {"color": "#97c2fc", "id": "XCELL DRIVING SCHOOL LLP", "label": "XCELL DRIVING SCHOOL LLP", "shape": "dot", "size": 10, "title": "Company Title: XCELL DRIVING SCHOOL LLP\n                            Company Type: Limited Liability Partnership - Domestic\n                            SOS Control ID# 0000181034\n                        "}, {"color": "#97c2fc", "id": "DAVID J KLINKHAMMER", "label": "DAVID J KLINKHAMMER", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : DAVID J KLINKHAMMER"}, {"color": "#97c2fc", "id": "XCLOUD, LLC", "label": "XCLOUD, LLC", "shape": "dot", "size": 10, "title": "Company Title: XCLOUD, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0005338314\n                        "}, {"color": "#97c2fc", "id": "XCELERATE INDOOR ADVENTURES", "label": "XCELERATE INDOOR ADVENTURES", "shape": "dot", "size": 10, "title": "Company Title: XCELERATE INDOOR ADVENTURES\n                            Company Type: Trade Name\n                            SOS Control ID# 0006271482\n                        "}, {"color": "#97c2fc", "id": "XCELERATE INDOOR ADVENTURES LLC", "label": "XCELERATE INDOOR ADVENTURES LLC", "shape": "dot", "size": 10, "title": "Company Title: XCELERATE INDOOR ADVENTURES LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006271478\n                        "}, {"color": "#97c2fc", "id": "XCEL TRUCKING LLC", "label": "XCEL TRUCKING LLC", "shape": "dot", "size": 10, "title": "Company Title: XCEL TRUCKING LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0000112023\n                        "}, {"color": "#97c2fc", "id": "KENNETH MILLER", "label": "KENNETH MILLER", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : KENNETH MILLER"}, {"color": "#97c2fc", "id": "XCEL NDT LLC", "label": "XCEL NDT LLC", "shape": "dot", "size": 10, "title": "Company Title: XCEL NDT LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0000171823\n                        "}, {"color": "#97c2fc", "id": "SEARCH COMPANY OF NORTH DAKOTA LLC", "label": "SEARCH COMPANY OF NORTH DAKOTA LLC", "shape": "dot", "size": 10, "title": "COMMERCIAL_REGISTERED_AGENT : SEARCH COMPANY OF NORTH DAKOTA LLC"}, {"color": "#97c2fc", "id": "XCEL HOLDINGS LLC", "label": "XCEL HOLDINGS LLC", "shape": "dot", "size": 10, "title": "Company Title: XCEL HOLDINGS LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0005852383\n                        "}, {"color": "#97c2fc", "id": "TAIT SILTALA", "label": "TAIT SILTALA", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : TAIT SILTALA"}, {"color": "#97c2fc", "id": "XE USA", "label": "XE USA", "shape": "dot", "size": 10, "title": "Company Title: XE USA\n                            Company Type: Trade Name\n                            SOS Control ID# 0002695525\n                        "}, {"color": "#97c2fc", "id": "DANDELION PAYMENTS, INC.", "label": "DANDELION PAYMENTS, INC.", "shape": "dot", "size": 10, "title": "OWNER_NAME : DANDELION PAYMENTS, INC."}, {"color": "#97c2fc", "id": "ANNIE CREECH", "label": "ANNIE CREECH", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : ANNIE CREECH"}, {"color": "#97c2fc", "id": "XCEL ENERGY INC.", "label": "XCEL ENERGY INC.", "shape": "dot", "size": 10, "title": "Company Title: XCEL ENERGY INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000000120\n                        "}, {"color": "#97c2fc", "id": "XCEL HOLDINGS", "label": "XCEL HOLDINGS", "shape": "dot", "size": 10, "title": "Company Title: XCEL HOLDINGS\n                            Company Type: Trade Name\n                            SOS Control ID# 0005807728\n                        "}, {"color": "#97c2fc", "id": "TANNER COLLETTE", "label": "TANNER COLLETTE", "shape": "dot", "size": 10, "title": "OWNER_NAME : TANNER COLLETTE"}, {"color": "#97c2fc", "id": "XCEL ENERGY", "label": "XCEL ENERGY", "shape": "dot", "size": 10, "title": "Company Title: XCEL ENERGY\n                            Company Type: Trade Name\n                            SOS Control ID# 0000237337\n                        "}, {"color": "#97c2fc", "id": "NORTHERN STATES POWER COMPANY", "label": "NORTHERN STATES POWER COMPANY", "shape": "dot", "size": 10, "title": "OWNER_NAME : NORTHERN STATES POWER COMPANY"}, {"color": "#97c2fc", "id": "XCEL ENERGY SERVICES INC.", "label": "XCEL ENERGY SERVICES INC.", "shape": "dot", "size": 10, "title": "Company Title: XCEL ENERGY SERVICES INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000064741\n                        "}, {"color": "#97c2fc", "id": "XCEL AVIATION", "label": "XCEL AVIATION", "shape": "dot", "size": 10, "title": "Company Title: XCEL AVIATION\n                            Company Type: Trade Name\n                            SOS Control ID# 0005675460\n                        "}, {"color": "#97c2fc", "id": "TANNER S COLLETTE", "label": "TANNER S COLLETTE", "shape": "dot", "size": 10, "title": "OWNER_NAME : TANNER S COLLETTE"}, {"color": "#97c2fc", "id": "XCEL DETAILING", "label": "XCEL DETAILING", "shape": "dot", "size": 10, "title": "Company Title: XCEL DETAILING\n                            Company Type: Trade Name\n                            SOS Control ID# 0006431195\n                        "}, {"color": "#97c2fc", "id": "DIAMONTE STUGELMEYER", "label": "DIAMONTE STUGELMEYER", "shape": "dot", "size": 10, "title": "OWNER_NAME : DIAMONTE STUGELMEYER"}, {"color": "#97c2fc", "id": "XCEL AUTOMATION \u0026 ELECTRIC LLC", "label": "XCEL AUTOMATION \u0026 ELECTRIC LLC", "shape": "dot", "size": 10, "title": "Company Title: XCEL AUTOMATION \u0026 ELECTRIC LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0002767465\n                        "}, {"color": "#97c2fc", "id": "XCHANGE BENEFITS, LLC", "label": "XCHANGE BENEFITS, LLC", "shape": "dot", "size": 10, "title": "Company Title: XCHANGE BENEFITS, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0000108533\n                        "}, {"color": "#97c2fc", "id": "XCEL ERECTORS, INC.", "label": "XCEL ERECTORS, INC.", "shape": "dot", "size": 10, "title": "Company Title: XCEL ERECTORS, INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000002063\n                        "}, {"color": "#97c2fc", "id": "MICHAEL S BROOKS", "label": "MICHAEL S BROOKS", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : MICHAEL S BROOKS"}, {"color": "#97c2fc", "id": "XCEL AGRONOMY LLC", "label": "XCEL AGRONOMY LLC", "shape": "dot", "size": 10, "title": "Company Title: XCEL AGRONOMY LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0000166132\n                        "}, {"color": "#97c2fc", "id": "CHRISTOPHER PERLEBERG", "label": "CHRISTOPHER PERLEBERG", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : CHRISTOPHER PERLEBERG"}, {"color": "#97c2fc", "id": "XCEL AG SOLUTIONS LLC", "label": "XCEL AG SOLUTIONS LLC", "shape": "dot", "size": 10, "title": "Company Title: XCEL AG SOLUTIONS LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0000172029\n                        "}, {"color": "#97c2fc", "id": "ANTHONY BAUMGARTNER", "label": "ANTHONY BAUMGARTNER", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : ANTHONY BAUMGARTNER"}, {"color": "#97c2fc", "id": "XCED AVIATION SERVICES, LLC", "label": "XCED AVIATION SERVICES, LLC", "shape": "dot", "size": 10, "title": "Company Title: XCED AVIATION SERVICES, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0000170946\n                        "}, {"color": "#97c2fc", "id": "XCALIBUR LEASING COMPANY", "label": "XCALIBUR LEASING COMPANY", "shape": "dot", "size": 10, "title": "Company Title: XCALIBUR LEASING COMPANY\n                            Company Type: Corporation - Business - Domestic\n                            SOS Control ID# 0006557504\n                        "}, {"color": "#97c2fc", "id": "GREGORY C KRUTSINGER", "label": "GREGORY C KRUTSINGER", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : GREGORY C KRUTSINGER"}, {"color": "#97c2fc", "id": "XCALIBUR ENTERTAINMENT", "label": "XCALIBUR ENTERTAINMENT", "shape": "dot", "size": 10, "title": "Company Title: XCALIBUR ENTERTAINMENT\n                            Company Type: Trade Name\n                            SOS Control ID# 0006363711\n                        "}, {"color": "#97c2fc", "id": "JONES ENTERPRISES, INC.", "label": "JONES ENTERPRISES, INC.", "shape": "dot", "size": 10, "title": "OWNER_NAME : JONES ENTERPRISES, INC."}, {"color": "#97c2fc", "id": "XCALIBER INTERNATIONAL LTD., L.L.C.", "label": "XCALIBER INTERNATIONAL LTD., L.L.C.", "shape": "dot", "size": 10, "title": "Company Title: XCALIBER INTERNATIONAL LTD., L.L.C.\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0000151910\n                        "}, {"color": "#97c2fc", "id": "X-CALIBER RURAL CAPITAL, LLC", "label": "X-CALIBER RURAL CAPITAL, LLC", "shape": "dot", "size": 10, "title": "Company Title: X-CALIBER RURAL CAPITAL, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0007004608\n                        "}, {"color": "#97c2fc", "id": "XAP LLC", "label": "XAP LLC", "shape": "dot", "size": 10, "title": "Company Title: XAP LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0005827829\n                        "}, {"color": "#97c2fc", "id": "INCORPORATING SERVICES, LTD.", "label": "INCORPORATING SERVICES, LTD.", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : INCORPORATING SERVICES, LTD."}, {"color": "#97c2fc", "id": "XANADU, LLC", "label": "XANADU, LLC", "shape": "dot", "size": 10, "title": "Company Title: XANADU, LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0000084583\n                        "}, {"color": "#97c2fc", "id": "MICHELLE BAKKE", "label": "MICHELLE BAKKE", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : MICHELLE BAKKE"}, {"color": "#97c2fc", "id": "XANADU PRODUCTS, L.L.C.", "label": "XANADU PRODUCTS, L.L.C.", "shape": "dot", "size": 10, "title": "Company Title: XANADU PRODUCTS, L.L.C.\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0000041563\n                        "}, {"color": "#97c2fc", "id": "RICK PAULSON", "label": "RICK PAULSON", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : RICK PAULSON"}, {"color": "#97c2fc", "id": "XAPIC STUDIOS", "label": "XAPIC STUDIOS", "shape": "dot", "size": 10, "title": "Company Title: XAPIC STUDIOS\n                            Company Type: Trade Name\n                            SOS Control ID# 0000266006\n                        "}, {"color": "#97c2fc", "id": "PATRICIA A ROGALLA", "label": "PATRICIA A ROGALLA", "shape": "dot", "size": 10, "title": "OWNER_NAME : PATRICIA A ROGALLA"}, {"color": "#97c2fc", "id": "XAVIER GOLD CONSULTING GROUP INC", "label": "XAVIER GOLD CONSULTING GROUP INC", "shape": "dot", "size": 10, "title": "Company Title: XAVIER GOLD CONSULTING GROUP INC\n                            Company Type: Corporation - Business - Domestic\n                            SOS Control ID# 0006420317\n                        "}, {"color": "#97c2fc", "id": "LEGALCORP SOLUTIONS, LLC", "label": "LEGALCORP SOLUTIONS, LLC", "shape": "dot", "size": 10, "title": "COMMERCIAL_REGISTERED_AGENT : LEGALCORP SOLUTIONS, LLC"}, {"color": "#97c2fc", "id": "XABOW EXPRESS LOGISTICS INC.", "label": "XABOW EXPRESS LOGISTICS INC.", "shape": "dot", "size": 10, "title": "Company Title: XABOW EXPRESS LOGISTICS INC.\n                            Company Type: Corporation - Business - Domestic\n                            SOS Control ID# 0006355495\n                        "}, {"color": "#97c2fc", "id": "ABDIKARIM A JAMA", "label": "ABDIKARIM A JAMA", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : ABDIKARIM A JAMA"}, {"color": "#97c2fc", "id": "XACTUS, LLC", "label": "XACTUS, LLC", "shape": "dot", "size": 10, "title": "Company Title: XACTUS, LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0005806191\n                        "}, {"color": "#97c2fc", "id": "XABEAT, LLC", "label": "XABEAT, LLC", "shape": "dot", "size": 10, "title": "Company Title: XABEAT, LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006269430\n                        "}, {"color": "#97c2fc", "id": "ROXANNE WANZEK", "label": "ROXANNE WANZEK", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : ROXANNE WANZEK"}, {"color": "#97c2fc", "id": "XACTLYONE FOUNDATION", "label": "XACTLYONE FOUNDATION", "shape": "dot", "size": 10, "title": "Company Title: XACTLYONE FOUNDATION\n                            Company Type: Corporation - Nonprofit - Foreign\n                            SOS Control ID# 0005510743\n                        "}, {"color": "#97c2fc", "id": "X4 PHARMACEUTICALS, INC.", "label": "X4 PHARMACEUTICALS, INC.", "shape": "dot", "size": 10, "title": "Company Title: X4 PHARMACEUTICALS, INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0006339864\n                        "}, {"color": "#97c2fc", "id": "XAVIER TAYLOR CONSTRUCTION", "label": "XAVIER TAYLOR CONSTRUCTION", "shape": "dot", "size": 10, "title": "Company Title: XAVIER TAYLOR CONSTRUCTION\n                            Company Type: Trade Name\n                            SOS Control ID# 0006320673\n                        "}, {"color": "#97c2fc", "id": "XAVIER G TAYLOR", "label": "XAVIER G TAYLOR", "shape": "dot", "size": 10, "title": "OWNER_NAME : XAVIER G TAYLOR"}, {"color": "#97c2fc", "id": "XAVIER COLLECTIONS LLC", "label": "XAVIER COLLECTIONS LLC", "shape": "dot", "size": 10, "title": "Company Title: XAVIER COLLECTIONS LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006611230\n                        "}, {"color": "#97c2fc", "id": "KORTO C KOLLIE", "label": "KORTO C KOLLIE", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : KORTO C KOLLIE"}, {"color": "#97c2fc", "id": "X4I LIMITED (DBA X4I LIMITED, LLC)", "label": "X4I LIMITED (DBA X4I LIMITED, LLC)", "shape": "dot", "size": 10, "title": "Company Title: X4I LIMITED (DBA X4I LIMITED, LLC)\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0006190492\n                        "}, {"color": "#97c2fc", "id": "X.L. GLOBAL SERVICES, INC.", "label": "X.L. GLOBAL SERVICES, INC.", "shape": "dot", "size": 10, "title": "Company Title: X.L. GLOBAL SERVICES, INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0006988332\n                        "}, {"color": "#97c2fc", "id": "X4I LIMITED, LLC", "label": "X4I LIMITED, LLC", "shape": "dot", "size": 10, "title": "Company Title: X4I LIMITED, LLC\n                            Company Type: Trade Name\n                            SOS Control ID# 0006187455\n                        "}, {"color": "#97c2fc", "id": "X4I LIMITED", "label": "X4I LIMITED", "shape": "dot", "size": 10, "title": "OWNER_NAME : X4I LIMITED"}, {"color": "#97c2fc", "id": "X S BROKERS INSURANCE AGENCY, INC.", "label": "X S BROKERS INSURANCE AGENCY, INC.", "shape": "dot", "size": 10, "title": "Company Title: X S BROKERS INSURANCE AGENCY, INC.\n                            Company Type: Corporation - Business - Foreign\n                            SOS Control ID# 0000157662\n                        "}, {"color": "#97c2fc", "id": "X11 LLC", "label": "X11 LLC", "shape": "dot", "size": 10, "title": "Company Title: X11 LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006672219\n                        "}, {"color": "#97c2fc", "id": "MIAN HUSSAIN", "label": "MIAN HUSSAIN", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : MIAN HUSSAIN"}, {"color": "#97c2fc", "id": "X REALTY LLC", "label": "X REALTY LLC", "shape": "dot", "size": 10, "title": "Company Title: X REALTY LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0005781604\n                        "}, {"color": "#97c2fc", "id": "ERIC CHRISTIANS", "label": "ERIC CHRISTIANS", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : ERIC CHRISTIANS"}, {"color": "#97c2fc", "id": "X PAYMENTS LLC", "label": "X PAYMENTS LLC", "shape": "dot", "size": 10, "title": "Company Title: X PAYMENTS LLC\n                            Company Type: Limited Liability Company - Business - Foreign\n                            SOS Control ID# 0006261917\n                        "}, {"color": "#97c2fc", "id": "X MARK PROPERTIES LLC", "label": "X MARK PROPERTIES LLC", "shape": "dot", "size": 10, "title": "Company Title: X MARK PROPERTIES LLC\n                            Company Type: Limited Liability Company - Business - Domestic\n                            SOS Control ID# 0006848693\n                        "}, {"color": "#97c2fc", "id": "DANNY KRAFT", "label": "DANNY KRAFT", "shape": "dot", "size": 10, "title": "REGISTERED_AGENT : DANNY KRAFT"}, {"color": "#97c2fc", "id": "X GOLF MINOT", "label": "X GOLF MINOT", "shape": "dot", "size": 10, "title": "Company Title: X GOLF MINOT\n                            Company Type: Trade Name\n                            SOS Control ID# 0005643099\n                        "}, {"color": "#97c2fc", "id": "ELITE GOLF, LLC", "label": "ELITE GOLF, LLC", "shape": "dot", "size": 10, "title": "OWNER_NAME : ELITE GOLF, LLC"}, {"color": "#97c2fc", "id": "X GOLF BISMARCK", "label": "X GOLF BISMARCK", "shape": "dot", "size": 10, "title": "Company Title: X GOLF BISMARCK\n                            Company Type: Trade Name\n                            SOS Control ID# 0005891299\n                        "}, {"color": "#97c2fc", "id": "ELITE GOLF 2, LLC", "label": "ELITE GOLF 2, LLC", "shape": "dot", "size": 10, "title": "OWNER_NAME : ELITE GOLF 2, LLC"}]);
+                  edges = new vis.DataSet([{"from": "X ELECTRIC", "title": "OWNER_NAME", "to": "XTREME ELECTRICAL SERVICES, INC.", "weight": 3}, {"from": "X BLOCK INC", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "REGISTERED AGENTS INC", "weight": 3}, {"from": "REGISTERED AGENTS INC", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XWIND SERVICES LTD.", "weight": 3}, {"from": "REGISTERED AGENTS INC", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XPERT HOME LENDING INC.", "weight": 3}, {"from": "REGISTERED AGENTS INC", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XMODN SECURITY LLC", "weight": 3}, {"from": "REGISTERED AGENTS INC", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XGSC INC.", "weight": 3}, {"from": "REGISTERED AGENTS INC", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XACTLYONE FOUNDATION", "weight": 3}, {"from": "X FOODS", "title": "OWNER_NAME", "to": "OECH FOODS LLC", "weight": 3}, {"from": "XZILON, INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "C T CORPORATION SYSTEM", "weight": 3}, {"from": "C T CORPORATION SYSTEM", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XYZ ROOFCO, LLC", "weight": 3}, {"from": "C T CORPORATION SYSTEM", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "X CORP.", "weight": 3}, {"from": "C T CORPORATION SYSTEM", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XYLEM WATER SOLUTIONS U.S.A., INC.", "weight": 3}, {"from": "C T CORPORATION SYSTEM", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XYLEM DEWATERING SOLUTIONS, INC.", "weight": 3}, {"from": "C T CORPORATION SYSTEM", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XPRESSBET, LLC", "weight": 3}, {"from": "C T CORPORATION SYSTEM", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XPL OFFSITE, LLC", "weight": 3}, {"from": "C T CORPORATION SYSTEM", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XO COMMUNICATIONS SERVICES, LLC", "weight": 3}, {"from": "C T CORPORATION SYSTEM", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XLT MANAGEMENT SERVICES, INC.", "weight": 3}, {"from": "C T CORPORATION SYSTEM", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XLHOME, P.C. (DBA HOME HEALTH ASSESSMENTS OF NORTH DAKOTA, P.C.)", "weight": 3}, {"from": "C T CORPORATION SYSTEM", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XLHOME NORTHEAST, P.C. (DBA XLHNE, P.C.)", "weight": 3}, {"from": "C T CORPORATION SYSTEM", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XEROX BUSINESS SOLUTIONS, LLC", "weight": 3}, {"from": "C T CORPORATION SYSTEM", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XFIT HOLDINGS, INC.", "weight": 3}, {"from": "C T CORPORATION SYSTEM", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XERIS PHARMACEUTICALS, INC.", "weight": 3}, {"from": "C T CORPORATION SYSTEM", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XIGENT SOLUTIONS, LLC", "weight": 3}, {"from": "C T CORPORATION SYSTEM", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XCEL ERECTORS, INC.", "weight": 3}, {"from": "C T CORPORATION SYSTEM", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XCED AVIATION SERVICES, LLC", "weight": 3}, {"from": "C T CORPORATION SYSTEM", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "X.L. GLOBAL SERVICES, INC.", "weight": 3}, {"from": "C T CORPORATION SYSTEM", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "X PAYMENTS LLC", "weight": 3}, {"from": "X DIAMOND PARTNERS, LLP", "title": "REGISTERED_AGENT", "to": "KENDALL VETTER", "weight": 3}, {"from": "XYZ SERVICES LLC", "title": "REGISTERED_AGENT", "to": "ZANE SCHOBINGER", "weight": 3}, {"from": "XYMTEC INDUSTRIES LLC", "title": "REGISTERED_AGENT", "to": "ANDREW SANDVIK", "weight": 3}, {"from": "XYLEM I LLC", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "CORPORATION SERVICE COMPANY", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XTO OFFSHORE INC.", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XTO ENERGY INC.", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XTO HOLDINGS, LLC", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XSOLLA PAYMENT NETWORK USA, LLC", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XSPRAY PHARMA INC.", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XPRESSDOCS PARTNERS, LTD. (DBA XPRESSDOCS PARTNERS, LTD., A TEXAS LP)", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XPRESSCONNECT SUPPLY, LLC", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XPRESSDOCS GP, LLC", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XPLR INFRASTRUCTURE CONSTRUCTORS, LLC", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XPERIENCE TITLE, LLC", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XP SYSTEMS CORPORATION", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XOME REALTY SERVICES LLC", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XOME FIELD SERVICES LLC", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XOME INC.", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XL INDUSTRIAL SERVICES, INC.", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XH, LLC", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XEROX FINANCIAL SERVICES LLC", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XEC, INC.", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XCEL ENERGY INC.", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XCEL ENERGY SERVICES INC.", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XCALIBER INTERNATIONAL LTD., L.L.C.", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "X-CALIBER RURAL CAPITAL, LLC", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XACTUS, LLC", "weight": 3}, {"from": "CORPORATION SERVICE COMPANY", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "X4I LIMITED (DBA X4I LIMITED, LLC)", "weight": 3}, {"from": "XXXXX HOLDINGS LLC", "title": "REGISTERED_AGENT", "to": "LIGHT CONSULTING LLC", "weight": 3}, {"from": "XXI CENTURY LTD.", "title": "REGISTERED_AGENT", "to": "TODD J SCHULZ", "weight": 3}, {"from": "XWA 2024, LLC", "title": "REGISTERED_AGENT", "to": "KYLE BLACK", "weight": 3}, {"from": "XTS HOLDINGS, LLC", "title": "REGISTERED_AGENT", "to": "DARIN POWELL", "weight": 3}, {"from": "XTREME PRODUCTS LLC", "title": "REGISTERED_AGENT", "to": "GREG PFAFF", "weight": 3}, {"from": "XTTRIUM LABORATORIES, INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "INCORP SERVICES, INC.", "weight": 3}, {"from": "INCORP SERVICES, INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XTREME FIRE PROTECTION, LLC", "weight": 3}, {"from": "INCORP SERVICES, INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XTREME DRILLING, LLC", "weight": 3}, {"from": "INCORP SERVICES, INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XPONET (DBA XPONET CORPORATION)", "weight": 3}, {"from": "INCORP SERVICES, INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "X-GEN PHARMACEUTICALS, INC.", "weight": 3}, {"from": "INCORP SERVICES, INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XENEX DISINFECTION SERVICES INC.", "weight": 3}, {"from": "INCORP SERVICES, INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XCONNECT TEXAS, LLC", "weight": 3}, {"from": "INCORP SERVICES, INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XCHANGE TELECOM LLC", "weight": 3}, {"from": "INCORP SERVICES, INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XCONNECT, LLC", "weight": 3}, {"from": "XTREME LAWN CARE LLC", "title": "REGISTERED_AGENT", "to": "WOODROW SHORT", "weight": 3}, {"from": "XTREME SIGNS \u0026 GRAPHIX", "title": "OWNER_NAME", "to": "CRAIG NICHOLAS THOMAS", "weight": 3}, {"from": "XTREME SIGNS \u0026 GRAPHIX", "title": "OWNER_NAME", "to": "AMANDA KAY THOMAS", "weight": 3}, {"from": "XTREME XTERIORS LLC", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "AAA NORTH DAKOTA REGISTERED AGENT LLC", "weight": 3}, {"from": "AAA NORTH DAKOTA REGISTERED AGENT LLC", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XDATAK LLC", "weight": 3}, {"from": "X-TREME FITNESS, LLC", "title": "REGISTERED_AGENT", "to": "SCOTT SCHMIDT", "weight": 3}, {"from": "XTREME INSTALLATION LLC", "title": "REGISTERED_AGENT", "to": "DAVID RODRIGUEZ", "weight": 3}, {"from": "DAVID RODRIGUEZ", "title": "OWNER_NAME", "to": "XTREME INSTALLATIONS", "weight": 3}, {"from": "X-TREME OUTFITTERS", "title": "OWNER_NAME", "to": "COREY GULKE", "weight": 3}, {"from": "XTREME ELECTRICAL SERVICES, INC. (DBA X ELECTRIC)", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "PARACORP INCORPORATED", "weight": 3}, {"from": "XTREME ELECTRIC INC", "title": "REGISTERED_AGENT", "to": "DEREK WANZEK", "weight": 3}, {"from": "XTREME GUN WORKS", "title": "OWNER_NAME", "to": "WET WORK HYDROGRAPHICS LLC", "weight": 3}, {"from": "XTREME TROPHY PROPERTIES", "title": "OWNER_NAME", "to": "HAWLEY REALTY, INC.", "weight": 3}, {"from": "XTREME CLEANING SERVICES LLC", "title": "REGISTERED_AGENT", "to": "GABRIEL FRANCO", "weight": 3}, {"from": "XTREME CARPET CLEANING LLC", "title": "REGISTERED_AGENT", "to": "ALDIN MEHUKIC", "weight": 3}, {"from": "X-TREME DETAILING", "title": "OWNER_NAME", "to": "WILL A SIRY", "weight": 3}, {"from": "XTREME BUILDERS", "title": "OWNER_NAME", "to": "JOSH JELINEK", "weight": 3}, {"from": "XTREME AUTO, INC.", "title": "REGISTERED_AGENT", "to": "MARK L SCHUMACHER", "weight": 3}, {"from": "XTREME AUTO DETAILZ", "title": "OWNER_NAME", "to": "SCOTT A KRAFT", "weight": 3}, {"from": "XTRAVAGANT ELEGANCE", "title": "OWNER_NAME", "to": "XIOMARA A. URIBE, ECATERINA M. QUINTANA", "weight": 3}, {"from": "XTRA-OFFICE, INC.", "title": "REGISTERED_AGENT", "to": "TRACIE DAY", "weight": 3}, {"from": "XTRA MILE PROPERTY SERVICES LLC", "title": "REGISTERED_AGENT", "to": "REMINGTON KOSTENKO", "weight": 3}, {"from": "XTRA APPAREL CO LLC", "title": "REGISTERED_AGENT", "to": "NORTH DAKOTA REGISTERED AGENT SERVICES LLC", "weight": 3}, {"from": "XTRA HAND LLC", "title": "REGISTERED_AGENT", "to": "GREGORY P BUCKTA", "weight": 3}, {"from": "XTC U.S. XPRESS INC. U.S. INC.", "title": "REGISTERED_AGENT", "to": "WILLIAM LUCAS", "weight": 3}, {"from": "XSTREAM PROPERTIES, LLP", "title": "REGISTERED_AGENT", "to": "LYNN JOHNSTON", "weight": 3}, {"from": "XTERNALSOURCE LLC", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "COGENCY GLOBAL INC.", "weight": 3}, {"from": "COGENCY GLOBAL INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XERCOR INSURANCE SERVICES LLC", "weight": 3}, {"from": "X-TECH LLC", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "VOGEL LAW FIRM, LTD.", "weight": 3}, {"from": "XSM ATM SERVICES LLC", "title": "REGISTERED_AGENT", "to": "SPENSER J MILLER", "weight": 3}, {"from": "XSELLR8R, INC.", "title": "REGISTERED_AGENT", "to": "RANDY KENT MILLER", "weight": 3}, {"from": "XSIDING XTERIORS LLC", "title": "REGISTERED_AGENT", "to": "DALE PIETRUSZEWSKI", "weight": 3}, {"from": "XSTREME MD", "title": "OWNER_NAME", "to": "LIFE LINE TECHNOLOGIES, LLC", "weight": 3}, {"from": "XSTREAM CLEAN CAR WASH", "title": "OWNER_NAME", "to": "KARLGAARD ENTERPRISES, LLC", "weight": 3}, {"from": "XS AUTOMATION", "title": "OWNER_NAME", "to": "JEROME M HINDS", "weight": 3}, {"from": "XTRA PROPERTIES, LLC", "title": "REGISTERED_AGENT", "to": "SHERLEEN LARSON", "weight": 3}, {"from": "XSEED CONSULTANTS", "title": "OWNER_NAME", "to": "DUSTIN R SMITH", "weight": 3}, {"from": "XRQ CORP.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "NORTHWEST REGISTERED AGENT SERVICE, INC.", "weight": 3}, {"from": "NORTHWEST REGISTERED AGENT SERVICE, INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XPERT DRYWALL LLC", "weight": 3}, {"from": "X-TERIOR SOLUTIONS", "title": "OWNER_NAME", "to": "TRAVIS C TOEPKE", "weight": 3}, {"from": "XRPL MINING COMPANY, LLC", "title": "REGISTERED_AGENT", "to": "DANIEL B BRUNSON", "weight": 3}, {"from": "X-RAY LIMA TANGO, LLC", "title": "REGISTERED_AGENT", "to": "CORY KUNERTH", "weight": 3}, {"from": "X-RAY LIMA TANGO, LLC", "title": "OWNER_NAME", "to": "XLT TAXI", "weight": 3}, {"from": "X-RAY LIMA TANGO, LLC", "title": "OWNER_NAME", "to": "XLT PACK AND SHIP", "weight": 3}, {"from": "XR SOLUTIONS, LLC", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "MONTGOMERY \u0026 PENDER, P.C.", "weight": 3}, {"from": "XQUISITE CONSTRUCTION LLC", "title": "REGISTERED_AGENT", "to": "BRYCE ANDERSON \u0026 ASSOCIATES, PLLC", "weight": 3}, {"from": "XPT SPECIALTY", "title": "OWNER_NAME", "to": "XPT PARTNERS, LLC", "weight": 3}, {"from": "XPT PARTNERS, LLC", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "3H AGENT SERVICES, INC.", "weight": 3}, {"from": "XPRESS MONEY", "title": "OWNER_NAME", "to": "MONEYDART GLOBAL SERVICES INC.", "weight": 3}, {"from": "XPRESS BOOKKEEPERS", "title": "OWNER_NAME", "to": "CHRISTOPHER TEGWE", "weight": 3}, {"from": "XPON INTERNATIONAL LLC", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "LEGALINC CORPORATE SERVICES INC.", "weight": 3}, {"from": "3H AGENT SERVICES, INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XCHANGE BENEFITS, LLC", "weight": 3}, {"from": "XPO LOGISTICS FREIGHT, INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "REGISTERED AGENT SOLUTIONS, INC.", "weight": 3}, {"from": "REGISTERED AGENT SOLUTIONS, INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XN FINANCIAL SERVICES INC.", "weight": 3}, {"from": "REGISTERED AGENT SOLUTIONS, INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XETA TECHNOLOGIES, INC.", "weight": 3}, {"from": "REGISTERED AGENT SOLUTIONS, INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XERATEX GROUP, LLC", "weight": 3}, {"from": "REGISTERED AGENT SOLUTIONS, INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XENCOM ENERGY MANAGEMENT, LLC", "weight": 3}, {"from": "REGISTERED AGENT SOLUTIONS, INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "XCLOUD, LLC", "weight": 3}, {"from": "REGISTERED AGENT SOLUTIONS, INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "X S BROKERS INSURANCE AGENCY, INC.", "weight": 3}, {"from": "XPERT XTERIORS, LLC", "title": "REGISTERED_AGENT", "to": "PHILIP L MAENZA", "weight": 3}, {"from": "XPERT ENTERPRISES LLC", "title": "REGISTERED_AGENT", "to": "RACHAEL NADEAU", "weight": 3}, {"from": "XPERT CONCRETE COATINGS LLC", "title": "REGISTERED_AGENT", "to": "ROBERT C JAMIESON", "weight": 3}, {"from": "XPERIENCE INVESTMENTS LLC", "title": "REGISTERED_AGENT", "to": "DELSON SAINTAL", "weight": 3}, {"from": "DELSON SAINTAL", "title": "REGISTERED_AGENT", "to": "XPERIENCE BARBERS LLC", "weight": 3}, {"from": "DELSON SAINTAL", "title": "OWNER_NAME", "to": "XPERIENCE BARBERS", "weight": 3}, {"from": "XPERIENCE HEALTH \u0026 FITNESS LLC", "title": "REGISTERED_AGENT", "to": "DARCY D REIS", "weight": 3}, {"from": "XPERIENCE HEALTH \u0026 FITNESS LLC", "title": "OWNER_NAME", "to": "XPERIENCE HEALTH \u0026 FITNESS", "weight": 3}, {"from": "XPEDITION WELL SERVICE LLC", "title": "REGISTERED_AGENT", "to": "BROOKS HONDL", "weight": 3}, {"from": "XOXO, PHOENIIX LLC", "title": "REGISTERED_AGENT", "to": "STACY THOMAS", "weight": 3}, {"from": "XOOM", "title": "OWNER_NAME", "to": "PAYPAL, INC.", "weight": 3}, {"from": "XO BEAUTY", "title": "OWNER_NAME", "to": "ASHLEY MACK", "weight": 3}, {"from": "XM42", "title": "OWNER_NAME", "to": "ROUGHRIDER ARMS LLC", "weight": 3}, {"from": "XM ACRES, LLP", "title": "REGISTERED_AGENT", "to": "MICHAEL BERG", "weight": 3}, {"from": "XOLARIA LLC", "title": "REGISTERED_AGENT", "to": "SHILO J SHUMWAY", "weight": 3}, {"from": "XPEL, INC.", "title": "REGISTERED_AGENT", "to": "FIRST CORPORATE SOLUTIONS, INC.", "weight": 3}, {"from": "XLHNE, P.C.", "title": "OWNER_NAME", "to": "XLHOME NORTHEAST, P.C.", "weight": 3}, {"from": "XL TRANSPORT, LLC", "title": "REGISTERED_AGENT", "to": "COREY GETZLAFF", "weight": 3}, {"from": "XL LOGISTICS LLC", "title": "REGISTERED_AGENT", "to": "MOHAMED GARAAR", "weight": 3}, {"from": "XL HOMES, CORP.", "title": "REGISTERED_AGENT", "to": "DAN MASSETH", "weight": 3}, {"from": "XJOY LLC", "title": "REGISTERED_AGENT", "to": "LIYING ZHANG", "weight": 3}, {"from": "XILAJU, LLC", "title": "REGISTERED_AGENT", "to": "JUAN ULLOA", "weight": 3}, {"from": "XIE XIE, LLC", "title": "REGISTERED_AGENT", "to": "CINDY O\u0027DAY", "weight": 3}, {"from": "XL FARMS", "title": "OWNER_NAME", "to": "COREY K GETZLAFF", "weight": 3}, {"from": "XL FARMS", "title": "OWNER_NAME", "to": "CINDY J GETZLAFF", "weight": 3}, {"from": "XGP PROPERTIES, LLC", "title": "REGISTERED_AGENT", "to": "GEORGE POITRA", "weight": 3}, {"from": "XIPHOS TECHNICAL SERVICES, LLC", "title": "REGISTERED_AGENT", "to": "DARIN K POWELL", "weight": 3}, {"from": "XFINITY HOME", "title": "OWNER_NAME", "to": "COMCAST BROADBAND SECURITY, LLC", "weight": 3}, {"from": "XERO LLC", "title": "REGISTERED_AGENT", "to": "KAYLEN STANLEY", "weight": 3}, {"from": "XEROX CORPORATION", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "THE PRENTICE-HALL CORPORATION SYSTEM, INC.", "weight": 3}, {"from": "XERIC HOLDINGS LLC", "title": "REGISTERED_AGENT", "to": "CHRISTOPHER SHERMAN", "weight": 3}, {"from": "XENITH, LLC", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "UNITED AGENT GROUP INC.", "weight": 3}, {"from": "UNITED AGENT GROUP INC.", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "X4 PHARMACEUTICALS, INC.", "weight": 3}, {"from": "XENITH DEVELOPMENT GROUP", "title": "OWNER_NAME", "to": "TREVOR HARTMAN", "weight": 3}, {"from": "XECARE LLC", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "CAPITOL CORPORATE SERVICES, INC.", "weight": 3}, {"from": "XCS PROS", "title": "OWNER_NAME", "to": "XCS PROS, LLC", "weight": 3}, {"from": "XCS PROS, LLC", "title": "REGISTERED_AGENT", "to": "MICHAEL S BROOKS", "weight": 3}, {"from": "XDP DIGITAL LLC", "title": "REGISTERED_AGENT", "to": "KIMBERLY BRAUN", "weight": 3}, {"from": "XCMG AMERICA FINANCIAL LLC", "title": "REGISTERED_AGENT", "to": "VCORP SERVICES, LLC", "weight": 3}, {"from": "XCELL DRIVING SCHOOL LLP", "title": "REGISTERED_AGENT", "to": "DAVID J KLINKHAMMER", "weight": 3}, {"from": "XCELERATE INDOOR ADVENTURES", "title": "OWNER_NAME", "to": "XCELERATE INDOOR ADVENTURES LLC", "weight": 3}, {"from": "XCELERATE INDOOR ADVENTURES LLC", "title": "REGISTERED_AGENT", "to": "ANNIE CREECH", "weight": 3}, {"from": "XCEL TRUCKING LLC", "title": "REGISTERED_AGENT", "to": "KENNETH MILLER", "weight": 3}, {"from": "XCEL NDT LLC", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "SEARCH COMPANY OF NORTH DAKOTA LLC", "weight": 3}, {"from": "XCEL HOLDINGS LLC", "title": "REGISTERED_AGENT", "to": "TAIT SILTALA", "weight": 3}, {"from": "TAIT SILTALA", "title": "REGISTERED_AGENT", "to": "XCEL AUTOMATION \u0026 ELECTRIC LLC", "weight": 3}, {"from": "XE USA", "title": "OWNER_NAME", "to": "DANDELION PAYMENTS, INC.", "weight": 3}, {"from": "XCEL HOLDINGS", "title": "OWNER_NAME", "to": "TANNER COLLETTE", "weight": 3}, {"from": "XCEL ENERGY", "title": "OWNER_NAME", "to": "NORTHERN STATES POWER COMPANY", "weight": 3}, {"from": "XCEL AVIATION", "title": "OWNER_NAME", "to": "TANNER S COLLETTE", "weight": 3}, {"from": "XCEL DETAILING", "title": "OWNER_NAME", "to": "DIAMONTE STUGELMEYER", "weight": 3}, {"from": "XCEL AGRONOMY LLC", "title": "REGISTERED_AGENT", "to": "CHRISTOPHER PERLEBERG", "weight": 3}, {"from": "XCEL AG SOLUTIONS LLC", "title": "REGISTERED_AGENT", "to": "ANTHONY BAUMGARTNER", "weight": 3}, {"from": "XCALIBUR LEASING COMPANY", "title": "REGISTERED_AGENT", "to": "GREGORY C KRUTSINGER", "weight": 3}, {"from": "XCALIBUR ENTERTAINMENT", "title": "OWNER_NAME", "to": "JONES ENTERPRISES, INC.", "weight": 3}, {"from": "XAP LLC", "title": "REGISTERED_AGENT", "to": "INCORPORATING SERVICES, LTD.", "weight": 3}, {"from": "XANADU, LLC", "title": "REGISTERED_AGENT", "to": "MICHELLE BAKKE", "weight": 3}, {"from": "XANADU PRODUCTS, L.L.C.", "title": "REGISTERED_AGENT", "to": "RICK PAULSON", "weight": 3}, {"from": "XAPIC STUDIOS", "title": "OWNER_NAME", "to": "PATRICIA A ROGALLA", "weight": 3}, {"from": "XAVIER GOLD CONSULTING GROUP INC", "title": "COMMERCIAL_REGISTERED_AGENT", "to": "LEGALCORP SOLUTIONS, LLC", "weight": 3}, {"from": "XABOW EXPRESS LOGISTICS INC.", "title": "REGISTERED_AGENT", "to": "ABDIKARIM A JAMA", "weight": 3}, {"from": "XABEAT, LLC", "title": "REGISTERED_AGENT", "to": "ROXANNE WANZEK", "weight": 3}, {"from": "XAVIER TAYLOR CONSTRUCTION", "title": "OWNER_NAME", "to": "XAVIER G TAYLOR", "weight": 3}, {"from": "XAVIER COLLECTIONS LLC", "title": "REGISTERED_AGENT", "to": "KORTO C KOLLIE", "weight": 3}, {"from": "X4I LIMITED, LLC", "title": "OWNER_NAME", "to": "X4I LIMITED", "weight": 3}, {"from": "X11 LLC", "title": "REGISTERED_AGENT", "to": "MIAN HUSSAIN", "weight": 3}, {"from": "X REALTY LLC", "title": "REGISTERED_AGENT", "to": "ERIC CHRISTIANS", "weight": 3}, {"from": "X MARK PROPERTIES LLC", "title": "REGISTERED_AGENT", "to": "DANNY KRAFT", "weight": 3}, {"from": "X GOLF MINOT", "title": "OWNER_NAME", "to": "ELITE GOLF, LLC", "weight": 3}, {"from": "X GOLF BISMARCK", "title": "OWNER_NAME", "to": "ELITE GOLF 2, LLC", "weight": 3}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+                    network.on("selectNode", neighbourhoodHighlight);
+                  
+
+                  
+
+
+                  
+                      network.on("stabilizationProgress", function(params) {
+                          document.getElementById('loadingBar').removeAttribute("style");
+                          var maxWidth = 496;
+                          var minWidth = 20;
+                          var widthFactor = params.iterations/params.total;
+                          var width = Math.max(minWidth,maxWidth * widthFactor);
+                          document.getElementById('bar').style.width = width + 'px';
+                          document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+                      });
+                      network.once("stabilizationIterationsDone", function() {
+                          document.getElementById('text').innerHTML = '100%';
+                          document.getElementById('bar').style.width = '496px';
+                          document.getElementById('loadingBar').style.opacity = 0;
+                          // really clean the dom element
+                          setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+                      });
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

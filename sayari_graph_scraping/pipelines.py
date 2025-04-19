@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 import logging
 import re
 import polars as pl
+from pyvis.network import Network
 
 
 class SayariGraphScrapingPipeline:
@@ -25,17 +26,23 @@ class SayariGraphScrapingPipeline:
         os.makedirs(self.output_dir, exist_ok=True)
         self.graph_path = os.path.join(self.output_dir, "graph.csv")
         self.knowledge_graph = []  # Store edges
-        # self.nodes = set()  # Store nodes
+        self.nodes = []  # Store nodes
 
     def open_spider(self, spider):
         return
 
     def process_item(self, item, spider):
-        self.write_to_knowledge_graph(item)  # Add to knowledge graph
+        self.write_to_knowledge_graph(item)  # Add nodes and edges for network graph plot
         return item
 
     def write_to_knowledge_graph(self, item):
+        '''
+            Start writing to knowledge graph.
+            Item is dictionary to process, yieled
+            from spider.
+        '''
         is_relation_found = False
+        
         # interesting relationships to capture with company
         interested_labels = (
             "COMMERCIAL_REGISTERED_AGENT",
@@ -44,19 +51,39 @@ class SayariGraphScrapingPipeline:
             "OWNERS",
         )
         company_title = jmespath.search("TITLE[0]", item)
+        company_type = jmespath.search("TITLE[1]", item)
+        record_num = jmespath.search("RECORD_NUM", item)
+        
         if company_title is None:
             self.log_warn_msg("Company title not found", item)
         company_title = company_title.upper().strip()
+        company_title = re.sub(r"\s+", " ", company_title)
 
         # If company title does not start with x, don't incorporate into knowledge graph
         if company_title and not company_title.startswith("X"):
             return
+        
+        # Prepare nodes for Pyvis and networkx Rendering
+        self.nodes.append(
+            [
+                company_title,
+                {
+                    "label" : "",
+                    "title" : 
+                    (
+                        f"""Company Title: {company_title}
+                            Company Type: {company_type}
+                            SOS Control ID# {record_num}
+                        """
+                    )
+                }
+            ]
+        )
 
-        # self.nodes.add(company_title)
+        # Go through drawer to extract all drawer labels and values
         if "DRAWER_DETAIL_LIST" in item:
             details = item["DRAWER_DETAIL_LIST"]
             i = 0
-            # Go through drawer to extract all drawer labels and values
             while i < len(details):
                 detail = details[i]
                 label_name = detail.get("LABEL", None)
@@ -105,7 +132,8 @@ class SayariGraphScrapingPipeline:
                     is_relation_found = True
                 else:
                     i += 1
-            ## After going through all drawer details
+            ## After going through all drawer details. If no graph relation was found
+            ## Log an error.
             if is_relation_found is False:
                 self.log_warn_msg(f"Expected graph label names not found", item)
         else:
@@ -114,7 +142,10 @@ class SayariGraphScrapingPipeline:
     def reformat_and_check_data_for_knowledge_graph(
         self, value, company_title, label_name, item
     ):  
-        company_title = re.sub(r"\s+", " ", company_title)
+        '''
+        This function checks data and reformats edges for writing.
+        It also adds nodes from business relationships (ex. commercial agents, owners).
+        '''
         if not self.check_string_warning(
             value, f"Value for {label_name} not string", item
         ):
@@ -123,16 +154,29 @@ class SayariGraphScrapingPipeline:
                                                          # entire string
             value = re.sub(r"\s+", " " , value)
 
+        true_label = "OWNER_NAME" if label_name == "OWNERS" else label_name
         edge_to_write = [
             value,
             company_title,
-            {"label": "OWNER_NAME" if label_name == "OWNERS" else label_name},
+            {"label": true_label,
+             "title": true_label},
         ]
+
+        # 
+        all_current_elements = jmespath.search("[*][0]", self.nodes)
+        if value not in all_current_elements:
+            self.nodes.append(
+                (value, {"label" : "", "title": f"{true_label} : {value}"})
+            )
         return edge_to_write
 
     def draw_and_save_knowledge_graph(self):
+        '''
+        Build networkx and pyvis graph, then write to HTML/png
+        '''
+        # Build networkx graph 
         G = nx.Graph()
-        # G.add_nodes_from(self.nodes)
+        G.add_nodes_from(self.nodes)
         G.add_edges_from(self.knowledge_graph)  # Populate Graph
 
         pos = nx.nx_agraph.pygraphviz_layout(G, prog="neato")  # add some distance
@@ -141,6 +185,7 @@ class SayariGraphScrapingPipeline:
         for g in C:
             c = [random.random()] * nx.number_of_nodes(g)  # random color...
             nx.draw(g, pos, ax=ax, node_size=20, node_color=c, vmin=0.0, vmax=1.0)
+
         plt.axis("off")
         plt.title(
             "North Dakota Web App Business Relationships",
@@ -152,7 +197,29 @@ class SayariGraphScrapingPipeline:
             fontweight=800,
         )
         plt.tight_layout()
+        # Save Networkx Graph
         plt.savefig(os.path.join(self.output_dir, "knowledge_graph.png"))
+
+        # Build Pyvis Graph
+        nt = Network('100vh', '100% ', notebook=False, directed=False,
+                     cdn_resources='remote', select_menu=True, filter_menu=True)
+        # Add nodes with styling
+        for node in G.nodes:
+            tooltip = G.nodes[node].get("title", node)
+            nt.add_node(
+                node,
+                title=tooltip,
+                shape="dot",
+                size=10
+            )
+
+        # Add edges
+        for u, v in G.edges:
+            title = G.edges[(u,v)].get("title", "")
+            nt.add_edge(u, v, title=title, weight=3)
+
+        # Write out HTMl
+        nt.write_html(os.path.join(self.output_dir, "knowledge_graph.html"))
 
     @staticmethod
     def normalize_label_str(s):

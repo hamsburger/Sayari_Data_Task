@@ -220,7 +220,7 @@ class SayariGraphScrapingPipeline:
 
         # Write out HTML
         # First write is for github.io rendering, second write it to output folder
-        nt.write_html(os.path.join(self.root_dir, "knowledge_graph.html"))
+        nt.write_html(os.path.join(self.root_dir, "index.html"))
         nt.write_html(os.path.join(self.output_dir, "knowledge_graph.html"))
 
     @staticmethod

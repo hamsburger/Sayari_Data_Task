@@ -2,6 +2,15 @@
 ## About
 <img src="./output/knowledge_graph.png"
 style="width:100%;aspect-ratio:initial">
+<i>non-interactive networkx graph</i>
+<br>
+<br>
+<a href="https://hamsburger.github.io/Sayari_Data_Task/index.html">
+<img src="./docs/pyvis_example.png"
+style="width:100%;aspect-ratio:initial">
+</a>
+<i>interactive Pyvis graph</i> [try it out here](https://hamsburger.github.io/Sayari_Data_Task/index.html)
+
 
 This public repo is my submission for Sayari's Data Task. The goal of this challenge is to complete the following data engineering tasks:
 - [x] Web crawl relevant business information from [North Dakota Secretary of State Web App](https://firststop.sos.nd.gov/search/business). 
@@ -19,6 +28,7 @@ Some additional tasks were done to ensure data quality, code reproducibility and
 ├── Makefile # Automate docker container build and runs.
 ├── README.md
 ├── experiments # Playground for trying out web scraping requests and python libraries such as jmespath.
+├── docs # contains documentation images and also hosts github.io webpage.
 ├── output
 │   ├── company_records.jsonl # Web crawled results.
 │   ├── graph.csv # Structured graph data.
@@ -35,9 +45,7 @@ Some additional tasks were done to ensure data quality, code reproducibility and
 │   │   ├── __init__.py
 │   │   └── sayari_spider.py # Spider responsible for following links and acquire data through web crawling
 │ 
-├── scrapy.cfg
-└── test
-    └── test_random.py
+└── scrapy.cfg
 ```
 
 ## Methodology
@@ -48,6 +56,7 @@ Some additional tasks were done to ensure data quality, code reproducibility and
         B --Using Polars--> E
         B --Python Transform--> C
         C --Populate Graph--> D
+        C --Populate Graph--> G
         
         A["""Scrapy
         Web Crawling"""]
@@ -61,6 +70,8 @@ Some additional tasks were done to ensure data quality, code reproducibility and
         (experiments/explore_company_records.ipynb)"""]
         F["""Logs
         (business_spider.log)"""]
+        G["""Pyvis Visualization
+        (output/knowledge_graph.html)"""]  
 ```
 I will break down key features of my design responsible for scalable, fault-tolerant data engineering pipeline.
 
@@ -115,16 +126,22 @@ More complex processing could be done in the future, such as Levenshtein distanc
 As mentionned, [Click for my data quality exploration notebook](experiments/explore_company_records.ipynb) for more information. 
 
 Data quality problems won't be explored in detail in README, but here are the general issues that were found and resolved:
-- Additional **OWNERS** field needs to be processed from initially expected graph fields: **OWNER_NAME, COMMERCIAL_REGISTERED_AGENT, OR REGISTERED_AGENT.** Recall this issue was only discovered with the help of web crawling logging. *Solution*: rewrite code to add OWNERS field **AND** subsequent dictionaries in drawer that has "" empty string label to the resulting network graph. 
+- Additional **OWNERS** field needs to be processed from initially expected graph fields: **OWNER_NAME, COMMERCIAL_REGISTERED_AGENT, OR REGISTERED_AGENT.** This issue was only discovered with the help of web crawling logging. *Solution*: rewrite code to add OWNERS field **AND** subsequent dictionaries in drawer that has "" empty string label to the resulting network graph. <div><img src="./docs/empty_field_example.png" style="margin-left:160px;height:200px;aspect-ratio:initial;"></img></div> if you see the above portion of the polars dataframe containing extracted drawer fields in columns, you can see next to Owners is an empty string column.
+
+
 - POST request for companies whose titles start with X return some companies whose title do not start with X. *Solution:* filter for company titles using string operations (startswith).
 - Multiple owner names delimited by commas under OWNER_NAME field in drawer. Only one data record when this happens: Company Xtravagant Elegance with SOS CONTROL ID# of 5852807. *Solution:* No solution how to resolve owner name with seeming multiple names yet. I need to understand the data better.
 
-Even though these issues are considered resolved for now, it's important to have good code design and stay alert of future problems.
+Whether these issues are considered resolved or not for now, it's important to have good code design and always data explore so we can stay alert of future problems.
 
 ### Data Visualization
-> [Link to Vis](output/knowledge_graph.png)
+> [Link to Non-Interactive Vis](output/knowledge_graph.png)
 
 Based on the graph data model, a networkx graph visualization was generated. The graph is divided into connected components and each set of connected components is assigned a colour. With the help of neato graphviz positioning, registered agents and owner hubs assigned to many companies were revealed through the networkx graph. 
+
+> [Link to Interactive Vis](https://hamsburger.github.io/Sayari_Data_Task/index.html)
+
+The interactive vis generated from PyVis only uses one colour for the nodes, but supports hover labels to clearly see graph connections. You can also filter nodes by company name/owner name/agent name, please give it a try yourself!
 
 
 ## Running/Reproducing the Results
@@ -159,8 +176,8 @@ All the above commands should be executed in the **root** directory.
 
 - [ ] Consult stakeholders on desired data lake format. The field labels returned from API aren't exactly the same as what's shown on UI, (ex. SOS Control ID on UI is shown as RECORD_NUM in the API), so we need to understand the desired data schema and make necessary changes.
 
-- [ ] Consult stakeholders to improve network visualization. For example, they might want colour each type of node (ex. is it a registered agent? company? owner?) instead of just a colour for each connected component.
+- [ ] Consult stakeholders to improve network visualization. See if they like the interactive viz to check graph connections, or if they might want to colour each type of node (ex. colour based on registered agent, company, or owner) 
 
 - [ ] Understand data and data quality better. Improve string preprocessing for entity resolution, since simple preprocessing may not be enough to normalize all names. 
 
-- [ ] Create custom commands in Makefile to run Jupyter Notebook data quality exploration in Docker. That way developers can play around and check my analysis.
+- [ ] Create more automations, such as custom commands in Makefile to run Jupyter Notebook data quality exploration in Docker. Anything that improves development experience (ex. yaml configs, less hardcoded variables).

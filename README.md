@@ -1,7 +1,6 @@
 # Sayari Data Task
 ## Submission
 To see results, please see the [outputs folder](/output),
-as well as the [interactive web app](https://hamsburger.github.io/Sayari_Data_Task/index.htm)
 
 ## About
 <img src="./output/knowledge_graph.png"

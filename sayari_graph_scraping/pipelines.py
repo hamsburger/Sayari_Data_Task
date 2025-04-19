@@ -204,7 +204,7 @@ class SayariGraphScrapingPipeline:
 
         # Build Pyvis Graph
         nt = Network('100vh', '100% ', notebook=False, directed=False,
-                     cdn_resources='remote', select_menu=True, filter_menu=True)
+                     cdn_resources=, select_menu=True, filter_menu=True)
         # Add nodes with styling
         for node in G.nodes:
             tooltip = G.nodes[node].get("title", node)
@@ -221,9 +221,8 @@ class SayariGraphScrapingPipeline:
             nt.add_edge(u, v, title=title, weight=3)
 
         # Write out HTML
-        # First write is for github.io rendering, second write it to output folder
+        # Write to docs_dir is for github.io rendering
         nt.write_html(os.path.join(self.docs_dir, "index.html"))
-        nt.write_html(os.path.join(self.output_dir, "knowledge_graph.html"))
 
     @staticmethod
     def normalize_label_str(s):

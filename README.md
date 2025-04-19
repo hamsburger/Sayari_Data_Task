@@ -174,10 +174,10 @@ All the above commands should be executed in the **root** directory.
 ## Future Work
 - [ ] Test data lake modeling and graph data modeling in postgres with docker-compose, to prepare for cloud deployments (ex. Kubernetes, RDS, S3). We are already going in the right direction with Dockerfiles.
 
-- [ ] Consult stakeholders on desired data lake format. The field labels returned from API aren't exactly the same as what's shown on UI, (ex. SOS Control ID on UI is shown as RECORD_NUM in the API), so we need to understand the desired data schema and make necessary changes.
+- [ ] Consult stakeholders on desired data lake format. The field labels returned from API aren't exactly the same as what's shown on web app, (ex. SOS Control ID on web app is shown as RECORD_NUM in the API), so we need to understand the desired data schema and make necessary changes.
 
 - [ ] Consult stakeholders to improve network visualization. See if they like the interactive viz to check graph connections, or if they might want to colour each type of node (ex. colour based on registered agent, company, or owner) 
 
 - [ ] Understand data and data quality better. Improve string preprocessing for entity resolution, since simple preprocessing may not be enough to normalize all names. 
 
-- [ ] Create more automations, such as custom commands in Makefile to run Jupyter Notebook data quality exploration in Docker. Anything that improves development experience (ex. yaml configs, less hardcoded variables).
+- [ ] Create more automations, such as custom commands in Makefile to run Jupyter Notebook data quality exploration in Docker. Anything that improves development experience (ex. yaml configs, less hardcoded variables) would be helpful to create.

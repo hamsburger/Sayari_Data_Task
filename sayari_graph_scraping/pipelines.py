@@ -218,7 +218,9 @@ class SayariGraphScrapingPipeline:
             title = G.edges[(u,v)].get("title", "")
             nt.add_edge(u, v, title=title, weight=3)
 
-        # Write out HTMl
+        # Write out HTML
+        # First write is for github.io rendering, second write it to output folder
+        nt.write_html(os.path.join(self.root_dir, "knowledge_graph.html"))
         nt.write_html(os.path.join(self.output_dir, "knowledge_graph.html"))
 
     @staticmethod

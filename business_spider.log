@@ -7,3 +7,21 @@ Traceback (most recent call last):
   File "/app/sayari_graph_scraping/pipelines.py", line 202, in close_spider
     print("Number of Companies Plotted:", len(self.nodes))
 AttributeError: 'SayariGraphScrapingPipeline' object has no attribute 'nodes'
+2025-04-19 00:16:40 [scrapy.core.engine] ERROR: Scraper close failure
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/networkx/drawing/nx_agraph.py", line 301, in pygraphviz_layout
+    import pygraphviz
+ModuleNotFoundError: No module named 'pygraphviz'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/twisted/internet/defer.py", line 1088, in _runCallbacks
+    current.result = callback(  # type: ignore[misc]
+  File "/app/sayari_graph_scraping/pipelines.py", line 277, in close_spider
+    print("Nubmer of Relationships Plotted:", len(self.knowledge_graph))
+  File "/app/sayari_graph_scraping/pipelines.py", line 182, in draw_and_save_knowledge_graph
+    pos = nx.nx_agraph.pygraphviz_layout(G, prog="neato")  # add some distance
+  File "/usr/local/lib/python3.10/site-packages/networkx/drawing/nx_agraph.py", line 303, in pygraphviz_layout
+    raise ImportError("requires pygraphviz http://pygraphviz.github.io/") from err
+ImportError: requires pygraphviz http://pygraphviz.github.io/
